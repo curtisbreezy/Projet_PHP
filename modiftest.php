@@ -1,27 +1,26 @@
-<?php  session_start();
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "projet_5";
 
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
-
-if(isset($_get['id']) AND !empty($_GET['id'])) {
-	$get_id = htmlspecialchars($_GET['id']);
-	
-	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
-	$article->execute(array($get_id));
-	
-	if($article->rowCount() ==1) {
-		$titre = $article['titrepost'];
-		$contenu = $article['textepost'];
-	
-} else{
-	die('Cet article n existe pas !');
-	
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 } 
+
+$sql = "UPDATE articles SET auteurpost='?',titrepost='?',datepost='?',textepost='?' WHERE id_article = '?'";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
 }
 
+$conn->close();
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -33,50 +32,71 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Blog PHP-Supprimer un post</title>
+  <title>Blog PHP-Créer un post</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+   <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+	<script>tinymce.init({ selector:'textarea' });</script>
+	
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">Administration</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin.php">
+          <a class="nav-link" href="index.html">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Tableau de bord</span>
           </a>
         </li>
-        
-        
 		
 		
-     
-         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+		 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Outil</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="forgot-password.html">Modifier son mot de passe</a>
+            </li>
+          </ul>
+        </li>
+        
+       
+       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Gestion des posts</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="post.php?id=".$user['id_utilisateur']"">Créer un post</a>
+              <a href="post.php">Créer un post</a>
             </li>
             <li>
-              <a href="article.php">Modifier un post/Voir les posts</a>
+              <a href="modifierpost.php">Modifier un post</a>
+            </li>
+			<li>
+              <a href="supprimer-un-post.php">Supprimer un post</a>
             </li>
           </ul>
         </li>
+		
+		
        
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
           <a class="nav-link" href="index.php">
             <i class="fa fa-fw fa-link"></i>
@@ -188,76 +208,94 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
       </ul>
     </div>
   </nav>
-  <div class="content-wrapper">
+ 
+<div class="content-wrapper">
     <div class="container-fluid">
-
       <!-- Breadcrumbs-->
+	  
+	  <h2 class="mt-2"> <?php
+		if(isset($_SESSION['pseudo'])){
+		echo "".$_SESSION['pseudo'];
+									}
+	
+?>
+	</h2>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Tableau de bord</a>
         </li>
-        
+        <li class="breadcrumb-item active">Modifier un post</li>
       </ol>
-     
-	 <div class="row">
-        
-		<div class="col-12">
-          
-		  <h1>Supprimer un post</h1>
-          <p>Sur cette page vous avez la possibilité de supprimer un post, cette action est irrévocable.</p>
+      <div class="row">
+        <div class="col-12">
+          <h1>Modifier votre post</h1>
+          <p>Poster un texte sur mon blog accompagné d'une image et répondez aussi aux commentaires laissé par les visiteurs.</p>
+        </div>
+      </div>
+	  
+	  
+<!---------------------------------------------------------------------------------------------------------------------------------- éditeur de post-------------------------------------------------------------------------------------------------------------------------------- -->
+	  
+<section class="col-md-12">
+	  
+	  <form method="POST">
+			
+					<?php while($a = $articles->fetch()) {?>
+					<label>Auteur</label>
+					
+					<input type="text"  name="auteurpost" placeholder="" Value="<?=$a['auteurpost'] ?>"> </br>
+				
+
+				
+					<label>Titre</label>
+					 
+					<input type="text"   name="titrepost"  placeholder="Titre du post" value="<?=$a['titrepost'] ?>"> </br>
 				
 		
-		</div>
-	
-	<!---------------- code à modifier ----------------------->
-	
-<div class="col-md-12">
-	<div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i></div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-			  
-                <tr>
-                  <th>Article</th>
-                  <th>Auteur</th>
-                  <th>Date de publication</th>
-                  <th>Supprimer</th>
-                </tr>
+					<label>Date</label>
+					<input type="datetime" name="datepost" value="<?php echo date("Y-m-d-H:i" ); ?>"> 
+					
+					
+				<div>
+			
+					<textarea id="textepost" name="textepost" type="text">
+					<?=$a['textepost'] ?>
+					</textarea>
+					
+				</div>
+			
+			
+			<div class="form-group form-check mt-3">
 				
-              </thead>
-			  
-			  
-			  <?php 
-			  while($a = $articles->fetch()) 
-			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
-              <tbody>
-                <tr>
-                  <td><?= $a['titrepost'] ?>  <!-- insertion des informations --> </td>
-                  <td><?= $a['auteurpost'] ?></td>
-                  <td><?= $a['datepost'] ?></td>
-                  <td><a href="supprimer.php?id=<?= $a['id_article'] ?>">Supprimer le post</a>  <!-- suppression par id --></td>
-                </tr>
-              </tbody>
-			  
-			  <?php }?>
-			  
-            </table>
-          </div>
-        </div>
-        <div class="card-footer small text-muted">Mise à jour le <?php echo date('l jS \of F Y h:i:s A'); ?>
+					
+			
+					<button type="submit" class="btn btn-primary" name="modifier" id="modifier" Value="modifier"> Modifier l'article </button>
+
+			
+			</div>
+	 <?php } ?>
+	 </form>
+	  <?php
+	  if(isset($message))
+	  {
+		  echo $message;
+	  }
+	  
+	  ?>
+	  
+</section>
+   
+<!---------------------------------------------------------------------------------------------------------------------------------- fin du modèle ----------------------------------------------------------------------------------------------------------------------------------------------------->
+	
+	
 </div>
-      </div>
-    </div>
-</div>
-    <!-- /.container-fluid-->
+    
+	<!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
         </div>
       </div>
     </footer>
@@ -288,8 +326,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+   
   </div>
 </body>
 

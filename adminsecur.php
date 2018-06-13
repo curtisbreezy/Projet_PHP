@@ -1,0 +1,1 @@
+<?= realpath('adminsecur.php'); ?>

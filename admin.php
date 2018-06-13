@@ -6,18 +6,41 @@ setcookie('pseudo','',time(), null, null, false, true); // 86400 = 1 day
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
 $comm = $bdd->query('SELECT * FROM commentaire ORDER BY id_commentaire LIMIT 0, 10');
-$reponse_comm = $bdd->query('SELECT * FROM reponse_commentaire ORDER BY id_reponse LIMIT 0, 5');
+
+ 
 
 
-if(isset($_GET['pseudo']))
-		if(!empty($_GET['pseudo'])){
+if(isset($_POST['pseudo'],$_POST['mdpconnect'])) 
+	if(!empty($_POST['pseudo']) && !empty($_POST['mdpconnect']))
+		{ // si ok le code continue
+			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdpconnect = ?"); // on récupère les informations dans la  BDD
+			$userexist = $requser->rowCount(); // on verifie si l'information existe
 			
-		}
-		else
-		{	
-	
-	header("Location: login.php");
-		}
+			if($userexist == 1)
+			{
+				
+			 $userinfo = $requser->fetch();
+			 $_SESSION['pseudo'] = $userinfo['pseudo'];
+			 $_SESSION['mdpconnect'] = $userinfo['mdpconnect'];
+			 header("Location: admin.php?id=".$_SESSION['pseudo']);
+			 $erreur = "vous êtes connecté";
+			
+			}
+			
+			else  //sinon afficher ce message d'erreur
+			
+		
+			{
+			 header("Location: login.php");
+			}
+		
+		}	
+
+			
+
+		
+		
+
 ?>
 
 
@@ -46,14 +69,14 @@ if(isset($_GET['pseudo']))
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Administration</a>
+    <a class="navbar-brand" href="#">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="admin.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Tableau de bord</span>
           </a>
@@ -61,18 +84,7 @@ if(isset($_GET['pseudo']))
         
         
 		
-		 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Outil</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-		  <li>
-              <a href="forgot-password.html">Réinitialiser son mot de passe</a>
-            </li>
-            
-          </ul>
-        </li>
+		
      
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
@@ -81,10 +93,10 @@ if(isset($_GET['pseudo']))
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="post.php">Créer un post</a>
+              <a href="post.php?id=".$user['id_utilisateur']"">Créer un post</a>
             </li>
             <li>
-              <a href="modifier.php">Modifier un post</a>
+              <a href="article.php">Modifier un post/Voir les posts</a>
             </li>
 			<li>
               <a href="supprimer-un-post.php">Supprimer un post</a>
@@ -124,17 +136,17 @@ if(isset($_GET['pseudo']))
 
 </section>
 
-	  
+	 
   <div class="content-wrapper">
     <div class="container-fluid">
 	
-	 <h2 class="mt-2"> <?php
+	 <h2 class="mt-4"> <?php
 		if(isset($_SESSION['pseudo'])){
-		echo " Bienvenue ".$_SESSION['pseudo'];
+		echo " Vous êtes connecté ".$_SESSION['pseudo'];
 									}
 	
-?>
-	</h2>
+?> 
+	</h2> <br/>
 	
       <!-- Breadcrumbs-->
       <ol class="breadcrumb mt-2">
@@ -145,7 +157,7 @@ if(isset($_GET['pseudo']))
       </ol>
       <!-- Icon Cards-->
       <div class="row">
-        <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
@@ -162,7 +174,10 @@ if(isset($_GET['pseudo']))
           </div>
         </div>
         
-        <div class="col-xl-4 col-sm-6 mb-3">
+		
+		
+		
+        <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
@@ -197,26 +212,10 @@ if(isset($_GET['pseudo']))
 				<?=$a['titrepost'] ?> </br>
 				<?=$a['textepost'] ?> </br/>
 				
-				<?php }?>	
-			  <button  href="modifier.php?id=<?=$a['id_article']?>"/>
-			  
-				<div class="col-xl-4 col-sm-6 mb-3">
-          <div class="card text-white bg-warning o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-list"></i>
 				
-              </div>
-              <div class="mr-5">Mettre à jour un post</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="modifier.php?id=<?=$a['id']?>">
-              <span class="float-left">Quoi de neuf?</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
+			  <button><a href="modifierpost.php?edit=<?= $a['id_article'] ?>" style="color:#F05F40; !important"> Éditer l'article </a> </button>
+			  <?php }?>	
+		
 						
 				
               </div>
@@ -267,12 +266,14 @@ if(isset($_GET['pseudo']))
          
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
-        </div>
-      </div>
+  <footer class="sticky-footer text-center col-md-12 bg-dark">
+       <div class="container">
+			<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="admin.php">Espace abonné</a>
+	   <div>
+			<small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
+	   </div>
+	  </div>
+      
     </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

@@ -1,7 +1,7 @@
 <?php  session_start();
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
-
+$comm = $bdd->query('SELECT * FROM commentaire ORDER BY commentairedate');
 if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['textepost'])) 
 	if(!empty($_POST['auteurpost']) AND !empty($_POST['datepost']) AND !empty($_POST['textepost']))
 	{
@@ -52,49 +52,37 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Administration</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="admin.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Tableau de bord</span>
           </a>
         </li>
-		
-		
-		 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Outil</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="forgot-password.html">Modifier son mot de passe</a>
-            </li>
-          </ul>
-        </li>
         
-       
-       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+        
+		
+		
+     
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Gestion des posts</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="creer-un-post.html">Créer un post</a>
-            </li>
-            <li>
-              <a href="modifier-un-post.html">Modifier un post</a>
+              <a href="article.php">Modifier un post/Voir les posts</a>
             </li>
 			<li>
-              <a href="supprimer-un-post.html">Supprimer un post</a>
+              <a href="supprimer-un-post.php">Supprimer un post</a>
             </li>
+			
           </ul>
         </li>
 		
@@ -102,7 +90,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
        
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="https://www.mourad-kheloui.ovh/Accueil/">
+          <a class="nav-link" href="index.php">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Blog</span>
           </a>
@@ -119,36 +107,28 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
-            <span class="d-lg-none">Messages
-              <span class="badge badge-pill badge-primary">12 New</span>
+            <span class="d-lg-none">Commentaires
+              <span class="badge badge-pill badge-primary"></span>
             </span>
             <span class="indicator text-primary d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
             </span>
           </a>
+		  
+		  <!-- affichage des derniers commentaire dans la barre de navigation -->
+		  
+		  <?php while($c = $comm->fetch()) { ?>
           <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-            <h6 class="dropdown-header">New Messages:</h6>
+            <h6 class="dropdown-header">Nouveaux commentaires:</h6>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">
-              <strong>David Miller</strong>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+		  <strong><?=$c['pseudo']?></strong>
+              <span class="small float-right text-muted"><?=$c['commentairedate']?></span>
+              <div class="dropdown-message small"><?=$c['commentairetexte']?></div>
             </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <strong>Jane Smith</strong>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <strong>John Doe</strong>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item small" href="#">View all messages</a>
           </div>
+
+		  <?php } ?>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

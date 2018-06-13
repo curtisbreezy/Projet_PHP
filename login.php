@@ -41,7 +41,7 @@ if(isset($_POST['connexion'])) // si la variable connexion existe
 			
 		
 			{
-			$erreur = "Merci de tout compléter";
+			header("Location: registrer.php");
 			}
 		
 		
@@ -80,7 +80,7 @@ if(isset($_POST['connexion'])) // si la variable connexion existe
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Se connecter</div>
       <div class="card-body">
-        <form method="POST" action="">
+        <form method="POST">
           <div class="form-group">
             <label for="pseudo">Pseudo</label>
             <input class="form-control" id="pseudo" type="texte" name="pseudo"  placeholder="Votre pseudo">
@@ -101,10 +101,13 @@ if(isset($_POST['connexion'])) // si la variable connexion existe
 		
 		?>
 		
+			<div class="text-center">
+				<a class="d-block small mt-3" href="registrer.php">S'enregistrer</a>
+			</div>
 		
-        <div class="text-center">
-		  <a class="d-block small mt-3" href="http://mourad-kheloui.ovh/Accueil/">Retour au blog</a>
-        </div>
+			<div class="text-center">
+				<a class="d-block small mt-3" href="index.php">Retour au blog</a>
+			</div>
 		
       </div>
     </div>

@@ -1,17 +1,6 @@
 <?php  session_start();
-
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 
-
-if(isset($_GET['edit'])) {
-	if(!empty($_GET['edit']))
-	{
-
-$getid = htmlspecialchars($_GET['id']);
-$article->execute(array($getid));
-$article = $article->fetch();
-}
-}
 	
 if(isset($_POST['submit_commentaire'])){
 	if(isset($_POST['pseudo'], $_POST['commentairedate'], $_POST['commentairetexte'])
@@ -21,15 +10,11 @@ if(isset($_POST['submit_commentaire'])){
 		$commentairedate = htmlspecialchars ($_POST['commentairedate']);
 		$commentairetexte =htmlspecialchars_decode($_POST['commentairetexte']);
 	
-		$ins = $bdd->prepare('INSERT INTO commentaire (pseudo,commentairedate,commentairetexte,id_article) VALUE (?,?,?,?)');
-		$ins->execute(array($pseudo,$commentairedate,$commentairetexte,$getid));	
+		$ins = $bdd->prepare('INSERT INTO commentaire (pseudo,commentairedate,commentairetexte) VALUE (?,?,?)');
+		$ins->execute(array($pseudo,$commentairedate,$commentairetexte));	
 		header("Location: article.php?id=".$_SESSION['id_utilisateur']);
 		}
-		
-
-
-
-
+	
 }	
 
 
@@ -97,22 +82,30 @@ if(isset($_POST['submit_commentaire'])){
       </div>
     </nav>
    
-   <header class="masthead  text-white d-flex bg-white ">
+<header class="masthead  text-white d-flex bg-white ">
       
 	  <div class="container my-auto ">
 	  
-	  
-	  <form class="col-md-12 mt-3 " method="POST">
-						<h6> Poster votre commentaire </h6>
-								<input class="col-sm-6" type="text" name="pseudo" placeholder="votre pseudo"/> </br>
+	    <form class="col-md-6 mt-3" method="POST">
+									
+								<h6> Poster votre commentaire </h6>
+								
+								<input class="col-sm-6" type="text" name="pseudo"/> </br>
+								
 								<input class="col-sm-6" type="datetime" name="commentairedate" value="<?php echo date("d-m-Y H:i:s");?>"> </br>
-								<textarea class="col-md-12" type ="text"  name="commentairetexte" placeholder="Votre commentaire">  </textarea> </br>
+								
+								<textarea class="col-md-12" type ="text"  name="commentairetexte">  </textarea> </br>
+								
 								<input type="submit" name="submit_commentaire"/> </br>
-						</form>
+							
+		</form>
+	 
 		
         </div>
-      </div>
-    </header>
+      
+	  </div>
+    
+</header>
 
 	
 						

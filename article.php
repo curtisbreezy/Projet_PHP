@@ -1,37 +1,26 @@
 <?php  session_start();
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles ORDER BY id_article ASC LIMIT 0, 10');
-$comm = $bdd->query('SELECT * FROM commentaire ORDER BY commentairedate LIMIT 0, 10');
-$reponse_comm = $bdd->query('SELECT * FROM reponse_commentaire ORDER BY datereponse LIMIT 0, 5');
 
+if(isset($_GET['id']) AND !empty($_GET['id'])) {
+    
+	$get_id = htmlspecialchars($_GET['id']);
+	
+	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
+	$article->execute(array($get_id));
+	
+	if($article->rowCount()== 1) {
+		$article = $article->fetch();
+		$titre = $article['titrepost'];
+		$contenu = $article['textepost'];
+	
+}
 
-
-
-
-
-
-
-if(isset($_POST['repondre_commentaire'])){
-	if(isset($_POST['auteurreponse'],$_POST['datereponse'],$_POST['textereponse'])
-		AND !empty($_POST['auteurreponse']) AND !empty ($_POST['datereponse']) AND !empty ($_POST['textereponse']))
-		{
-		$auteurreponse = htmlspecialchars($_POST['auteurreponse']);
-		$datereponse = htmlspecialchars($_POST['datereponse']);
-		$textereponse = htmlspecialchars_decode($_POST['textereponse']);
+	else{
+		die('Erreur');
 		
-		$ins = $bdd->prepare('INSERT INTO reponse_commentaire (auteurreponse,datereponse,textereponse) VALUE (?,?,?)');
-		$ins->execute(array($auteurreponse,$datereponse,$textereponse));
-		
-		
-		header("Location: article.php?id=".$_SESSION['id_utilisateur']);
-		}
-		else
-		{
-		$error = "Votre commentaire ne fonctionne pas";
-		}
+	}
 
-// fin du script pour l'ajout de sous-commentaire
 }
 ?>
 
@@ -59,7 +48,7 @@ if(isset($_POST['repondre_commentaire'])){
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/creative_posts.css" rel="stylesheet">
+     <link href="css/creative_posts.css" rel="stylesheet">
 	
 
   </head>
@@ -68,195 +57,197 @@ if(isset($_POST['repondre_commentaire'])){
 
     <!-- Navigation -->
       <nav class="navbar navbar-expand-lg  fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index.html">Accueil</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-		  <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="log.html">Connexion/Inscription</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#about">A propos</a>
-            </li>
-			
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#services">Mes compétences</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#portfolio">Mon Portfolio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html/#contact">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+          
+          <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">Accueil</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="login.php">Connexion</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="index.php#about">A propos</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="index.php#services">Mes compétences</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="index.php#portfolio">Mon Portfolio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="index.php/#contact">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+      </nav>
    
    <header class="masthead text-center text-white d-flex bg-white ">
       
 	  <div class="container my-auto ">
 	  
-	  
-	 
-          
-		  
-		   
-		 
-		  
-		<section>
-		
-			
-		<h1>Tesla dans la tourmente</h1>
-			<div class="thumbnail">
-				<img src="img/tesla.jpg" width="100%" alt="Nature">
-					<div class="caption mt-3">
-       
-       <p>Le géant américain est confronté à de plus en plus de problème avec son nouveau modèle.</p>
-       <p><a href="https://www.capital.fr/entreprises-marches/tesla-suspend-de-nouveau-la-production-de-sa-voiture-model-3-1283405" target="blank" class="btn btn-xs btn-primary" role="button" title="En savoir +">En savoir +</a> </p>
-					</div>
-			</div>
-	
-         </section>
-        </div>
-      </div>
-    </header>
-			
-			
+				
+			<!--DÉBUT CODE À RÉVISER-->
 
 <section> 
 	<div class="container">
 		 <div class="card col-sm-12 mb-3">
 				<div class="caption m-3">
-					<div class="col-sm-6"> 
+                    
+					<div class="col-sm-12"> 
+                        
+                        <script src="vendor/jquery/jquery.min.js"></script>
+                        
+                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+                        
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+                        <script>
+                            
+                            $( document ).ready(function() {
+                                $( ".commentbutton" ).click(function() {
+                                    
+                                    $(".comments" + event.target.id).toggle();
+                                    
+                                });
+                                
+                                $( ".seecommentbutton" ).click(function() {
+                                    
+                                    $('.savebutton').attr('id',event.target.id); 
+                                    
+                                });
+                                
+                                $( ".savebutton" ).click(function() {
+                                                        
+                                    var author = $("#exampleInputAuthor1").val();
+                                    var comment = $("#exampleInputComment1").val();
+                                    
+                                     $.ajax({
+                                        type: 'POST',
+                                        url: "addcomment.php",
+                                        cache: false,
+                                        data: { id : event.target.id, author: author, comment: comment },
+                                        success: function(data){  
+                                            alert(data);
+                                        }
+                                    });
+                                    
+                                });
+                            });
+                        </script>
 					
-					<h4>Articles</h4>
-							
-							
-							<?php while($a = $articles->fetch()){?> <!-- récupération des articles en base de donnée -->
-							<button class="col-md-8"><a href="modifierpost.php?id=<?= $a['id_article'] ?>"/> Editer l'article </button> </a> </br>
-							<h5 class="m-3"> titre : <?=$a['titrepost'] ?> </h5> </br>
-							<p class="col-md-6"><?=$a['textepost'] ?></p>
-							<p> Rédigé par  <?=$a['auteurpost'] ?>, le <?=$a['datepost'] ?>. </p>
-							
-							
-							<p> <a href="comm.php?id=<?=$a['id_article']?>"> Poster un commentaire</a> </p> <!-- poster un comm avec transmission
-							de l'id de l'article -->
-							
-					</div>
-							
+					    <h3>Articles</h3>
+                        
+                        <br/>
+				
+				        <!-- récupération des articles en base de donnée -->
+						<?php $articles = $bdd->query('SELECT * FROM articles ORDER BY datepost DESC LIMIT 0, 10'); ?>
+                        <?php while($a = $articles->fetch()) {  
+                        
+                            $current = $a['id_article'] ?>
 
-							
-					<div class="col-md-12"> Commentaires <!-- visualisation des commentaires -->
-						
-						<div class="row">
-							
-							<div class="col-md-6">	
-						
-							<?php while($c = $comm->fetch()) {?>
-									<!--- première boucle pour les commentaire -->
-							<?=$c['pseudo'] ?> </br>
-							<?=$c['commentairedate']?> </br>
-							<?=$c['commentairetexte'] ?></br>
-							<a href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>">Supprimer le commentaire</a>
-							
-									<ul><?php while($r = $reponse_comm->fetch()) {?>  <!-- seconde boucle dans la première pour que les sous commentaire s'affiche sous le commentaire --> 
-									<?=$r['auteurreponse'] ?></br> 
-									<?=$r['datereponse']?> </br>
-									<?=$r['textereponse'] ?> </br>  
-									<?php }?>
-									<?php }?>
-									<?php }?>	</ul>
-									<?php while($c = $comm->fetch()) {?>
-									<!--- première boucle pour les commentaire -->
-							<?=$c['pseudo'] ?> </br>
-							<?=$c['commentairedate']?> </br>
-							<?=$c['commentairetexte'] ?></br>
-							<a href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>">Supprimer le commentaire</a>
-							<?php }?>
-									
-								
-									
-									</br>
-							
-							</div>
-						
-			
-							<div class="col-md-6"> Répondre au commentaire
-							
-							<form method="post">  <!-- création de réponse aux commentaires -->
-							<input type="text"  name="auteurreponse" placeholder="Votre pseudo"> </li></br>
-							<input type="datetime" name="datereponse" value="<?php echo date("d-m-Y H:i:s"); ?>"></li></br>
-							<textarea class="col-md-8" type="text" name="textereponse"> </textarea></li> </br>
-							<input type="submit" name="repondre_commentaire"/> </br> <!-- réponse aux commentaires -->
-							</form>
-						
-							
-							 </div>	
-							</div>
-						</div>	
-							
-					</div>
-							
+                            <div id="currentarticle" style="margin-bottom:50px;">
+                             
+                                <h4 style="color:black; font-weight:bold;"><?=$a['titrepost'] ?> </h4> 
 
-							
-															
-							
-							
-							
-						
-						</div>
+                                <p><?=$a['textepost'] ?></p>
+
+                                <p style="color:lightgray;">Rédigé par <?=$a['auteurpost'] ?>, le <?=$a['datepost'] ?>. </p> 
+
+                                <br/>
+
+                                <button><a href="modifierpost.php?edit=<?= $a['id_article'] ?>" style="color:#F05F40; !important"> Éditer l'article </a> </button>
+                                
+                                <button id="<?php echo $a['id_article']; ?>" class="commentbutton" style="color:#F05F40;">Voir les commentaires </button>
+                                
+                                <button id="<?php echo $a['id_article']; ?>" class="seecommentbutton" style="color:#F05F40;" data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
+                                
+                            </div>
+                            
+                            
+                            <!-- Récupération des commentaires liés à l'article -->
+                            <div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; margin-left:75px; display:none;">
+                                <?php
+                                    $comments = $bdd->query('SELECT * FROM commentaire WHERE id_article = ' . $current . ' ORDER BY commentairedate DESC LIMIT 0, 10');
+                                ?>
+                                <?php while($c = $comments->fetch()) { ?> 
+
+                                    <div style="margin-bottom:15px; border:1px solid lightgray; padding: 10px;">
+                                        <p><?=$c['commentairetexte'] ?></p>
+
+                                        <p style="color:lightgray;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p> 
+                                    </div>
+
+                                <?php } ?>
+                            </div>
+                        
+                        <?php } ?>
+                    
 					</div>
-					<div>
-							</div>				
-				</div>	
-		</br>	
-					</div>
-			 </div>
-	</div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Ajouter un commentaire
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <form role="form">
+                                      <div class="form-group">
+                                        <label for="exampleInputAuthor1">Auteur</label>
+                                          <input type="text" class="form-control"
+                                          id="exampleInputAuthor1" name="auteur" placeholder="Auteur"/>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputComment1">Commentaire</label>
+                                          <input type="text" class="form-control"
+                                              id="exampleInputComment1" placeholder="Votre commentaire"/>
+                                      </div>
+                                    
+                                      <button id="savebutton" action="addcomment.php" type="submit" class="btn btn-secondary savebutton" style="float:right;">Enregistrer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END OF Modal-->
+            </div>
+        </div>
+    </div>
 </section>
+        </div>
+       
+    </header>
 
 
+<!--FIN CODE À RÉVISER-->
+<!--VOIR AUSSI addcomment.php-->
 
 
 
 
 	 <!---------------------------------------------------------------------------------- mes réseaux socaux  --------------------------------------------------------------------------------------------------------------------------->
  
-
-	<section class="bg-dark text-white">
-      <div class="container-fluid text-center">
-        <h2 class="mb-4">Mon CV là ! </h2>
-        <a class="btn btn-light btn-xl sr-button" href="https://drive.google.com/file/d/1V-hvMRpyUv--RlI_QeVX7EmZPNRlNwT8/view?usp=sharing">Ne soyez pas timide !</a>
-      </div>
-    </section>
-
-    <section class="bg-white text-dark">
-      <div class="container text-center">
-        <h2 class="mb-4">Mon profil Linkedin est disponible ici ! </h2>
-        <a class="btn btn-light btn-xl sr-button" href="https://www.linkedin.com/in/mourad-kheloui-64ba8931/">Jetez-y un coup d'oeil !</a>
-      </div>
-    </section>
 	
 	<!-------------------------------------------------------------------------------------------- fin ------------------------------------------------------------------------------------------------------------------>
 	
-	<footer class="sticky-footer text-center col-md-12 bg-dark">
-       <div class="container">
-		
-	  
-			<small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
-	   
-	  </div>
-      
-    </footer>
-
+	
    
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->

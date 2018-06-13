@@ -26,6 +26,7 @@ if(isset($_POST['inscription']))
 					 $insertmbr = $bdd->prepare('INSERT INTO user (email,pseudo,mdp) VALUES(?,?,?)');
 					 $insertmbr->execute(array($email,$pseudo,$mdp));
 					 $erreur = "Votre compte à bien été crée";
+					 header("Location:login.php");
 					 
 					}
 					else
@@ -100,7 +101,7 @@ if(isset($_POST['inscription']))
               </div>
             </div>
           </div>
-          <input type="submit" name ="inscription" value="inscription"></input>
+          <input type="submit" class="btn btn-primary" name ="inscription" value="Inscription"></input>
         </form>
 		
 		<!-- controle des erreurs -->
@@ -115,9 +116,8 @@ if(isset($_POST['inscription']))
 		?>
 		
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Se connecter</a>
-          <a class="d-block small" href="forgot-password.html">Mot de passe oublié?</a>
-		  <a class="d-block small" href="http://mourad-kheloui.ovh/Accueil/">Retour au blog</a>
+          <a class="d-block small mt-3" href="login.php">Se connecter</a>
+		  <a class="d-block small" href="index.php">Retour au blog</a>
         </div>
       </div>
     </div>

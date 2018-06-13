@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="login.php">Connexion/Inscription</a>
+              <a class="nav-link js-scroll-trigger" href="login.php">Connexion</a>
             </li>
 			<li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="article.php">Posts</a>
@@ -64,27 +64,29 @@
 
     <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
-        
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
               <strong>
-<?php
-		if(isset($_SESSION['pseudo'])){
-		echo " Bienvenue ".$_SESSION['pseudo'];
-									}
-	
-?>
-			
-
-			  Ensemble,allons plus loin.</strong>
+			  
+               <?php if(isset($_SESSION['pseudo']))
+			   { echo " Bienvenue ".$_SESSION['pseudo'];}
+			else
+			{ 	
+			echo" Bienvenue visiteur";}
+			   
+			   
+			   ?>
+			   
+			  "Ensemble,allons plus loin."
+			  </strong>
             </h1>
             <hr>
           </div>
-          <div class="col-lg-8 mx-auto">
+          
+		  <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">Mourad Kheloui- Développeur PHP</p>
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="CV_2018_PHP.pdf">Plus d'informations</a>
           </div>
-        
       </div>
     </header>
 	
@@ -112,39 +114,42 @@
           </div>
         </div>
       </div>
+	  
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">A la pointe de la technologie</h3>
-              <p class="text-muted mb-0">Toujours plus d'efficience :</p><p> je maîtrise le HTML, le CSS combiné à bootstrap pour la partie front. Je travail avec le framework SYMPHONY en architecture MVC et est friand de MySQL.</p>
+              <p class="mb-0">Toujours plus d'efficience :</p><p> je maîtrise le HTML, le CSS combiné à bootstrap pour la partie front.</p><p> J'ai travaillé sur ce site avec PHP et MySQL pour le rendre le plus attractif possible.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">Prêt pour l'action</h3>
-              <p class="text-muted mb-0">Création collaborative avec l'aide de Github</p> <p> J'aime les projets collaboratifs 
+              <p class="mb-0">Création collaborative avec l'aide de Github</p> <p> Parce que versionner son site est vital pour un développement et un déploiement rapide </p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">En veille permanente</h3>
-              <p class="text-muted mb-0">Je reste à l'affût des dernières nouveautés </p> <p> et est ouvert à de nouvelles aventures dans le domaine du développement sur appareil mobile.</p>
+              <p class=" mb-0">Je reste à l'affût des dernières nouveautés dans le développement web</p> <p> Je suis ouvert à de nouvelles compétences dans le domaine du développement sur appareil mobile.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">Créer avec amour</h3>
-              <p class="text-muted mb-0">Ce site est là</p> <p>pour démontrer mon envie, ma passion et mon employabilité dans ce secteur !</p>
+              <p class="mb-0">Ce site est là pour démontrer mon envie, ma passion et mon employabilité dans ce secteur !</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+	
+<!------------------------------------------------ Carrousel de mes différents projets ----------------------------------------------------------------------->	
 
     <section class="p-0" id="portfolio">
       <div class="container-fluid p-0">
@@ -158,7 +163,7 @@
                     Projet 1
                   </div>
                   <div class="project-name">
-                    Chalets et caviar (Validé)
+                    Chalets et caviar site WordPress (Validé)
                   </div>
                 </div>
               </div>
@@ -173,7 +178,7 @@
                     Projet 2
                   </div>
                   <div class="project-name">
-                    Festival du Parc Monceau (Validé)
+                    Festival du Parc Monceau site en Bootstrap (Validé)
                   </div>
                 </div>
               </div>
@@ -188,7 +193,7 @@
                     Projet 3
                   </div>
                   <div class="project-name">
-                    Express Food (Validé)
+                    Express Food spécifications techniques (Validé)
                   </div>
                 </div>
               </div>
@@ -218,7 +223,7 @@
                     Projet 5
                   </div>
                   <div class="project-name">
-                    Site communautaire (prochainement)
+                    Site communautaire avec Symphony (prochainement)
                   </div>
                 </div>
               </div>
@@ -239,23 +244,47 @@
               </div>
             </a>
           </div>
+		  
+		   <div class="col-lg-12 col-sm-12">
+            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Dernier projet
+                  </div>
+                  <div class="project-name">
+                   Recherche d'un stage de longue durée ou d'un emploi en CDI (rentrée 2018)
+                  </div> 
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
-
-    <section class="bg-white text-dark">
+	
+	
+<!--------------------------------------------------------- Mes réseaux sociaux -------------------------------------------------------------------------------------->
+    
+	
+	<section class="bg-white text-dark">
       <div class="container text-center">
-        <h2 class="mb-4">Mon profil Linkedin est disponible ici ! </h2>
+        <h2 class="mb-4">Mon profil Linkedin : </h2>
         <a class="btn btn-dark btn-xl sr-button" href="https://www.linkedin.com/in/mourad-kheloui-64ba8931/" target="blank">Jetez-y un coup d'oeil !</a>
       </div>
     </section>
 	
 	<section class="bg-dark text-white">
       <div class="container-fluid text-center">
-        <h2 class="mb-4">Mon CV là ! </h2>
+        <h2 class="mb-4">Mon curriculum vitae : </h2>
         <a class="btn btn-light btn-xl sr-button" href="CV_2018_PHP.pdf" target="blank">Ne soyez pas timide !</a>
       </div>
     </section>
+	
+	
+<!---------------------------------------------------------- Me contacter ------------------------------------------------------------------------>
+
 
     <section id="contact">
       <div class="container">
@@ -263,7 +292,7 @@
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading">Restons connecté</h2>
             <hr class="my-4">
-            <p class="mb-5">Prêt à commencer une nouvelle aventure et à trouvé le candidat qu'il vous faut? Prenez votre téléphone ou votre ordinateur et écrivez-moi pour que nous nous rencontrions le plus vite possible !</p>
+            <p class="mb-5">Prêt à commencer une nouvelle aventure et à trouver le candidat qu'il vous faut? Prenez votre téléphone ou votre ordinateur et écrivez-moi pour que nous nous rencontrions le plus vite possible !</p>
           </div>
         </div>
         <div class="row">
@@ -281,6 +310,10 @@
       </div>
     </section>
 	
+	
+<!---------------------------------------------------Fin----------------------------------------------------------------------------------->
+
+
 	<footer class="sticky-footer text-center col-md-12 bg-dark">
        <div class="container">
 			<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="admin.php">Espace abonné</a>
