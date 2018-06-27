@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 07 juin 2018 à 09:15
+-- Généré le :  lun. 11 juin 2018 à 12:39
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -36,14 +36,15 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `datepost` datetime NOT NULL,
   `textepost` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `articles`
 --
 
 INSERT INTO `articles` (`id_article`, `auteurpost`, `titrepost`, `datepost`, `textepost`) VALUES
-(10, 'MK72', 'Commentaire', '2018-06-06 10:40:00', '<p>Test du syst&egrave;me de commentaire</p>');
+(12, 'Mourad', 'Modification', '2018-06-09 00:00:00', '<p>Gestion des articles fonctionnelle , merci Alexandre !</p>'),
+(13, 'ALEX', 'Modification', '2018-06-11 09:51:00', '<p>Second article pour en voir le bon fonctionnement</p>');
 
 -- --------------------------------------------------------
 
@@ -56,44 +57,17 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `commentairedate` datetime NOT NULL,
-  `commentairetexte` text COLLATE utf8_unicode_ci NOT NULL,
+  `commentairetexte` varchar(10000) COLLATE utf8_unicode_ci NOT NULL,
   `id_article` int(11) NOT NULL,
   PRIMARY KEY (`id_commentaire`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `commentaire`
 --
 
 INSERT INTO `commentaire` (`id_commentaire`, `pseudo`, `commentairedate`, `commentairetexte`, `id_article`) VALUES
-(1, 'MK', '2018-05-30 18:00:00', 'Hello', 0),
-(2, 'mk', '2018-06-06 17:00:00', 'nonnnnnnnnnnnnnnnnn', 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `reponse_commentaire`
---
-
-DROP TABLE IF EXISTS `reponse_commentaire`;
-CREATE TABLE IF NOT EXISTS `reponse_commentaire` (
-  `id_reponse` int(11) NOT NULL AUTO_INCREMENT,
-  `auteurreponse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `datereponse` datetime NOT NULL,
-  `textereponse` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `id_commentaire` int(11) NOT NULL,
-  PRIMARY KEY (`id_reponse`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `reponse_commentaire`
---
-
-INSERT INTO `reponse_commentaire` (`id_reponse`, `auteurreponse`, `datereponse`, `textereponse`, `id_commentaire`) VALUES
-(1, 'mk', '2018-06-06 13:00:00', 'oui', 0),
-(2, 'mk', '2018-06-06 14:00:00', 'oui', 0),
-(3, 'mk', '2018-06-06 15:00:00', 'possible?', 0),
-(4, 'mk', '2018-06-06 18:00:00', 'Pourquoi pas?', 2);
+(3, 'MK', '2018-06-11 14:20:25', 'Hello', 13);
 
 -- --------------------------------------------------------
 
@@ -108,24 +82,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pseudo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mdp` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id_utilisateur`, `email`, `pseudo`, `mdp`) VALUES
-(1, 'mourad.kheloui@gmail.com', 'MK72', '7c222fb2927d828af22f592134e8932480637c0d');
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `commentaire`
---
-ALTER TABLE `commentaire`
-  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_commentaire`) REFERENCES `reponse_commentaire` (`id_reponse`);
+(1, 'mourad.kheloui@gmail.com', 'MK72', '7c222fb2927d828af22f592134e8932480637c0d'),
+(2, 'curtis.jayden@gmail.com', 'ALEX', '7c222fb2927d828af22f592134e8932480637c0d');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

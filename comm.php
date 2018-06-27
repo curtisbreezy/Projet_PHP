@@ -1,5 +1,5 @@
 <?php  session_start();
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
+$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "root");
 
 	
 if(isset($_POST['submit_commentaire'])){

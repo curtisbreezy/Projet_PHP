@@ -18,8 +18,8 @@
 		//FOR TESTING
 		//echo "Connected successfully";
 		
-		$sql = "INSERT INTO reponse_commentaire (auteurreponse,datereponse,textereponse,id_commentaire)
-		VALUES ('" . $_POST['author'] . "',now(),'" . $_POST['comment'] . "','" . $_POST['id'] . "')";
+		$sql = "INSERT INTO commentaire (pseudo, commentairedate, commentairetexte, id_article, parent_id)
+		VALUES ('" . $_POST['pseudo'] . "',now(),'" . $_POST['reponse'] . "','" . $_POST['id'] . "','". $_POST['id_commentaire'] ."')";
 
 		if ($conn->query($sql) === TRUE) {
 			
