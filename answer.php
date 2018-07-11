@@ -44,7 +44,7 @@ if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['
 			$id_article = intval($_GET['id_article']);
 			$id_commentaire = intval($_GET['id_commentaire']);
 			$validate = intval($_GET['validate']);
-			var_dump($pseudo,$commentairedate,$commentairetexte,$id_article,$id_commentaire,$validate);										
+												
 			$ins = $bdd->prepare('INSERT INTO commentaire (pseudo,commentairedate,commentairetexte,id_article,parent_id,validate) VALUES (?,?,?,?,?,?)'); 
 														
 			echo "<script> alert('requête préparée'); </script>"; 

@@ -13,7 +13,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 	
 	$ins = $bdd->prepare('INSERT INTO articles(auteurpost, titrepost, datepost, textepost) VALUES(?,?,?,?)'); // insertion dans la base de donnée ,en théorie !
 	$ins->execute(array($auteurpost,$titrepost,$datepost,$textepost));
-	var_dump($auteurpost,$titrepost,$datepost,$textepost);			
+		
 	$message = 'Votre article a bien été posté';
 	
 	header("Location: /extrait.php?id=".$_POST['id_article']);
