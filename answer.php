@@ -1,13 +1,24 @@
 <?php 
 
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$comments = $bdd->query('SELECT * FROM commentaire');
-$articles = $bdd->query('SELECT * FROM articles');
-$_GET['id_article']= $_POST['id_article'];
+	$servername = "127.0.0.1";
+		$username = "root";
+		$password = "";
+		$db = "projet_5";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $db);
+		
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		$conn->set_charset("utf8");
+$comments = $conn->query('SELECT * FROM commentaire');
+$articles = $conn->query('SELECT * FROM articles');
+
 
 ?>
-<?php while ($c = $comments->fetch());
-{?>
+
 	
 											<form method="post">
 												<br/>
@@ -30,39 +41,42 @@ $_GET['id_article']= $_POST['id_article'];
 											</form>
 											
 
-	<?php }?>
+	
 											
 <?php
-if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['validate'])) 
-	if(isset($_POST['pseudo']) && isset($_POST['commentairedate']) && isset($_POST['commentairetexte'])) 							
+if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['validate'])) {
+	if(isset($_POST['pseudo']) && isset($_POST['commentairedate']) && isset($_POST['commentairetexte'])) {							
 		if(!empty($_POST['pseudo']) && !empty($_POST['commentairedate']) && !empty($_POST['commentairetexte'])) {
 												// sécurisation des informations
-			echo "<script> alert('test 1'); </script>"; 
+			
 			$pseudo = htmlspecialchars($_POST['pseudo']);
 			$commentairedate = htmlspecialchars($_POST['commentairedate']);
 			$commentairetexte = htmlspecialchars($_POST['commentairetexte']);
 			$id_article = intval($_GET['id_article']);
-			$id_commentaire = intval($_GET['id_commentaire']);
+			$parent_id = intval($_GET['id_commentaire']);
 			$validate = intval($_GET['validate']);
-												
-			$ins = $bdd->prepare('INSERT INTO commentaire (pseudo,commentairedate,commentairetexte,id_article,parent_id,validate) VALUES (?,?,?,?,?,?)'); 
-														
-			echo "<script> alert('requête préparée'); </script>"; 
-														
-			$ins->execute(array($pseudo,$commentairedate,$commentairetexte,'.$id_article.','.$id_commentaire.','.$validate.'));
-														
-			echo "<script> alert('réponse postée'); </script>";
+			
+			
+			$sql = "INSERT INTO commentaire (pseudo, commentairedate, commentairetexte, id_article, parent_id, validate)
+		VALUES ('" . $_POST['pseudo'] . "',now(),'" . $_POST['commentairetexte'] . "','" . $_POST['id_article'] . "','" . $_POST['id_commentaire'] . "','" . $_POST['validate'] . "')";
+		echo "<script> alert('Commentaire posté'); </script>";
+		
+		if ($conn->query($sql) === TRUE) {
+			
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+			
+				
+			
 										
 												
 
 
 																											}
-						else{
-
-						$message = 'Veuillez remplir tous les champs'; // si un des champs n'est pas complété
-																	
-							}
-	
+						
+	}
+}	
 
 							
 ?>

@@ -2,7 +2,6 @@
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 
-$comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 1  ORDER BY commentairedate ASC LIMIT 0, 10');
 
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
@@ -167,8 +166,6 @@ s
 						
 <div class="container">
 		<font face="Century Gothic" size="20"> Articles </font>
-                      
-				
 				        <!-- récupération des articles en base de donnée -->
                         <?php while($a = $articles->fetch()) {  
                         
@@ -190,71 +187,62 @@ s
                                 <button id="<?php echo $a['id_article']; ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>
                                 
                                 <button id="<?php echo $a['id_article']; ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
-								
-								
-                            
-								
-								
-								
 									
-								
-								
-								
-								
                             </div>
                             
-                            
-                           <!-- Récupération des commentaires liés à l'article -->
-                            <div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; margin-left:75px; display:none;">
+             <!-- Récupération des commentaires liés à l'article -->	               
+			<?php $comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
+	 			
+            ?>
+                                
+			<?php while($c = $comments->fetch()) { 
+								 
+				$answer = $c['id_commentaire'];
+				
+			?> 
+			
+			<div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; margin-left:75px; display:none;">
 									
-									
-                                <?php
-                                   
-									$comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
+								
+			
 							
-                                ?>
-                                <?php while($c = $comments->fetch()) { 
-								 $answer = $c['id_commentaire'] ;
-								?> 
-								
+			
+									
 
-                                    <div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
-                                        <p><?=$c['commentairetexte'] ?></p>
+            <div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
+                       
+					    <p><?=$c['commentairetexte'] ?></p>
+						<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
+										
+					  
 
-                                        <p style="color:lightgray;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p>
+                        <p style="color:lightgray;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p>
 
-											<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
-											
-											<br/>
-											
-											<a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
-											
-											
-											
-											<?php while($c = $comments->fetch()) { 
-								
-											$comments = $bdd->query('SELECT * FROM commentaire WHERE  validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');	 
-									
-											?>	
-								
-											
-                                        <p> Réponse : <?=$c['commentairetexte'] ?></p>
-											<hr/>
-												<?=$c['commentairedate'] ?>
-											
-									
-								
-								
-									
-									
-											
-                           
-								<?php } ?> 
-							</div>	 
-							<?php } ?>	
-				  
-				  </div>
-				  <?php } ?> 
+						  <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
+						
+						<br/>
+					<?php  $reponse = $bdd->query('SELECT * FROM commentaire WHERE parent_id = '.$answer.' ORDER BY commentairedate asc');	
+					?>	
+					<?php while($r = $reponse->fetch()) { 
+								 
+						$answer = $r['id_commentaire'];
+				
+					?> 
+						
+						
+					
+						<div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">					
+						<?=$r['commentairetexte']?>				
+						<p style="color:lightgray;">Rédigé par <?=$r['pseudo']?>, le <?=$r['commentairedate'] ?>. </p>
+						</div>
+						<?php } ?> 
+			</div>	 
+			
+					
+			<?php } ?>	 
+		 </div>
+		    
+			<?php } ?> 		  
 	 </div>
 				 
 </div>
