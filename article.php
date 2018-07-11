@@ -1,8 +1,8 @@
 <?php  session_start();
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC LIMIT 0, 10');
 
+$comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 1  ORDER BY commentairedate ASC LIMIT 0, 10');
 
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
@@ -15,17 +15,18 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 		$article = $article->fetch();
 		$titre = $article['titrepost'];
 		$contenu = $article['textepost'];
-	
+		$articles = $bdd->query('SELECT * FROM articles WHERE id_article = '.$get_id.' ORDER BY id_article DESC LIMIT 0, 10');
 }
 
 }
+
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-
-  <head>
+s
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -84,7 +85,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
           </div>
           
       </nav>
-	  <nav>
+	 
 	   
    
   
@@ -95,7 +96,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 		 <div class="mb-3">
 				<div class="caption m-3">
                     
-					<div> 
+					
                         
                         <script src="vendor/jquery/jquery.min.js"></script>
                         
@@ -190,22 +191,34 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
                                 
                                 <button id="<?php echo $a['id_article']; ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
 								
-								<button id="<?php echo $a['id_article']; ?>" class="seecommentbutton2 btn btn-secondary"  data-toggle="modal" data-target="#ModalReponse">Répondre à un commentaire</button>
-                                
+								
+                            
+								
+								
+								
+									
+								
+								
+								
+								
                             </div>
                             
                             
-                            <!-- Récupération des commentaires liés à l'article -->
+                           <!-- Récupération des commentaires liés à l'article -->
                             <div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; margin-left:75px; display:none;">
+									
+									
                                 <?php
-                                    $comments = $bdd->query("SELECT * FROM commentaire WHERE valid = '1' AND id_article = '.$current.' ");
+                                   
+									$comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
 							
                                 ?>
                                 <?php while($c = $comments->fetch()) { 
-								
+								 $answer = $c['id_commentaire'] ;
 								?> 
+								
 
-                                    <div style="margin-bottom:15px; border:1px solid lightgray; padding: 10px;">
+                                    <div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
                                         <p><?=$c['commentairetexte'] ?></p>
 
                                         <p style="color:lightgray;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p>
@@ -213,79 +226,44 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 											<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
 											
 											<br/>
-									
-										
-									</div>
-									
-									 <?php
-                                    $comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id= 1 ORDER BY commentairedate ASC LIMIT 0, 10');
-							
-                                ?>
-										<?php while($c = $comments->fetch()){ ?>
-
-										<?php }?>										
-                            </div>
-							
-							<div>
-							
-							<?php } ?>
-							
-							
-							
-							</div>
+											
+											<a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
+											
+											
+											
+											<?php while($c = $comments->fetch()) { 
 								
-					
-					<?php } ?> 
-						 
-                   
-				   </div>
-                       
- 
-					 
+											$comments = $bdd->query('SELECT * FROM commentaire WHERE  validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');	 
+									
+											?>	
+								
+											
+                                        <p> Réponse : <?=$c['commentairetexte'] ?></p>
+											<hr/>
+												<?=$c['commentairedate'] ?>
+											
+									
+								
+								
+									
+									
+											
+                           
+								<?php } ?> 
+							</div>	 
+							<?php } ?>	
+				  
+				  </div>
+				  <?php } ?> 
+	 </div>
+				 
+</div>
                     
-				</div>
-                    
-				
-			 </div>
-</div>		
+											
 
 
 
-<div class="modal fade" id="ModalReponse" tabindex="-1" role="dialog" 
-                         aria-labelledby="ModalReponse" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        Répondre
-                                    </h4>
-                                </div>
-
-                                <!-- Modal Body -->
-                                <div class="modal-body">
-
-                                    <form role="form">
-                                      <div class="form-group">
-                                        <label for="pseudo">Auteur</label>
-                                          <input type="text" class="form-control"
-                                          id="pseudo" placeholder="Auteur"/>
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="reponse">Commentaire</label>
-                                          <input type="text" class="form-control"
-                                              id="reponse" placeholder="Commentaire"/>
-                                      </div>
-                                    
-                                      <button id="savebutton2" type="submit" class="btn btn-secondary savebutton2" style="float:right;">Enregistrer</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-		<!-- modal -->
-				  	
-                    <!-- Modal -->
+				<!-- Modal -->
                     <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

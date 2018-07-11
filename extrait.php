@@ -1,49 +1,8 @@
 <?php  session_start();
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles ORDER BY datepost DESC LIMIT 0, 10');
-
-
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
-    
-	$get_id = htmlspecialchars($_GET['id']);
-	
-	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
-	$article->execute(array($get_id));
-	
-	if($article->rowCount()== 1) {
-		$article = $article->fetch();
-		$titre = $article['titrepost'];
-		$contenu = $article['textepost'];
-	
-}
-
-	
-	
-	
-
-if(isset($_POST['auteurreponse'],$_POST['datereponse'],$_POST['textereponse'])) 
-	if(!empty($_POST['auteurreponse']) AND !empty($_POST['datereponse']) AND !empty($_POST['textereponse']))
-	{
-	$auteurreponse = htmlspecialchars($_POST['auteurreponse']); // protection des données
-	$datereponse = htmlspecialchars($_POST['datereponse']);
-	$textereponse = htmlspecialchars_decode($_POST['textereponse']);
-	
-	
-	$ins = $bdd->prepare('INSERT INTO reponse_commentaire (auteurreponse,datereponse, textereponse) VALUES(?,?,?)'); // insertion dans la base de donnée ,en théorie !
-	$ins->execute(array($auteurreponse,$datereponse,$textereponse));
-		
-	$message = 'Votre article a bien été posté';
-	
-	header("Location: article.php?id=".$_SESSION['id_article']);
-	}
-	else
-	{
-		$message = 'Veuillez remplir tous les champs'; // si un des champs n'est pas complété
-	}
-}
-
-
+$articles = $bdd->query('SELECT * FROM articles');
+$comments = $bdd->query('SELECT * FROM commentaire');
 ?>
 
 <!DOCTYPE html>
@@ -121,17 +80,18 @@ if(isset($_POST['auteurreponse'],$_POST['datereponse'],$_POST['textereponse']))
 				<font face="Century Gothic" size="20"> Articles </font>
                       
 				
-				        <!-- récupération des articles en base de donnée -->
-                        <?php while($a = $articles->fetch()) { 
-						$current = $a['id_article'] ?>
-
-                            <div id="currentarticle" class="p-3" style="margin-bottom:50px;">
-								
-                             
+				        
+						
+                            <div id="currentarticle" class="p-3 mt-3" style="margin-bottom:50px;">
+								<!-- récupération des articles en base de donnée -->
+							<?php while($a = $articles->fetch()) { 
+							?>
+                           
                                 <h4 style="font-weight:bold;"><?=$a['titrepost'] ?></h4>
 								<hr/>								
 
                                 <p>
+								
 								<!---------------- limitation du nombre de caractère pour créer l'extrait. ----------------->
 								
 								<?php 
@@ -142,52 +102,23 @@ if(isset($_POST['auteurreponse'],$_POST['datereponse'],$_POST['textereponse']))
 								
 								?>..........</p>
 								
+								<!----------------------------------------------------------------------------------------------------->
 								<hr/>
 
                                 <p style="color:lightgray;">Rédigé par <?=$a['auteurpost'] ?>, le <?=$a['datepost'] ?>. </p> 
 
                                 <br/>
 
-                                <button class="btn btn-warning"><a href="article.php?id=<?= $a['id_article'] ?>"> En savoir + </a> </button>
+                                <button class="btn btn-warning mb-3"><a href="article.php?id=<?= $a['id_article'] ?>"> En savoir + </a> </button>
+                                   <?php } ?> 
                                 
-                               
                             </div>
                             
-                         
-											
-                            </div>
-							
-							<div>
-							
-							
-							
-							
-							
-							</div>
-								
-					<?php } ?>  
-				
-						 
-                   
-				   </div>
-                       
- 
-					 
-                    
-				</div>
-                     
                            
-				
-			 </div>
-</div>		
-
-
-
-		
-	
+											
+                  </div>
             </div>
         </div>
-    </div>
 </section>
 
 <!--FIN CODE À RÉVISER-->

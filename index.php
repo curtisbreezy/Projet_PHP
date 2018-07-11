@@ -3,15 +3,14 @@
 
 
 if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])) {
-        
+        $from =(isset($_POST['email']));
         $to = "mourad.kheloui@gmail.com";
         $subject = "Expéditeur : " .$_POST['nom'];
-        $email =  $_POST['email'];
         $message = "Corps du message : " .$_POST['message'];
         
-        
-        if(mail($to,$subject,$email,$message)){
-            $erreur = "Votre message a été envoyé !";
+       
+        if(mail($from,$to,$subject,$message)){
+            echo "<script> alert ('Votre message à bien été envoyé'); </script>";
             unset($nom);
             unset($email);
             unset($message);
@@ -55,7 +54,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
   <body id="page-top">
 
     <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top container-fluid" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Accueil</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,15 +92,14 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
               <strong>
-<?php
-		if(isset($_SESSION['pseudo'])){
-		echo " Bienvenue ".$_SESSION['pseudo'];
+				<?php if(isset($_SESSION['pseudo'])){
+					echo " Bienvenue ".$_SESSION['pseudo'];
 									}
 	
-?>
-			
-
-			  Ensemble,allons plus loin.</strong>
+				?>  
+				
+				Ensemble,allons plus loin.
+			  </strong>
             </h1>
             <hr>
           </div>
@@ -121,7 +119,10 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading text-white">J'ai les compétences que vous recherchez!</h2>
             <hr class="light my-4">
-            <p class="text-faded mb-4">Titulaire d'une licence gestion de la relation clientèle et e-commerce, j'ai durant cette troisième année, aborder les langages de développement web</p><p> Après plusieurs expériences dans le domaine commerciale qui m'ont ennuyé, j'ai franchi le pas et est désormais étudiant en Master 1 développeur d'application PHP avec l'école de renommée internationale OpenClassrooms.</p>
+            <p class="text-faded mb-4">Titulaire d'une licence gestion de la relation clientèle et e-commerce, j'ai durant cette troisième année, aborder les langages de développement web</p>
+			<p> Après plusieurs expériences dans le domaine commercial qui m'ont ennuyé, j'ai franchi le pas et est désormais étudiant en Master 1 développeur d'application PHP avec l'école de renommée 
+			internationale OpenClassrooms.</p>
+			
             <a class="btn btn-light btn-xl js-scroll-trigger" href="#contact">Rencontrons-nous !</a>
           </div>
         </div>
@@ -290,7 +291,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading">Restons connecté</h2>
             <hr class="my-4">
-            <p class="mb-5">Prêt à commencer une nouvelle aventure et à trouver le candidat qu'il vous faut? Prenez votre téléphone ou votre ordinateur et écrivez-moi pour que nous nous rencontrions le plus vite possible !</p>
+            <p class="mb-5">Prêt à commencer une nouvelle aventure et à trouver le candidat qu'il vous faut ? Prenez votre téléphone ou votre ordinateur et écrivez-moi pour que nous nous rencontrions le plus vite possible !</p>
           </div>
         </div>
         <div class="row">
@@ -309,21 +310,21 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 	  
 	  
 	  <!-- ajout d'un formulaire de contact --->
-		<div class="row">
-			<div class="col-lg-8 col-md-8 mx-auto text-center">
+		
+			<div class="col-lg-8 col-md-12 col-xs-12 mx-auto text-center">
 				<form method="post" action="">
 					<div class="form-group">
 					<?php
-					if(isset($erreur)){ echo"<p>$erreur</>"; }
+					if(isset($erreur)){ echo"$erreur"; }
 					?>
 					
 					<h2 class="mt-4"> Formulaire de contact </h2>
 					<hr/>
 					<label for="nom">Vos coordonnées</label>
 					
-					<br/><input type="text" class="col-md-5" name="nom" id="nom" placeholder="" required/>  <br/>
+					<br/><input type="text" class="col-md-5 col-xs-6" name="nom" id="nom" placeholder="" required/>  <br/>
 					
-					<br/><label>Votre email</label>
+					<br/><label for="email">Votre email</label>
 					
 					<br/><input type="email" class="col-md-6" name="email" id="email" placeholder="" required/>
 					
@@ -333,7 +334,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 			
 					
 					
-					<textarea class="col-md-12 form-control" name="message" id="message" type="text" placeholder="Votre message"></textarea>
+					<textarea class="col-xs-12 form-control" name="message" id="message" type="text" placeholder="Votre message"></textarea>
 			 <hr/>
 			
 			
@@ -342,7 +343,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 				</form>
 		
 			</div>
-		</div>
+		
 		
 		<!--------------------------------------fin------------------------------------------------>
     </section>
