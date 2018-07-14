@@ -172,7 +172,7 @@ s
 				        <!-- récupération des articles en base de donnée -->
                         <?php while($a = $articles->fetch()) {  
                         
-                            $current = htmlspecialchars($a['id_article']) ?>
+                            ?>
 
                             <div id="currentarticle" class="p-3" style="margin-bottom:50px;">
 								
@@ -194,7 +194,7 @@ s
                             </div>
                             
              <!-- Récupération des commentaires liés à l'article -->	               
-			<?php $comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
+			<?php $comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . htmlspecialchars($a['id_article']) . '  ORDER BY commentairedate ASC LIMIT 0, 10');
 	 			
             ?>
                                 
