@@ -6,7 +6,8 @@ $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
-	
+	if (is_numeric($get_id))
+	{
 	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
 	$article->execute(array($get_id));
 	
@@ -16,7 +17,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 		$contenu = $article['textepost'];
 		$articles = $bdd->query('SELECT * FROM articles WHERE id_article = '.$get_id.' ORDER BY id_article DESC LIMIT 0, 10');
 }
-
+}
 }
 
 
@@ -172,7 +173,7 @@ s
 				        <!-- récupération des articles en base de donnée -->
                         <?php while($a = $articles->fetch()) {  
                         
-                            $current = $a['id_article'] ?>
+                            $current = intval ($a['id_article']) ?>
 
                             <div id="currentarticle" class="p-3" style="margin-bottom:50px;">
 								
@@ -194,7 +195,9 @@ s
                             </div>
                             
              <!-- Récupération des commentaires liés à l'article -->	               
-			<?php $comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
+			<?php 
+			
+			$comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = '.$current.' ORDER BY commentairedate ASC LIMIT 0, 10');
 	 			
             ?>
                                 
@@ -204,7 +207,7 @@ s
 				
 			?> 
 			
-			<div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; margin-left:75px; display:none;">
+			<div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; display:none;">
 									
 								
 			
@@ -212,7 +215,7 @@ s
 			
 									
 
-<div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
+<div style="margin-top:5%;margin-bottom:5%; margin-left:5%; border:1px solid lightgray; padding: 10px;">
     <h5 class="mt-3 mb-3"><?=$c['commentairetexte'] ?></h5>
 		<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
 						
@@ -222,7 +225,7 @@ s
 						 <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
 						
 						<br/>
-					<?php  $reponse = $bdd->query('SELECT * FROM commentaire WHERE parent_id = '.$answer.' ORDER BY commentairedate asc');	
+					<?php $reponse = $bdd->query('SELECT * FROM commentaire WHERE parent_id = '.$answer.' ORDER BY commentairedate asc');	
 					?>	
 					<?php while($r = $reponse->fetch()) { 
 								 
