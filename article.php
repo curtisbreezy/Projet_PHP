@@ -66,6 +66,9 @@ s
               <li class="nav-item">
                   <a class="nav-link js-scroll-trigger" href="login.php">Connexion/Inscription</a>
                 </li>
+				<li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="extrait.php">Posts</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link js-scroll-trigger" href="index.php#about">A propos</a>
                 </li>
@@ -169,7 +172,7 @@ s
 				        <!-- récupération des articles en base de donnée -->
                         <?php while($a = $articles->fetch()) {  
                         
-                            $current = $a['id_article'] ?>
+                            $current = htmlspecialchars($a['id_article']) ?>
 
                             <div id="currentarticle" class="p-3" style="margin-bottom:50px;">
 								
@@ -191,7 +194,7 @@ s
                             </div>
                             
              <!-- Récupération des commentaires liés à l'article -->	               
-			<?php $comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
+			<?php $comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = ' . $current . '  ORDER BY commentairedate ASC LIMIT 0, 10');
 	 			
             ?>
                                 
@@ -209,16 +212,14 @@ s
 			
 									
 
-            <div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
-                       
-					    <p><?=$c['commentairetexte'] ?></p>
-						<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
-										
-					  
-
+<div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">
+    <h5 class="mt-3 mb-3"><?=$c['commentairetexte'] ?></h5>
+		<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
+						
+						<br/>
                         <p style="color:lightgray;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p>
 
-						  <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
+						 <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
 						
 						<br/>
 					<?php  $reponse = $bdd->query('SELECT * FROM commentaire WHERE parent_id = '.$answer.' ORDER BY commentairedate asc');	
@@ -229,10 +230,10 @@ s
 				
 					?> 
 						
-						
 					
 						<div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">					
-						<?=$r['commentairetexte']?>				
+						<?=$r['commentairetexte']?>	
+						<hr/>
 						<p style="color:lightgray;">Rédigé par <?=$r['pseudo']?>, le <?=$r['commentairedate'] ?>. </p>
 						</div>
 						<?php } ?> 
