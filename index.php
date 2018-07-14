@@ -3,13 +3,15 @@
 
 
 if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])) {
-        $from =(isset($_POST['email']));
+		$headers = 'MIME-Version: 1.0'."\r\n";
+		$headers = 'Content-type: text/html; charset=iso-8859-1'."\r\n";
+		$headers = htmlspecialchars($_POST['email']);
         $to = "mourad.kheloui@gmail.com";
-        $subject = "Expéditeur : " .$_POST['nom'];
-        $message = "Corps du message : " .$_POST['message'];
-        
+        $subject = 'Message envoyé par ' . htmlspecialchars($_POST['nom']) .' - ' . htmlspecialchars($_POST['email']) .'';
+        $message = 'Corps du message :' .htmlspecialchars($_POST['message']);
+
        
-        if(mail($from,$to,$subject,$message)){
+        if(mail($headers,$to,$message,$subject)){
             echo "<script> alert ('Votre message à bien été envoyé'); </script>";
             unset($nom);
             unset($email);
@@ -21,7 +23,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
         $erreur = "Une erreur est survenue le mail n'est pas parti !";
         
         }
-		header("Location : #contact");
+		
     }
 
 ?>
@@ -57,8 +59,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-	<script>tinymce.init({ selector:'textarea' });</script>
+	
   </head>
 
   <body id="page-top">
