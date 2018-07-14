@@ -203,8 +203,8 @@ s
 											 <!-- Récupération des commentaires liés à l'article -->	               
 											<?php 
 											
-											$comments = $bdd->query('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = '.$current.' ORDER BY commentairedate ASC LIMIT 0, 10');
-												
+											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
+											$comments->execute(array('current'=>$current));	
 											?>
 																
 											<?php while($c = $comments->fetch()) { 
@@ -226,7 +226,8 @@ s
 																					 <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
 																					
 																					<br/>
-																				<?php $reponse = $bdd->query('SELECT * FROM commentaire WHERE parent_id != 0  ORDER BY commentairedate asc');	
+																				<?php $reponse = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = :answer  ORDER BY commentairedate asc');	
+																						$reponse->execute(array('answer'=>$answer));
 																				?>	
 																				<?php while($r = $reponse->fetch()) { 
 																							 
