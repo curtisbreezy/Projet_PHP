@@ -203,7 +203,7 @@ s
                                 
 			<?php while($c = $comments->fetch()) { 
 								 
-				$answer = $c['id_commentaire'];
+				$answer = intval($c['id_commentaire']);
 				
 			?> 
 			
@@ -234,7 +234,7 @@ s
 					?> 
 						
 					
-						<div style="margin-top:5%;margin-bottom:5%; border:1px solid lightgray; padding: 10px;">					
+						<div style="margin-top:5%;margin-bottom:5%; padding: 10px;">					
 						<?=$r['commentairetexte']?>	
 						<hr/>
 						<p style="color:lightgray;">Rédigé par <?=$r['pseudo']?>, le <?=$r['commentairedate'] ?>. </p>
