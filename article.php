@@ -1,22 +1,17 @@
 <?php  session_start();
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-
+$article = $bdd->query('SELECT * FROM articles');
 
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
 	if (is_numeric($get_id))
 	{
-	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
-	$article->execute(array($get_id));
+	$articles = $bdd->prepare('SELECT * FROM articles WHERE id_article = :get_id');
+	$articles->execute(array('get_id'=>$get_id));
 	
-	if($article->rowCount()== 1) {
-		$article = $article->fetch();
-		$titre = $article['titrepost'];
-		$contenu = $article['textepost'];
-		$articles = $bdd->query('SELECT * FROM articles WHERE id_article = '.$get_id.' ORDER BY id_article DESC LIMIT 0, 10');
-}
+	
 }
 }
 
