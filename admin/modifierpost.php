@@ -1,18 +1,9 @@
-<?php  
-// récupération des informations
-session_start();
-
-// connexion à la base de données et affichage des articles
+<?php  session_start();
 
 $bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
-
-
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article ASC LIMIT 0, 10');
 
-
-// requête pour modification d'article
-
-if(isset($_GET['edit']) AND !empty($_GET['edit'])){  //récupération de l'id de l'article pour le lier au commentaire
+if(isset($_GET['edit']) AND !empty($_GET['edit'])){  
 	
 		$edit_id = htmlspecialchars($_GET['edit']);
 		$edit_article = $bdd->prepare('SELECT * FROM articles WHERE id_article=?');
@@ -40,17 +31,14 @@ if(isset($_POST['modifier']))
 	
 	{
 		
-		// sécurisation des informations
+
 		
 				$auteurpost = htmlspecialchars($_POST['auteurpost']);
 				$titrepost = htmlspecialchars($_POST['titrepost']);
 				$datepost = htmlspecialchars($_POST['datepost']);
 				$textepost = htmlspecialchars_decode($_POST['textepost']);
 	
-		// requête de mise à jour
-		
 
-        //TODO : Ajouter les autres champs, car j'ai juste mis textepost
         
         $sql = "UPDATE articles SET textepost=? WHERE id_article =?";
         $statement = $bdd->prepare($sql);     
@@ -59,7 +47,7 @@ if(isset($_POST['modifier']))
 
         header("Location: /extrait.php?id=".$edit_id);
                     
-		// redirection vers la page article une fois modifié
+	
 		
 	
 	}
@@ -80,13 +68,13 @@ if(isset($_POST['modifier']))
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un post</title>
-  <!-- Bootstrap core CSS-->
+
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
+
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
+
   <link href="css/sb-admin.css" rel="stylesheet">
-   <!-- Custom scripts for all pages-->
+
     <script src="js/sb-admin.min.js"></script>
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 	<script>tinymce.init({ selector:'textarea' });</script>
@@ -94,7 +82,7 @@ if(isset($_POST['modifier']))
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
-  <!-- Navigation-->
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <a class="navbar-brand" href="#">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -143,7 +131,7 @@ if(isset($_POST['modifier']))
  
 <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
+
 	  
 	  <h2 class="mt-2"> <?php
 		if(isset($_SESSION['pseudo'])){
@@ -165,16 +153,11 @@ if(isset($_POST['modifier']))
         </div>
       </div>
 	  
-	  
-<!---------------------------------------------------------------------------------------------------------------------------------- éditeur de post-------------------------------------------------------------------------------------------------------------------------------- -->
+
 	  
 <section class="col-md-12">
-
-	 
-	  
 			<form method="POST">
-			
-					
+		
 					<label>Auteur</label>
 					
 					<input type="text"  name="auteurpost" Value="<?=$edit_article['auteurpost'] ?>"> </br>
@@ -195,29 +178,15 @@ if(isset($_POST['modifier']))
 						<div class="form-group form-check mt-3">
 				
 					
-							<button type="submit" class="btn btn-primary" name="modifier" id="modifier" Value="modifier"> 
-							Modifier l'article </button>
+							<button type="submit" class="btn btn-primary" name="modifier" id="modifier" Value="modifier"> Modifier l'article </button>
 
 			
 						</div>
 	 
 	        </form>
-			
-
-
-
-	
-	 
-	  
 </section>
-   
-<!---------------------------------------------------------------------------------------------------------------------------------- fin du modèle ----------------------------------------------------------------------------------------------------------------------------------------------------->
-	
 	
 </div>
-    
-	<!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -225,11 +194,9 @@ if(isset($_POST['modifier']))
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -247,10 +214,8 @@ if(isset($_POST['modifier']))
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
    
   </div>

@@ -5,10 +5,10 @@
 		$password = "";
 		$db = "projet_5";
 
-		// Create connection
+		
 		$conn = new mysqli($servername, $username, $password, $db);
 		
-		// Check connection
+		
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		} 
@@ -47,7 +47,7 @@ $articles = $conn->query('SELECT * FROM articles');
 if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['validate'])) {
 	if(isset($_POST['pseudo']) && isset($_POST['commentairedate']) && isset($_POST['commentairetexte'])) {							
 		if(!empty($_POST['pseudo']) && !empty($_POST['commentairedate']) && !empty($_POST['commentairetexte'])) {
-												// sécurisation des informations
+												
 			
 			$pseudo = htmlspecialchars($_POST['pseudo']);
 			$commentairedate = htmlspecialchars($_POST['commentairedate']);
@@ -66,18 +66,11 @@ if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
-			
-				
-			
-										
-												
-
-
-																											}
-						
 	}
-}	
+						
+}
 
+}	
 							
 ?>
 

@@ -1,6 +1,6 @@
 <?php session_start();
 
-setcookie('pseudo','',time(), null, null, false, true); // 86400 = 1 day
+setcookie('pseudo','',time(), null, null, false, true); 
 
 
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
@@ -12,9 +12,9 @@ $comm = $bdd->query('SELECT * FROM commentaire ORDER BY id_commentaire LIMIT 0, 
 
 if(isset($_POST['pseudo'],$_POST['mdpconnect'])) 
 	if(!empty($_POST['pseudo']) && !empty($_POST['mdpconnect']))
-		{ // si ok le code continue
-			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdpconnect = ?"); // on récupère les informations dans la  BDD
-			$userexist = $requser->rowCount(); // on verifie si l'information existe
+		{ 
+			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdpconnect = ?"); 
+			$userexist = $requser->rowCount(); /
 			
 			if($userexist == 1)
 			{
@@ -27,7 +27,7 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 			
 			}
 			
-			else  //sinon afficher ce message d'erreur
+			else  
 			
 		
 			{
@@ -35,11 +35,6 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 			}
 		
 		}	
-
-			
-
-		
-		
 
 ?>
 
@@ -56,18 +51,13 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Admin</title>
-  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="#">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,12 +109,7 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
           </a>
         </li>
       </ul>
-	  
-	  
-	  
-      <ul class="navbar-nav">
-        
-        
+      <ul class="navbar-nav"> 
         <li class="nav-item mb-2">
           <a class="nav-link" data-toggle="modal">
             <a class="fa fa-fw fa-sign-out" href="logout.php">Déconnexion</a>
@@ -132,14 +117,9 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
       </ul>
     </div>
   </nav>
-  <section>
 
-</section>
-
-	 
   <div class="content-wrapper">
     <div class="container-fluid">
-	
 	 <h2 class="mt-4"> <?php
 		if(isset($_SESSION['pseudo'])){
 		echo " Vous êtes connecté ".$_SESSION['pseudo'];
@@ -148,14 +128,13 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 ?> 
 	</h2> <br/>
 	
-      <!-- Breadcrumbs-->
+    
       <ol class="breadcrumb mt-2">
         <li class="breadcrumb-item">
           <a href="#">Mon tableau de bord</a>
         </li>
         <li class="breadcrumb-item active">Mon tableau de bord</li>
       </ol>
-      <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
@@ -173,10 +152,6 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
             </a>
           </div>
         </div>
-        
-		
-		
-		
         <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
@@ -193,13 +168,7 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
             </a>
           </div>
         </div>
-       
       </div>
-	  
-	
-		
-	  
-	            <!-- Card Columns Example Social Feed-->
           <div class="mb-0 mt-4">
             <i class="fa fa-newspaper-o"></i> Mes articles</div>
           <hr class="mt-2">
@@ -213,7 +182,7 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 				<?=$a['textepost'] ?> </br/>
 				
 				
-			  <button><a href="modifierpost.php?edit=<?= $a['id_article'] ?>" style="color:#F05F40; !important"> Éditer l'article </a> </button>
+			  <button> <a href="modifierpost.php?edit=<?= $a['id_article'] ?>" style="color:#F05F40; !important"> Éditer l'article </a> </button>
 			  <?php }?>	
 		
 						
@@ -246,26 +215,13 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
                         <a href="#">Reply</a>
                       </li>
                     </ul>
-					
-					
-					
-                 
                   </div>
                 </div>
               </div>
               <div class="card-footer small text-muted"><?php echo $a['commentairedate'];?></div>
             </div>
-            <!-- Example Social Card-->
-            
-           
-            
-          <!-- /Card Columns-->
         </div>
-      <!-- Area Chart Example-->
-      
-         
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+		
   <footer class="sticky-footer text-center col-md-12 bg-dark">
        <div class="container">
 			<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="admin.php">Espace abonné</a>
@@ -273,13 +229,10 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 			<small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
 	   </div>
 	  </div>
-      
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -297,21 +250,15 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
   </div>
 </body>
-
 </html>

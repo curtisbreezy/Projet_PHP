@@ -3,19 +3,18 @@ session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=projet_5', 'root', '');
 
 
-if(isset($_POST['connexion'])) // si la variable connexion existe
+if(isset($_POST['connexion'])) 
 {			
 		//protection des données
 		$pseudo = htmlspecialchars($_POST['pseudo']);
-		$mdpconnect = sha1($_POST['mdpconnect']); // encodage du mot de passe
-		
+		$mdpconnect = sha1($_POST['mdpconnect']); 
 		
 		
 		if(!empty($pseudo) AND !empty($mdpconnect))
-		{ // si ok le code continue
-			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdp = ?"); // on récupère les informations dans la  BDD
+		{ 
+			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdp = ?"); 
 			$requser->execute(array($pseudo,$mdpconnect));
-			$userexist = $requser->rowCount(); // on verifie si l'information existe
+			$userexist = $requser->rowCount(); 
 			
 			if($userexist == 1)
 			{
@@ -28,7 +27,7 @@ if(isset($_POST['connexion'])) // si la variable connexion existe
 			
 			}
 			
-			else  //sinon afficher ce message d'erreur
+			else  
 			
 		
 			{
@@ -37,7 +36,7 @@ if(isset($_POST['connexion'])) // si la variable connexion existe
 		
 		
 		}	
-		else  //sinon afficher ce message d'erreur
+		else 
 			
 		
 			{

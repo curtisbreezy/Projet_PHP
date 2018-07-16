@@ -62,11 +62,11 @@ if(isset($_POST['inscription']))
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un compte</title>
-  <!-- Bootstrap core CSS-->
+
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
+
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
+
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
@@ -102,8 +102,7 @@ if(isset($_POST['inscription']))
           </div>
           <input type="submit" class="btn btn-success" name ="inscription" value="Inscription"></input>
         </form>
-		
-		<!-- controle des erreurs -->
+
 		
 		<?php
 		
@@ -121,10 +120,8 @@ if(isset($_POST['inscription']))
       </div>
     </div>
   </div>
-  <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 
