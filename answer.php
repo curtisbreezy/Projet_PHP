@@ -73,4 +73,4 @@ if(isset($_GET['id_article']) && isset($_GET['id_commentaire']) && isset($_GET['
 }	
 							
 ?>
-
+<p> Mourad Kheloui - Étudiant Openclassrooms </p>

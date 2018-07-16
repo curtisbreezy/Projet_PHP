@@ -6,14 +6,17 @@ $article = $bdd->query('SELECT * FROM articles');
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
+	
 	if (is_numeric($get_id))
+	
 	{
+	
 	$articles = $bdd->prepare('SELECT * FROM articles WHERE id_article = :get_id');
 	$articles->execute(array('get_id'=>$get_id));
 	
 	
-}
-}
+	}
+												}
 
 
 

@@ -31,3 +31,4 @@
 		header("Location: article.php?id=$get_id ");
 		
 ?>
+<p> Mourad Kheloui - Étudiant Openclassrooms </p>

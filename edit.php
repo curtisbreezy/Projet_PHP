@@ -19,3 +19,5 @@ if(isset($_POST['textepost']))
 	}
 
 ?>
+
+<p> Mourad Kheloui - Étudiant Openclassrooms </p>
