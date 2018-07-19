@@ -48,18 +48,23 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <link href="css/creative.css" rel="stylesheet">
+	 <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
 	
   </head>
 
   <body id="page-top">
 
-
+    <!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top container-fluid" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Accueil</a>
@@ -144,30 +149,24 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 col-md-6 text-center">
+          <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">A la pointe de la technologie</h3>
               <p class="text-muted mb-0">Toujours plus d'efficience :</p><p> 
 			  Je maîtrise le HTML, le CSS combiné à bootstrap pour la partie front. 
-			  Le framework SYMPHONY viendra compléter le tout.</p>
+			  Le framework symfony viendra compléter mon socle sur le prochain projet.</p>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
-              <h3 class="mb-3">Prêt pour l'action</h3>
-              <p class="text-muted mb-0">Création collaborative avec l'aide de Github</p> <p> J'aime les projets collaboratifs 
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
+         
+          <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">En veille permanente</h3>
               <p class="text-muted mb-0">Je reste à l'affût des dernières nouveautés </p> <p> et est ouvert à de nouvelles aventures dans le domaine du développement sur appareil mobile.</p>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 text-center">
+          <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
               <h3 class="mb-3">Créer avec amour</h3>
@@ -182,8 +181,8 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/chalet.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -197,8 +196,8 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/festival.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -212,8 +211,8 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/food.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -227,8 +226,8 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/php.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -242,22 +241,22 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Projet 5
                   </div>
                   <div class="project-name">
-                    Site communautaire (prochainement)
+                    Site communautaire sous Symfony (prochainement)
                   </div>
                 </div>
               </div>
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
+            <a class="portfolio-box">
               <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -266,6 +265,36 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
                   </div>
                   <div class="project-name">
                    Création d'une API REST(prochainement)
+                  </div> 
+                </div>
+              </div>
+            </a>
+          </div>
+		   <div class="col-lg-6 col-sm-6">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/outil.jpg" width="1920px" height="1080px" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Projet 7
+                  </div>
+                  <div class="project-name">
+                   Maintenance et suivi d'appplication (prochainement)
+                  </div> 
+                </div>
+              </div>
+            </a>
+          </div>
+		   <div class="col-lg-6 col-sm-6">
+            <a class="portfolio-box">
+              <img class="img-fluid" src="img/portfolio/thumbnails/job.jpg" width="1920px" height="1080px" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Projet 8
+                  </div>
+                  <div class="project-name">
+                   Stage ou entrée dans la vie active (prochainement)
                   </div> 
                 </div>
               </div>
@@ -312,7 +341,8 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
         </div>
       </div>
 	  
-
+	  
+	  <!-- ajout d'un formulaire de contact --->
 		
 			<div class="col-lg-8 col-md-8 col-xs-10 mx-auto text-center">
 				<form method="post" action="">
@@ -334,7 +364,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 				</form>
 			</div>
     </section>
-	
+<!--------------------------------------fin------------------------------------------------>	
 	<footer class="sticky-footer text-center col-md-12 bg-dark">
        <div class="container">
 			<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="admin/admin.php">Espace abonné</a>
