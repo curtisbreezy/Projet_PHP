@@ -3,7 +3,7 @@
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $article = $bdd->query('SELECT * FROM articles');
 
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
+if(isset($_GET['id']) && !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
 	if (is_numeric($get_id))
@@ -179,7 +179,7 @@ s
 											 	               
 											<?php 
 											
-											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
+											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 && validate = 1 && id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
 											$comments->execute(array('current'=>$current));	
 											?>
 																

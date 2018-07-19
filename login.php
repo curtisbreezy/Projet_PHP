@@ -5,14 +5,14 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet_5', 'root', '');
 
 if(isset($_POST['connexion'])) 
 {			
-		//protection des données
+		
 		$pseudo = htmlspecialchars($_POST['pseudo']);
 		$mdpconnect = sha1($_POST['mdpconnect']); 
 		
 		
-		if(!empty($pseudo) AND !empty($mdpconnect))
+		if(!empty($pseudo) && !empty($mdpconnect))
 		{ 
-			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdp = ?"); 
+			$requser = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? && mdp = ?"); 
 			$requser->execute(array($pseudo,$mdpconnect));
 			$userexist = $requser->rowCount(); 
 			
@@ -114,10 +114,10 @@ if(isset($_POST['connexion']))
   </div>
   
   
-  <!-- Bootstrap core JavaScript-->
+ 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
+
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 

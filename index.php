@@ -2,7 +2,7 @@
  setcookie('pseudo', '', time() + 365*24*3600, null, null, false, true); 
 
 
-if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])) {
+if(!empty($_POST['nom']) &&!empty($_POST['email']) &&!empty($_POST['message'])) {
 		$headers = 'MIME-Version: 1.0'."\r\n";
 		$headers = 'Content-type: text/html; charset=iso-8859-1'."\r\n";
 		$headers = htmlspecialchars($_POST['email']);
@@ -48,23 +48,22 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <link href="css/creative.css" rel="stylesheet">
-	 <!-- Bootstrap core JavaScript -->
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-    <!-- Custom scripts for this template -->
+    
     <script src="js/creative.min.js"></script>
 	
   </head>
 
   <body id="page-top">
 
-    <!-- Navigation -->
+   
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top container-fluid" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Accueil</a>
@@ -342,7 +341,6 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
       </div>
 	  
 	  
-	  <!-- ajout d'un formulaire de contact --->
 		
 			<div class="col-lg-8 col-md-8 col-xs-10 mx-auto text-center">
 				<form method="post" action="">
@@ -364,7 +362,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
 				</form>
 			</div>
     </section>
-<!--------------------------------------fin------------------------------------------------>	
+	
 	<footer class="sticky-footer text-center col-md-12 bg-dark">
        <div class="container">
 			<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="admin/admin.php">Espace abonné</a>

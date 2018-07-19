@@ -3,7 +3,7 @@
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
 
-if(isset($_get['id']) AND !empty($_GET['id'])) {
+if(isset($_get['id']) && !empty($_GET['id'])) {
 	$get_id = htmlspecialchars($_GET['id']);
 	
 	$article = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
@@ -209,7 +209,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 		
 		</div>
 	
-	<!---------------- code à modifier ----------------------->
+
 	
 <div class="col-md-12">
 	<div class="card mb-3">
@@ -232,13 +232,13 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 			  
 			  <?php 
 			  while($a = $articles->fetch()) 
-			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
+			  {?>  
               <tbody>
                 <tr>
-                  <td><?= $a['titrepost'] ?>  <!-- insertion des informations --> </td>
+                  <td><?= $a['titrepost'] ?>  </td>
                   <td><?= $a['auteurpost'] ?></td>
                   <td><?= $a['datepost'] ?></td>
-                  <td><a href="supprimer.php?id=<?= $a['id_article'] ?>">Supprimer le post</a>  <!-- suppression par id --></td>
+                  <td><a href="supprimer.php?id=<?= $a['id_article'] ?>">Supprimer le post</a> </td>
                 </tr>
               </tbody>
 			  
@@ -252,8 +252,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
       </div>
     </div>
 </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+   
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -283,12 +282,10 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
+  
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
   </div>
 </body>

@@ -4,7 +4,7 @@ $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC LIMIT 0, 10');
 
 
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
+if(isset($_GET['id']) && !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
 	

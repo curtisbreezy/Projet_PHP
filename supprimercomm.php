@@ -1,7 +1,7 @@
 <?php
 $bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
 
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
+if(isset($_GET['id']) && !empty($_GET['id'])) {
    
    $suppr_id = htmlspecialchars($_GET['id']);
    
@@ -11,6 +11,9 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
  
    header("Location: extrait.php");
 }
+else {
+			die('Erreur : l\'article n\'existe pas !');
+		}
 ?>
 
 <p> Mourad Kheloui - Étudiant Openclassrooms </p>

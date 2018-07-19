@@ -91,6 +91,9 @@ if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET[
 			VALUES ('" . $_POST['pseudo'] . "',now(),'" . $_POST['commentairetexte'] . "','" . $_POST['id_article'] . "','" . $_POST['id_commentaire'] . "','" . $_POST['validate'] . "')");
 			header("Location: extrait.php");
 		}
+		else {
+			die('Erreur : problème dans la publication de la réponse.');
+		}
 	
 }
 exit();

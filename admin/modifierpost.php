@@ -3,7 +3,7 @@
 $bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article ASC LIMIT 0, 10');
 
-if(isset($_GET['edit']) AND !empty($_GET['edit'])){  
+if(isset($_GET['edit']) && !empty($_GET['edit'])){  
 	
 		$edit_id = htmlspecialchars($_GET['edit']);
 		$edit_article = $bdd->prepare('SELECT * FROM articles WHERE id_article=?');
@@ -51,6 +51,9 @@ if(isset($_POST['modifier']))
 		
 	
 	}
+	else {
+			die('Erreur : Un petit problème.... ');
+		}
 
 	
 }
