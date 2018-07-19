@@ -5,10 +5,10 @@
 		$password = "";
 		$db = "projet_5";
 
-		// Create connection
+	
 		$bdd = new mysqli($servername, $username, $password, $db);
 		
-		// Check connection
+		
 		if ($bdd->connect_error) {
 			die("Connection failed: " . $bdd->connect_error);
 		} 
@@ -93,7 +93,7 @@ if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET[
 		}
 	
 }
-
+exit();
 ?>		
 			
 										
