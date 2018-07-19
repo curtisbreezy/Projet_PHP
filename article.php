@@ -6,17 +6,14 @@ $article = $bdd->query('SELECT * FROM articles');
 if(isset($_GET['id']) AND !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
-	
 	if (is_numeric($get_id))
-	
 	{
-	
 	$articles = $bdd->prepare('SELECT * FROM articles WHERE id_article = :get_id');
 	$articles->execute(array('get_id'=>$get_id));
 	
 	
-	}
-												}
+}
+}
 
 
 
@@ -33,18 +30,18 @@ s
 
     <title>Mourad-Kheloui Développeur PHP</title>
 
-    
+    <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    
+    <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-  
+    <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-  
+    <!-- Custom styles for this template -->
    <link href="css/articles.css" rel="stylesheet">
 	
 	
@@ -53,7 +50,7 @@ s
 
   <body id="page-top">
 
-   
+    <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
           <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.php">Accueil</a>
@@ -87,18 +84,22 @@ s
           
       </nav>
 	 
-	  
+	   
+   
+  
+					<!--jumbotron pour le titre de la page-->
 <div class="jumbotron jumbotron-fluid text-center">
-		
-		<h1 class="display-4"><font face="Century Gothic" size="20"> Articles </font></h1>
-
-</div>
-				
+				<h1 class="display-4"><font face="Century Gothic" size="20"> Articles </font></h1>
+					</div>
+					<!---------------------------------------->
 					
 <section> 
 	<div class="text-center">
 		 <div class="mb-3">
 				<div class="caption m-3">
+                    
+					
+                        
                         <script src="vendor/jquery/jquery.min.js"></script>
                         
                         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -144,10 +145,6 @@ s
                                     
                                 });
 								
-								
-                                    
-                                });
-								
                             });
                         </script>
 						
@@ -155,7 +152,7 @@ s
 			
 <section style="background-image : url('article.jpg'); background-repeat:no-repeat; background-position:center center;">					
 	<div class="container">
-	
+	 <!-- récupération des articles en base de donnée -->
            <?php while($a = $articles->fetch()) {  
                    $current = intval ($a['id_article']) ?>
 						<div id="currentarticle" class="p-3" style="margin-bottom:50px;">
@@ -179,7 +176,7 @@ s
 									
                             </div>
                             
-											 	               
+											 <!-- Récupération des commentaires liés à l'article -->	               
 											<?php 
 											
 											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
@@ -195,7 +192,7 @@ s
 											<div class="comments<?php echo $a['id_article']; ?>" style="margin-bottom:100px; display:none;">
 									
 
-															<div style="background-color: #E9ECEF;color:#000;margin-top:5%;margin-bottom:5%; margin-left:5%; border:1px solid lightgray; padding: 10px;">
+															<div style=" width:90%;background-color: #E9ECEF;color:#000;margin-top:5%;margin-bottom:5%; margin-left:5%; border:1px solid lightgray; padding: 10px;">
 																<h5 class="mt-3 mb-3"><?=$c['commentairetexte'] ?></h5>
 																	<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
 																					
@@ -205,7 +202,7 @@ s
 																					 <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
 																					
 																					<br/>
-																				<?php $reponse = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = :answer  ORDER BY commentairedate asc');	
+																				<?php $reponse = $bdd->prepare('SELECT * FROM commentaire WHERE validate = 1 AND  parent_id = :answer   ORDER BY commentairedate asc');	
 																						$reponse->execute(array('answer'=>$answer));
 																				?>	
 																				<?php while($r = $reponse->fetch()) { 
@@ -235,7 +232,12 @@ s
 																 </div>
 																			 
 															</div>
-                  
+                    
+											
+
+
+
+				<!-- Modal -->
                     <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -247,7 +249,7 @@ s
                                     </h4>
                                 </div>
 
-                                
+                                <!-- Modal Body -->
                                 <div class="modal-body">
 
                                     <form role="form">
@@ -268,16 +270,32 @@ s
                             </div>
                         </div>
                     </div>
+                    <!--END OF Modal-->
+							
+	
             </div>
         </div>
     </div>
 </section>
-</div>
+
+<!--FIN CODE À RÉVISER-->
+<!--VOIR AUSSI addcomment.php-->
+
+        </div>
+       
     </header>	
+
+    <!-- Bootstrap core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
+	
+	
   </body>
 </html>
