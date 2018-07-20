@@ -33,13 +33,13 @@ if(isset($_GET['pseudo']))
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Admin</title>
-  
+  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  
+  <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  
+  <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
- 
+  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
@@ -77,8 +77,12 @@ if(isset($_GET['pseudo']))
             </li>
           </ul>
         </li>
-         
-       
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="validatecomment.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Gestion des commentaires</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
           <a class="nav-link" href="http://localhost/index.php">
             <i class="fa fa-fw fa-link"></i>
@@ -115,7 +119,7 @@ if(isset($_GET['pseudo']))
 	</h2>
 	
     
-     
+      <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-4 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
@@ -201,7 +205,8 @@ if(isset($_GET['pseudo']))
 </div>      
       
          
-   
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -209,11 +214,11 @@ if(isset($_GET['pseudo']))
         </div>
       </div>
     </footer>
-    
+    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-  
+    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -231,18 +236,18 @@ if(isset($_GET['pseudo']))
         </div>
       </div>
     </div>
-   
+    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   
+    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
- 
+    <!-- Page level plugin JavaScript-->
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-   
+    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
- 
+    <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
   </div>
