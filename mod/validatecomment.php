@@ -1,8 +1,8 @@
 <?php  session_start();
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
-$comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 ORDER BY commentairedate');
-
+$comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id = 0 ORDER BY commentairedate');
+$reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id !=0 ORDER BY commentairedate');
 
 
 
@@ -82,7 +82,7 @@ $comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 ORDER BY c
         
       </ol>
      
-	 <div class="row">
+<div class="row">
         
 		<div class="col-12">
           
@@ -92,7 +92,7 @@ $comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 ORDER BY c
 		
 		</div>
 	
-	<!---------------- code à modifier ----------------------->
+	
 	
 <div class="col-md-12">
 	<div class="card mb-3">
@@ -137,8 +137,61 @@ $comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 ORDER BY c
       </div>
     </div>
 </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+<hr/>
+<div class="row">
+        
+		<div class="col-12">
+          
+		  <h1>Modération des réponses</h1>
+          <p>Possibilité de valider ou supprimer un commentaire.</p>
+				
+		
+		</div>
+
+<div class="col-md-12">
+	<div class="card mb-3">
+        <div class="card-header"> </div>
+         <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" method="post" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+			  
+                <tr>
+				  <th>Auteur</th>
+				  <th>Date de publication</th>
+                  <th>Article</th>
+                  <th>Supprimer</th>
+				  <th>Publier</th>
+                </tr>
+				
+              </thead>
+			  
+			  
+			  <?php 
+			  while($r = $reponses->fetch()) 
+				  
+			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
+              <tbody>
+                <tr>
+                  <td type="text" name="pseudo"><?= $r['pseudo'] ?>  <!-- insertion des informations --> </td>
+                  <td type="datetime" name="commentairedate"><?= $r['commentairedate'] ?></td>
+                  <td type="text" name="commentairetexte"><?= $r['commentairetexte'] ?></td>
+                  <td><a href="supprimercommmodo.php?id=<?= $r['id_commentaire'] ?>">Supprimer le commentaire</a>  <!-- suppression par id --></td>
+				  <td><a name ="valider" href="validate.php?id=<?= $r['id_commentaire'] ?><?= $r['pseudo']?>&<?= $r['commentairetexte']?>&<?= $r['commentairedate']?>&<?= $r['validate']?>"> Valider le commentaire </a> <!-- editer un article --></td>
+                </tr>
+              </tbody>
+			  
+			  <?php }?>
+			  
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Mise à jour le <?php echo date('d/m/Y à h:i:s '); ?>
+</div>
+      </div>
+    </div>
+</div>
+   
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">

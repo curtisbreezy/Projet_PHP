@@ -123,7 +123,7 @@ s
                                     $('.savebutton2').attr('id',event.target.id); 
                                     
                                 });
-                                <!--premier modal-->
+                                
                                 $( ".savebutton" ).click(function() {
                                                         
                                     var author = $("#exampleInputAuthor1").val();
