@@ -12,7 +12,7 @@ if(isset($_POST['inscription']))
 		
 		
 	
-	if(!empty($_POST['email']) AND  !empty($_POST['pseudo'])  AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']))
+	if(!empty($_POST['email']) &&  !empty($_POST['pseudo'])  && !empty($_POST['mdp']) && !empty($_POST['mdp2']))
 	{
 		$pseudolength = strlen($pseudo);
 		
