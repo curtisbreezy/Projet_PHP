@@ -3,7 +3,7 @@
 $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $article = $bdd->query('SELECT * FROM articles');
 
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
+if(isset($_GET['id']) && !empty($_GET['id'])) {
     
 	$get_id = htmlentities($_GET['id']);
 	if (is_numeric($get_id))
@@ -21,7 +21,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
-s
+
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,18 +30,14 @@ s
 
     <title>Mourad-Kheloui Développeur PHP</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
    <link href="css/articles.css" rel="stylesheet">
 	
 	
@@ -87,7 +83,7 @@ s
 	   
    
   
-					<!--jumbotron pour le titre de la page-->
+				
 <div class="jumbotron jumbotron-fluid text-center">
 				<h1 class="display-4"><font face="Century Gothic" size="20"> Articles </font></h1>
 					</div>
@@ -127,7 +123,7 @@ s
                                     $('.savebutton2').attr('id',event.target.id); 
                                     
                                 });
-                                <!--premier modal-->
+                              
                                 $( ".savebutton" ).click(function() {
                                                         
                                     var author = $("#exampleInputAuthor1").val();
@@ -152,7 +148,6 @@ s
 			
 <section style="background-image : url('article.jpg'); background-repeat:no-repeat; background-position:center center;">					
 	<div class="container">
-	 <!-- récupération des articles en base de donnée -->
            <?php while($a = $articles->fetch()) {  
                    $current = intval ($a['id_article']) ?>
 						<div id="currentarticle" class="p-3" style="margin-bottom:50px;">
@@ -179,7 +174,7 @@ s
 											 <!-- Récupération des commentaires liés à l'article -->	               
 											<?php 
 											
-											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 AND validate = 1 AND id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
+											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 && validate = 1 && id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
 											$comments->execute(array('current'=>$current));	
 											?>
 																
@@ -194,7 +189,7 @@ s
 
 															<div style=" width:90%;background-color: #E9ECEF;color:#000;margin-top:5%;margin-bottom:5%; margin-left:5%; border:1px solid lightgray; padding: 10px;">
 																<h5 class="mt-3 mb-3"><?=$c['commentairetexte'] ?></h5>
-																	<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
+																	
 																					
 																					<br/>
 																					<p class="mt-3"style="color:#000;">Rédigé par <?=$c['pseudo'] ?>, le <?=$c['commentairedate'] ?>. </p>
@@ -202,7 +197,7 @@ s
 																					 <a type="submit" name="repondre" href="answer.php?id_commentaire=<?=$c['id_commentaire']?>&id_article=<?=$a['id_article']?>&validate=<?=$c['validate']?>" class="btn btn-success"> Répondre au commentaire </a>
 																					
 																					<br/>
-																				<?php $reponse = $bdd->prepare('SELECT * FROM commentaire WHERE validate = 1 AND  parent_id = :answer   ORDER BY commentairedate asc');	
+																				<?php $reponse = $bdd->prepare('SELECT * FROM commentaire WHERE validate = 1 && parent_id = :answer   ORDER BY commentairedate asc');	
 																						$reponse->execute(array('answer'=>$answer));
 																				?>	
 																				<?php while($r = $reponse->fetch()) { 
@@ -219,7 +214,7 @@ s
 																					
 																					<p style="color:black;">Rédigé par <?=$r['pseudo']?>, le <?=$r['commentairedate'] ?>. </p>
 																					<hr/>
-																					<a type="submit"class="btn btn-danger" href="supprimercomm.php?id=<?= $c['id_commentaire'] ?>"> Supprimer le commentaire </a> 
+																					 
 																					</div>
 																					<?php } ?> 
 																		</div>	 
@@ -237,19 +232,18 @@ s
 
 
 
-				<!-- Modal -->
+				
                     <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                                <!-- Modal Header -->
+                            <div class="modal-content">                         
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel">
                                         Ajouter un commentaire
                                     </h4>
                                 </div>
 
-                                <!-- Modal Body -->
+                              
                                 <div class="modal-body">
 
                                     <form role="form">
@@ -270,7 +264,7 @@ s
                             </div>
                         </div>
                     </div>
-                    <!--END OF Modal-->
+                    
 							
 	
             </div>
@@ -278,22 +272,20 @@ s
     </div>
 </section>
 
-<!--FIN CODE À RÉVISER-->
-<!--VOIR AUSSI addcomment.php-->
+
 
         </div>
        
     </header>	
 
-    <!-- Bootstrap core JavaScript -->
+ 
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Plugin JavaScript -->
+ 
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-    <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
 	
 	
