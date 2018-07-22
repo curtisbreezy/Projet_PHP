@@ -12,11 +12,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 	$articles->execute(array('get_id'=>$get_id));
 	
 	
-}
-}
-
-
-
+	}
+}	
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +34,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-   <link href="css/articles.css" rel="stylesheet">
+    <link href="css/articles.css" rel="stylesheet">
 	
 	
 
@@ -46,7 +42,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
   <body id="page-top">
 
-    <!-- Navigation -->
+   
       <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
           <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.php">Accueil</a>
@@ -87,7 +83,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 <div class="jumbotron jumbotron-fluid text-center">
 				<h1 class="display-4"><font face="Century Gothic" size="20"> Articles </font></h1>
 					</div>
-					<!---------------------------------------->
+					
 					
 <section> 
 	<div class="text-center">
@@ -171,7 +167,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 									
                             </div>
                             
-											 <!-- Récupération des commentaires liés à l'article -->	               
+											               
 											<?php 
 											
 											$comments = $bdd->prepare('SELECT * FROM commentaire WHERE parent_id = 0 && validate = 1 && id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
@@ -291,3 +287,4 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 	
   </body>
 </html>
+

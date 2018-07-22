@@ -21,7 +21,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
-s
+
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -278,3 +278,4 @@ s
     <script src="js/creative.min.js"></script>
   </body>
 </html>
+

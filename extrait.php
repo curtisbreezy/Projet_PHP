@@ -128,13 +128,8 @@ $comments = $bdd->query('SELECT * FROM commentaire');
             </div>
         </div>
 </section>
-
-
-
         </div>
-       
-   
-	
-	
   </body>
 </html>
+
+
