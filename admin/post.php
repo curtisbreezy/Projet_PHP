@@ -36,13 +36,10 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un post</title>
-  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-   <!-- Custom scripts for all pages-->
+
     <script src="js/sb-admin.min.js"></script>
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 	<script>tinymce.init({ selector:'textarea' });</script>
@@ -50,7 +47,6 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <a class="navbar-brand" href="admin.php">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -203,7 +199,6 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
  
 <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
 	  <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Tableau de bord</a>
@@ -220,7 +215,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
       </div>
 	  
 	  
-<!---------------------------------------------------------------------------------------------------------------------------------- éditeur de post-------------------------------------------------------------------------------------------------------------------------------- -->
+
 	  
 <section class="col-md-12">
 	  
@@ -272,13 +267,12 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 	  
 </section>
    
-<!---------------------------------------------------------------------------------------------------------------------------------- fin du modèle ----------------------------------------------------------------------------------------------------------------------------------------------------->
+
 	
 	
 </div>
     
-	<!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -286,11 +280,10 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
+   
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

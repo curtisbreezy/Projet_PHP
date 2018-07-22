@@ -12,7 +12,7 @@ if(isset($_POST['inscription']))
 		
 		
 	
-	if(!empty($_POST['email']) &&  !empty($_POST['pseudo'])  && !empty($_POST['mdp']) && !empty($_POST['mdp2']))
+	if(!empty($_POST['email']) AND  !empty($_POST['pseudo'])  AND !empty($_POST['mdp']) AND !empty($_POST['mdp2']))
 	{
 		$pseudolength = strlen($pseudo);
 		
@@ -62,11 +62,9 @@ if(isset($_POST['inscription']))
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un compte</title>
-
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+  
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
@@ -102,7 +100,8 @@ if(isset($_POST['inscription']))
           </div>
           <input type="submit" class="btn btn-success" name ="inscription" value="Inscription"></input>
         </form>
-
+		
+	
 		
 		<?php
 		
@@ -113,16 +112,17 @@ if(isset($_POST['inscription']))
 		
 		?>
 		
-        <div class="text-center">
+<div class="text-center">
           <a class="d-block small mt-3" href="login.php">Se connecter</a>
 		  <a class="d-block small" href="http://mourad-kheloui.ovh/Accueil/">Retour au blog</a>
         </div>
       </div>
     </div>
-  </div>
+</div>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
-
 </html>
+
+

@@ -1,4 +1,4 @@
-<?php 
+<?php	session_start();  
 
 		$servername = "127.0.0.1";
 		$username = "root";
@@ -29,16 +29,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un post</title>
-  
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
- 
   <link href="css/creative.css" rel="stylesheet">
-  
-    <script src="js/sb-admin.min.js"></script>
-	
-	
+  <script src="js/sb-admin.min.js"></script>
+		
 </head>
 
 	<div class="jumbotron text-center">	
@@ -63,18 +58,11 @@
 													<button type="submit" class="btn btn-success"> Répondre </button> 
 													
 											</form>
-											<br/>
-											<p> Tout commentaire posté sera soumis pour validation sous 24h </p>
+												<br/>
+											
+												<p> Tout commentaire posté sera soumis pour validation sous 24h </p>
 	</div>
 
-	
-											
-
-
-
-		
-		
-		
 
 <?php
 if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET['validate'])) {						
@@ -96,20 +84,15 @@ if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET[
 exit();
 ?>		
 			
-										
-					
-    <footer class="sticky-footer">
+<footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
           <small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
         </div>
       </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
+</footer>
+ <a class="scroll-to-top rounded" href="#page-top">
+   <i class="fa fa-angle-up"></i> </a>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -127,13 +110,11 @@ exit();
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-   
   </div>
 </body>
-
 </html>
+
+
