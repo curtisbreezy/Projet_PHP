@@ -21,16 +21,12 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Modération des commentaires</title>
-  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <a class="navbar-brand" href="#">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +69,6 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-
-      <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Tableau de bord</a>
@@ -116,14 +110,14 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
 			  <?php 
 			  while($c = $comments->fetch()) 
 				  
-			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
+			  {?> 
               <tbody>
                 <tr>
-                  <td type="text" name="pseudo"><?= $c['pseudo'] ?>  <!-- insertion des informations --> </td>
+                  <td type="text" name="pseudo"><?= $c['pseudo'] ?>  </td>
                   <td type="datetime" name="commentairedate"><?= $c['commentairedate'] ?></td>
                   <td type="text" name="commentairetexte"><?= $c['commentairetexte'] ?></td>
-                  <td><a href="supprimercommmodo.php?id=<?= $c['id_commentaire'] ?>">Supprimer le commentaire</a>  <!-- suppression par id --></td>
-				  <td><a name ="valider" href="validate.php?id=<?= $c['id_commentaire'] ?><?= $c['pseudo']?>&<?= $c['commentairetexte']?>&<?= $c['commentairedate']?>&<?= $c['validate']?>"> Valider le commentaire </a> <!-- editer un article --></td>
+                  <td><a href="supprimercommmodo.php?id=<?= $c['id_commentaire'] ?>">Supprimer le commentaire</a></td>
+				  <td><a name ="valider" href="validate.php?id=<?= $c['id_commentaire'] ?><?= $c['pseudo']?>&<?= $c['commentairetexte']?>&<?= $c['commentairedate']?>&<?= $c['validate']?>"> Valider le commentaire </a> </td>
                 </tr>
               </tbody>
 			  
@@ -170,14 +164,14 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
 			  <?php 
 			  while($r = $reponses->fetch()) 
 				  
-			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
+			  {?>  
               <tbody>
                 <tr>
-                  <td type="text" name="pseudo"><?= $r['pseudo'] ?>  <!-- insertion des informations --> </td>
+                  <td type="text" name="pseudo"><?= $r['pseudo'] ?>   </td>
                   <td type="datetime" name="commentairedate"><?= $r['commentairedate'] ?></td>
                   <td type="text" name="commentairetexte"><?= $r['commentairetexte'] ?></td>
-                  <td><a href="supprimercommmodo.php?id=<?= $r['id_commentaire'] ?>">Supprimer le commentaire</a>  <!-- suppression par id --></td>
-				  <td><a name ="valider" href="validate.php?id=<?= $r['id_commentaire'] ?><?= $r['pseudo']?>&<?= $r['commentairetexte']?>&<?= $r['commentairedate']?>&<?= $r['validate']?>"> Valider le commentaire </a> <!-- editer un article --></td>
+                  <td><a href="supprimercommmodo.php?id=<?= $r['id_commentaire'] ?>">Supprimer le commentaire</a>  </td>
+				  <td><a name ="valider" href="validate.php?id=<?= $r['id_commentaire'] ?><?= $r['pseudo']?>&<?= $r['commentairetexte']?>&<?= $r['commentairedate']?>&<?= $r['validate']?>"> Valider le commentaire </a> </td>
                 </tr>
               </tbody>
 			  
@@ -199,11 +193,9 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -221,14 +213,12 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
   </div>
 </body>
 
 </html>
+

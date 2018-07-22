@@ -14,3 +14,4 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
    header("Location: validatecomment.php");
 }
 ?>
+

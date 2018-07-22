@@ -8,10 +8,6 @@
 	
 		$bdd = new mysqli($servername, $username, $password, $db);
 		
-		
-		if ($bdd->connect_error) {
-			die("Connection failed: " . $bdd->connect_error);
-		} 
 		$bdd->set_charset("utf8");
 	
 		$comments = $bdd->query('SELECT * FROM commentaire');
@@ -81,7 +77,6 @@ if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET[
 		}
 	
 }
-exit();
 ?>		
 			
 <footer class="sticky-footer">

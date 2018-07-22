@@ -17,9 +17,7 @@ if(isset($_GET['edit']) AND !empty($_GET['edit'])){
 			$edit_article = $edit_article->fetch();
 											
 		}
-		else {
-			die('Erreur : l\'article n\'existe pas !');
-		}
+		
 	
 }
 

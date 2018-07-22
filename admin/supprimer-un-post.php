@@ -13,10 +13,8 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 		$contenu = $articles['textepost'];
 		$auteur = $articles['auteurpost'];
 	
-} else{
-	die('Cet article n existe pas !');
+									}
 	
-} 
 
 
 }
@@ -36,16 +34,13 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Supprimer un post</title>
-  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
+  
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <a class="navbar-brand" href="admin.php">Administration</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,7 +183,6 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
   <div class="content-wrapper">
     <div class="container-fluid">
 
-      <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Tableau de bord</a>
@@ -206,7 +200,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 		
 		</div>
 	
-	<!---------------- code à modifier ----------------------->
+	
 	
 <div class="col-md-12">
 	<div class="card mb-3">
@@ -229,14 +223,14 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 			  
 			  <?php 
 			  while($a = $articles->fetch())				  
-			  {?>  <!-- boucle pour appeler les articles depuis la bdd -->
+			  {?>  
               <tbody>
                 <tr>
-                  <td><?= $a['titrepost'] ?>  <!-- insertion des informations --> </td>
+                  <td><?= $a['titrepost'] ?>  </td>
                   <td><?= $a['auteurpost'] ?></td>
                   <td><?= $a['datepost'] ?></td>
-                  <td><a href="supprimer.php?id=<?= $a['id_article'] ?>">Supprimer le post</a>  <!-- suppression par id --></td>
-				  <td><a href="modifierpost.php?edit=<?= $a['id_article'] ?>"> Éditer l'article </a> <!-- editer un article --></td>
+                  <td><a href="supprimer.php?id=<?= $a['id_article'] ?>">Supprimer le post</a>  </td>
+				  <td><a href="modifierpost.php?edit=<?= $a['id_article'] ?>"> Éditer l'article </a> </td>
                 </tr>
               </tbody>
 			  
@@ -250,8 +244,6 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
       </div>
     </div>
 </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -259,11 +251,9 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -281,12 +271,9 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
   </div>
 </body>

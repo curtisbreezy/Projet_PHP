@@ -237,7 +237,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <!-- Modal Header -->
+                              
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel">
                                         Ajouter un commentaire
@@ -278,4 +278,5 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
     <script src="js/creative.min.js"></script>
   </body>
 </html>
+
 
