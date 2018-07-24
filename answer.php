@@ -1,18 +1,29 @@
 <?php	session_start();  
-
-		$servername = "127.0.0.1";
-		$username = "root";
-		$password = "";
-		$db = "projet_5";
-
-	
-		$bdd = new mysqli($servername, $username, $password, $db);
-		
-		$bdd->set_charset("utf8");
+		$bdd = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
 	
 		$comments = $bdd->query('SELECT * FROM commentaire');
 		$articles = $bdd->query('SELECT * FROM articles');
-		
+	
+
+if(isset($_POST['id_commentaire'])  && isset($_POST['id_article']) && isset($_POST['validate'])) {						
+		if(!empty($_POST['pseudo'])  && !empty($_POST['commentairetexte'])) {
+												
+			
+			$pseudo = htmlspecialchars($_POST['pseudo']);
+			$commentairedate=  htmlspecialchars($_POST['pseudo']); 
+			$commentairetexte = htmlspecialchars_decode($_POST['commentairetexte']);
+			$id_commentaire = intval($_POST['id_commentaire']);
+			$id_article = intval($_POST['id_article']);
+			$validate = intval($_POST['validate']);
+			
+			$req = $bdd->prepare("INSERT INTO commentaire (pseudo,commentairedate,commentairetexte,id_article,parent_id,validate) 
+			Values(?,now(),?,?,?,?)");
+			
+			$req->execute(array($pseudo,$commentairetexte,$id_article,$id_commentaire,$validate));
+			header("Location: extrait.php");
+		}
+	
+}	
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +40,8 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="css/creative.css" rel="stylesheet">
   <script src="js/sb-admin.min.js"></script>
-		
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+   <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 
 	<div class="jumbotron text-center">	
@@ -60,24 +72,7 @@
 	</div>
 
 
-<?php
-if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET['validate'])) {						
-		if(!empty($_POST['pseudo'])  && !empty($_POST['commentairetexte'])) {
-												
-			
-			$pseudo = htmlspecialchars($_POST['pseudo']);
-			$commentairedate=  htmlspecialchars($_POST['pseudo']); 
-			$commentairetexte = htmlspecialchars($_POST['commentairetexte']);
-			$id_commentaire = htmlspecialchars($_GET['id_commentaire']);
-			$id_article = htmlspecialchars($_GET['id_article']);
-			$validate = htmlspecialchars($_GET['validate']);
-			$reponse = $bdd->query("INSERT INTO commentaire(pseudo,commentairedate,commentairetexte,id_article,parent_id,validate) 
-			VALUES ('" . $_POST['pseudo'] . "',now(),'" . $_POST['commentairetexte'] . "','" . $_POST['id_article'] . "','" . $_POST['id_commentaire'] . "','" . $_POST['validate'] . "')");
-			header("Location: extrait.php");
-		}
 	
-}
-?>		
 			
 <footer class="sticky-footer">
       <div class="container">
@@ -109,7 +104,7 @@ if(isset($_GET['id_commentaire'])  && isset($_GET['id_article']) && isset($_GET[
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   </div>
+ 
 </body>
 </html>
-
 
