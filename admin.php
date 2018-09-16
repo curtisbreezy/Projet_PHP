@@ -7,7 +7,7 @@ $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
 $comm = $bdd->query('SELECT * FROM commentaire ORDER BY id_commentaire LIMIT 0, 10');
 
- 
+$_POST['pseudo'] = htmlspecialchars($_POST['pseudo'];
 
 
 if(isset($_POST['pseudo'],$_POST['mdpconnect'])) 

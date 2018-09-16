@@ -39,11 +39,11 @@ h6 {
 }
 
 .bg-primary {
-  background-color: #F05F40 !important;
+  background-color: #F05F40;
 }
 
 .bg-dark {
-  background-color: #212529 !important;
+  background-color: #212529;
 }
 
 .text-faded {
@@ -282,7 +282,7 @@ header.masthead p {
 }
 
 .text-primary {
-  color: #F05F40 !important;
+  color: #F05F40;
 }
 
 .btn {
@@ -304,14 +304,13 @@ header.masthead p {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #ee4b28 !important;
+  background-color: #ee4b28 ;
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5);
 }
 
-/* personnalisation du footer */
 
 
 footer

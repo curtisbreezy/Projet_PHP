@@ -21,7 +21,7 @@ if(isset($_GET['edit']) AND !empty($_GET['edit'])){
 	
 }
 
-if(isset($_POST['modifier'])) 
+if(isset ($_POST['modifier'])) 
 
 {	
 	if(isset($_POST['auteurpost'],
