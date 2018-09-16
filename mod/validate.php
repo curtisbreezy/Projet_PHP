@@ -10,17 +10,17 @@ if(isset($_POST['pseudo'],$_POST['commentairedate'],$_POST['commentairetexte'],$
 	{
 		
 		
-				$pseudo = htmlspecialchars ($_POST['pseudo']);
-				$commentairedate = htmlspecialchars($_POST['commentairedate']);
-				$commentairetexte = htmlspecialchars($_POST['commentairetexte']);
-				$validate = htmlspecialchars ($_POST['validate']);
+	$pseudo = htmlspecialchars ($_POST['pseudo']);
+	$commentairedate = htmlspecialchars($_POST['commentairedate']);
+	$commentairetexte = htmlspecialchars($_POST['commentairetexte']);
+	$validate = htmlspecialchars ($_POST['validate']);
 				 
 		echo "<script> alert('2'); </script>";
         
-        $sql = "UPDATE commentaire SET validate = 1";
+    $validate = $bdd->prepare("UPDATE commentaire SET validate = 1 WHERE id_commentaire = ?");
 		 echo "<script> alert('3'); </script>";
-        $statement = $bdd->prepare($sql);     
-        $statement->execute(array($_POST['validate']));
+        $statement = $bdd->prepare($validate);     
+        $statement->execute(array($pseudo,$commentairetexte,$_POST['validate']));
 		echo "<script> alert('commentaire validé'); </script>"; 
 		
 		

@@ -3,6 +3,7 @@ $bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
 $comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id = 0 ORDER BY commentairedate');
 $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id !=0 ORDER BY commentairedate');
+$suppression = $bdd->query('SELECT * FROM commentaire WHERE validate = 1');
 
 
 
@@ -172,6 +173,64 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_
                   <td type="text" name="commentairetexte"><?= $r['commentairetexte'] ?></td>
                   <td><a href="supprimercommmodo.php?id=<?= $r['id_commentaire'] ?>">Supprimer le commentaire</a>  </td>
 				  <td><a name ="valider" href="validate.php?id=<?= $r['id_commentaire'] ?><?= $r['pseudo']?>&<?= $r['commentairetexte']?>&<?= $r['commentairedate']?>&<?= $r['validate']?>"> Valider le commentaire </a> </td>
+                </tr>
+              </tbody>
+			  
+			  <?php }?>
+			  
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Mise à jour le <?php echo date('d/m/Y à h:i:s '); ?>
+</div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+        
+		<div class="col-12">
+          
+		  <h1>Suppression des réponses</h1>
+          <p>Possibilité de valider ou supprimer un commentaire.</p>
+				
+		
+		</div>
+
+<div class="col-md-12">
+	<div class="card mb-3">
+        <div class="card-header"> </div>
+         <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" method="post" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+			  
+                <tr>
+				  <th>Auteur</th>
+				  <th>Date de publication</th>
+                  <th>Article</th>
+                  <th>Supprimer</th>
+				 
+                </tr>
+				
+              </thead>
+			  
+			  
+			  <?php 
+			  while($s = $suppression->fetch()) 
+				 
+			  {?>  
+              <tbody>
+                <tr>
+                  <td type="text" name="pseudo"><?= $s['pseudo'] ?>   </td>
+                  <td type="datetime" name="commentairedate"><?= $s['commentairedate'] ?></td>
+                  <td type="text" name="commentairetexte"><?= $s['commentairetexte'] ?></td>
+                  <td><a href="supprimercommmodo.php?id=<?= $s['id_commentaire'] ?>">Supprimer le commentaire</a>  </td>
+				
                 </tr>
               </tbody>
 			  

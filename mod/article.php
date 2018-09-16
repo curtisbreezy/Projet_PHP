@@ -126,8 +126,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                                 
                                 $( ".savebutton" ).click(function() {
                                                         
-                                    var author = $("#exampleInputAuthor1").val();
-                                    var comment = $("#exampleInputComment1").val();
+                                    var author = $("#pseudo").val();
+                                    var comment = $("#commentairetexte").val();
                                     
                                      $.ajax({
                                         type: 'POST',
@@ -249,14 +249,14 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
                                     <form role="form">
                                       <div class="form-group">
-                                        <label for="exampleInputAuthor1">Auteur</label>
+                                        <label for="pseudo">Auteur</label>
                                           <input type="text" class="form-control"
-                                          id="exampleInputAuthor1" placeholder="Auteur"/>
+                                          id="pseudo" placeholder="Auteur"/>
                                       </div>
                                       <div class="form-group">
-                                        <label for="exampleInputComment1">Commentaire</label>
+                                        <label for="commentairetexte">Commentaire</label>
                                           <input type="text" class="form-control"
-                                              id="exampleInputComment1" placeholder="Commentaire"/>
+                                              id="commentairetexte" placeholder="Commentaire"/>
                                       </div>
                                     
                                       <button id="savebutton" type="submit" class="btn btn-secondary savebutton" style="float:right;">Enregistrer</button>

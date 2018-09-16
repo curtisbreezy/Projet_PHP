@@ -137,18 +137,15 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 														<p class="card-text">
 															<h4 style="font-weight:bold;"><?=$a['titrepost'] ?></h4>
 															<hr/>								
-
 															<p><?=$a['textepost'] ?></p>
 															<hr/>
-
 															<p style="color:lightgray;">Rédigé par <?=$a['auteurpost'] ?>, le <?=$a['datepost'] ?>. </p> 
-
 															<br/>
-
-															<button id="<?php echo $a['id_article']; ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>
-															
+															<button id="<?php echo $a['id_article']; ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>								
 															<button id="<?php echo $a['id_article']; ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
-									
+															<div>
+															<span> Validation sous 24h maximum </span>
+															</div>
 												</div>
                             
 											       
@@ -184,7 +181,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 																	?> 
 																					
 																				
-										<div style="width:80%;box-shadow: 10px 10px 5px 0px #656565;border-radius:3px;background-color:#fff;color:#000;margin-left:10%; margin-top:5%;margin-bottom:5%; padding: 10px;">					
+														<div style="width:80%;box-shadow: 10px 10px 5px 0px #656565;border-radius:3px;background-color:#fff;color:#000;margin-left:10%; margin-top:5%;margin-bottom:5%; padding: 10px;">					
 																	
 																	<?=$r['commentairetexte']?>	
 																	<hr/>
