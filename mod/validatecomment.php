@@ -281,3 +281,4 @@ $suppression = $bdd->query('SELECT * FROM commentaire WHERE validate = 1');
 
 </html>
 
+

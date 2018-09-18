@@ -312,3 +312,4 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 </body>
 
 </html>
+

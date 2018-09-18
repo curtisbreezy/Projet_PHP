@@ -6,4 +6,3 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
    $suppr->execute(array($suppr_id));
    header("Location: /extrait.php?id=".$_SESSION['id_utilisateur']);
 }
-?>

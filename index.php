@@ -217,7 +217,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
                     Projet 4
                   </div>
                   <div class="project-name">
-                    Blog PHP ( En cours )
+                    Blog PHP (Validé)
                   </div>
                 </div>
               </div>
@@ -232,7 +232,7 @@ if(!empty($_POST['nom']) AND!empty($_POST['email']) AND!empty($_POST['message'])
                     Projet 5
                   </div>
                   <div class="project-name">
-                    Site communautaire sous Symfony (prochainement)
+                    Site communautaire sous Symfony (En cours)
                   </div>
                 </div>
               </div>

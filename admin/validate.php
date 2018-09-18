@@ -29,6 +29,4 @@ if(isset($_POST['pseudo'],$_POST['commentairedate'],$_POST['commentairetexte'],$
 	}
 
 
-?>
-
 

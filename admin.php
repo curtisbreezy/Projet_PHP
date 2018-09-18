@@ -120,12 +120,9 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
 
   <div class="content-wrapper">
     <div class="container-fluid">
-	 <h2 class="mt-4"> <?php
-		if(isset($_SESSION['pseudo'])){
-		echo " Vous êtes connecté ".$_SESSION['pseudo'];
-									}
+	 <h2 class="mt-4"> 
+	 <?php if(isset($_SESSION['pseudo'])){ echo " Vous êtes connecté ".$_SESSION['pseudo'];}?> 
 	
-?> 
 	</h2> <br/>
 	
     
@@ -262,3 +259,4 @@ if(isset($_POST['pseudo'],$_POST['mdpconnect']))
   </div>
 </body>
 </html>
+

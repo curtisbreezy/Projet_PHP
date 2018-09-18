@@ -18,4 +18,3 @@ if(isset($_POST['textepost']))
 		$message = 'Veuillez remplir tous les champs'; 
 	}
 
-?>

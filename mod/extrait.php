@@ -80,7 +80,7 @@ $comments = $bdd->query('SELECT * FROM commentaire');
 				        
 						
                             <div id="currentarticle" class="p-3 mt-3" style="margin-bottom:50px;">
-								<!-- récupération des articles en base de donnée -->
+								
 							<?php while($a = $articles->fetch()) { 
 							?>
                            
@@ -129,4 +129,5 @@ $comments = $bdd->query('SELECT * FROM commentaire');
     <script src="js/creative.min.js"></script>
   </body>
 </html>
+
 
