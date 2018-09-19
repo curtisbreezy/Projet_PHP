@@ -108,14 +108,7 @@ if(isset($_GET['pseudo']))
   <div class="content-wrapper bg-light">
     <div class="container-fluid">
 	<hr/>
-	 <h2 class="mt-2"> <?php
-		if(isset($_SESSION['pseudo'])){
-		echo " Vous êtes connecté ".$_SESSION['pseudo'];
-									}
 	
-?>
-<hr/>
-	</h2>
 	
     
       <div class="row">
