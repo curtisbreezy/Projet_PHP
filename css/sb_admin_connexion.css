@@ -55,7 +55,7 @@ body.fixed-nav {
 }
 
 .o-hidden {
-  overflow: hidden !important;
+  overflow: hidden ;
 }
 
 .z-0 {
@@ -249,7 +249,7 @@ body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler {
 
 body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-item,
 body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-link {
-  width: 55px !important;
+  width: 55px ;
 }
 
 body.sidenav-toggled #mainNav.fixed-top #sidenavToggler i {
@@ -315,7 +315,7 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
 
 body.sidenav-toggled .navbar-sidenav .nav-item,
 body.sidenav-toggled .navbar-sidenav .nav-link {
-  width: 55px !important;
+  width: 55px ;
 }
 
 body.sidenav-toggled .navbar-sidenav .nav-item:after,
@@ -363,7 +363,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
     background: #343a40;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
-    color: white !important;
+    color: white ;
     background-color: #495057;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:hover {
@@ -407,7 +407,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
     background: #f8f9fa;
   }
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a {
-    color: #000 !important;
+    color: #000 ;
     background-color: #e9ecef;
   }
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:hover {

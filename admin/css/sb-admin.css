@@ -251,7 +251,7 @@ body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler {
 
 body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-item,
 body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-link {
-  width: 55px !important;
+  width: 55px ;
 }
 
 body.sidenav-toggled #mainNav.fixed-top #sidenavToggler i {
