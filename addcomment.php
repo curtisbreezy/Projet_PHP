@@ -6,13 +6,11 @@
 		$password = "";
 		$db = "projet_5";
 
-		n
+		
 		$conn = new mysqli($servername, $username, $password, $db);
 		
 	
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		} 
+		
 		$conn->set_charset("utf8");
 		
 		
@@ -23,9 +21,7 @@
 		
 		if ($conn->query($sql) === TRUE) {
 			
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}
+		} 
 		
 		
 		mysqli_close($conn);
