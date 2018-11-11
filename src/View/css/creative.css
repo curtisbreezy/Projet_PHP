@@ -19,7 +19,7 @@ hr.light {
 }
 
 a {
-  color: #F05F40;
+  color: #fff;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
@@ -38,12 +38,13 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
+
 .bg-primary {
-  background-color: #F05F40;
+  background-color: #F05F40 !important;
 }
 
 .bg-dark {
-  background-color: #212529;
+  background-color: #212529 !important;
 }
 
 .text-faded {
@@ -105,7 +106,7 @@ img::-moz-selection {
   font-size: .9rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #212529;
+  color: #fff;
 }
 
 #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
@@ -115,7 +116,7 @@ img::-moz-selection {
 
 #mainNav .navbar-nav > li.nav-item > a.nav-link.active,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active {
-  color: #F05F40 ;
+  color: #F05F40 !important;
   background-color: transparent;
 }
 
@@ -158,7 +159,7 @@ img::-moz-selection {
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: #212529;
+    color: #fff;
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {
@@ -282,7 +283,7 @@ header.masthead p {
 }
 
 .text-primary {
-  color: #F05F40;
+  color: #F05F40 !important;
 }
 
 .btn {
@@ -304,13 +305,14 @@ header.masthead p {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #ee4b28 ;
+  background-color: #ee4b28 !important;
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
 }
 
+/* personnalisation du footer */
 
 
 footer
@@ -323,6 +325,6 @@ footer
 
 footer .container
 {
-	padding:10%
+	padding:1%
 }
 

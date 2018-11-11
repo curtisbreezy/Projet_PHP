@@ -1,81 +1,4 @@
 
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-    color: #000;
-}
-h3{
-	text-align:center;
-}
-
-h4{
-	
-	color:black;
-	font-weight:bold;
-	text-align:center;
-	
-}
-
-#currentarticle a{
-	color:#fff;
-}
-
-
-
-#articles
-{
-border-radius : 30px;	
-}
-
-
-.reponse
-{
-	float:left;
-	
-}
-
-
-.thumbnail
-{
-	Display: block;
-	Background-color: #fff;
-	Padding: 1%;
-
-	
-}
-
-.thumbnail p
-{
-Color :#000;	
-}
-
-img
-{
-Padding:2%;	
-}
-
-.card p
-{
-color:#000;	
-}
-
-.card h3
-{
-color:#000;	
-}
-
-strong {
-    font-weight: bolder;
-	font-size:1.5em;
-    padding:5%;
-	background-color: #fff;
-	color: #000;
-	
-}
-
-
-
-
-
 body,
 html {
   width: 100%;
@@ -97,14 +20,14 @@ hr.light {
 }
 
 a {
-  color: #F05F40;
+  color: #fff;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
 }
 
 a:hover {
-  color: blue;
+  color: #f05f40;
 }
 
 h1,
@@ -116,17 +39,14 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-h3,p
-{
-	color: #000;
-}
+
 
 .bg-primary {
-  background-color: #F05F40;
+  background-color: #F05F40 ;
 }
 
 .bg-dark {
-  background-color: #212529;
+  background-color: #212529 ;
 }
 
 .text-faded {
@@ -188,7 +108,7 @@ img::-moz-selection {
   font-size: .9rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #212529;
+  color: #fff;
 }
 
 #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
@@ -198,7 +118,7 @@ img::-moz-selection {
 
 #mainNav .navbar-nav > li.nav-item > a.nav-link.active,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active {
-  color: #F05F40 !important;
+  color: #F05F40 ;
   background-color: transparent;
 }
 
@@ -241,7 +161,7 @@ img::-moz-selection {
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: #212529;
+    color: #fff;
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {
@@ -267,7 +187,6 @@ header.masthead hr {
 
 header.masthead h1 {
   font-size: 2rem;
- 
 }
 
 header.masthead p {
@@ -288,16 +207,13 @@ header.masthead p {
     padding-bottom: 0;
   }
   header.masthead h1 {
-    font-size: 2rem;
-	margin-top:3%;
-	padding: 3px;
-	border-radius: 5px;
+    font-size: 3rem;
   }
 }
 
 @media (min-width: 1200px) {
   header.masthead h1 {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 }
 
@@ -391,12 +307,26 @@ header.masthead p {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #ee4b28;
+  background-color: #ee4b28 ;
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) ;
 }
 
+/* personnalisation du footer */
 
+
+footer
+{
+	
+	color:#fff;
+	bottom:0;
+		
+}
+
+footer .container
+{
+	padding:5%
+}
 

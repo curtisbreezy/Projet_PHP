@@ -294,11 +294,11 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 }
 
 #editeur{
-    width: 500px; // La largeur de l'éditeur
-    height: 200px; // La hauteur de l'éditeur
-    border: 1px solid black; // Une bordure pour bien voir l'éditeur
-    padding: 5px; // Une petite marge intérieure
-    overflow: auto; // Cette propriété sert à envoyer le texte à la ligne au cas où il dépasse la largeur définie avant
+    width: 500px; 
+    height: 200px; 
+    border: 1px solid black; 
+    padding: 5px; 
+    overflow: auto; 
 }
 
 #sidenavToggler i {

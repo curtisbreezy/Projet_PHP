@@ -315,7 +315,7 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
 
 body.sidenav-toggled .navbar-sidenav .nav-item,
 body.sidenav-toggled .navbar-sidenav .nav-link {
-  width: 55px !important;
+  width: 55px ;
 }
 
 body.sidenav-toggled .navbar-sidenav .nav-item:after,

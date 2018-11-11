@@ -22,7 +22,7 @@ $(document).ready(function() {
                 }
             },
             grid: {
-                hoverable: true //IMPORTANT! this is needed for tooltip to work
+                hoverable: true 
             },
             yaxis: {
                 min: -1.2,
@@ -1077,7 +1077,7 @@ $(function() {
                 position: 'sw'
             },
             grid: {
-                hoverable: true //IMPORTANT! this is needed for tooltip to work
+                hoverable: true 
             },
             tooltip: true,
             tooltipOpts: {
