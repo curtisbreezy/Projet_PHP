@@ -6,6 +6,11 @@ $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article ASC LIMIT 0,
 
 $edit_id = htmlspecialchars($_GET['edit']);
 
+$auteurpost = htmlspecialchars($_POST['auteurpost']);
+$titrepost = htmlspecialchars($_POST['titrepost']);
+$datepost = htmlspecialchars($_POST['datepost']);
+$textepost = htmlspecialchars_decode($_POST['textepost']);
+
 if(isset($_GET['edit']) AND !empty($_GET['edit'])){ 
 	
 		$edit_id = htmlspecialchars($_GET['edit']);
