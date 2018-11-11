@@ -1,9 +1,10 @@
 <?php	
 		$bdd = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
-	
 		$comments = $bdd->query('SELECT * FROM commentaire');
 		$articles = $bdd->query('SELECT * FROM articles');
-	
+		$pseudo = htmlspecialchars($_POST['pseudo']);
+		$commentairedate =  htmlspecialchars($_POST['pseudo']); 
+		$commentairetexte = htmlspecialchars_decode($_POST['commentairetexte']);
 
 if(isset($_POST['id_commentaire'])  && isset($_POST['id_article']) && isset($_POST['validate'])) {						
 		if(!empty($_POST['pseudo'])  && !empty($_POST['commentairetexte'])) {
