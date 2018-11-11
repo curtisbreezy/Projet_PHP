@@ -4,8 +4,8 @@ $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article DESC');
 $comments = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id = 0 ORDER BY commentairedate');
 $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 0 && parent_id !=0 ORDER BY commentairedate');
 $suppression = $bdd->query('SELECT * FROM commentaire WHERE validate = 1');
-
-
+$comments = htmlspecialchars($_POST[$comments]);
+$reponses = htmlspecialchars($_POST[$reponses]);
 
 ?>
 
