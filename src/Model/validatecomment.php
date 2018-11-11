@@ -111,7 +111,7 @@ $reponses = $bdd->query('SELECT * FROM commentaire WHERE validate = 1 && parent_
 			  
 			  
 			  <?php 
-			  while($c = $comments->fetch()) 
+			  while($c = mysqli_real_escape_string($comments->fetch())) 
 				  
 			  {?> 
               <tbody>
