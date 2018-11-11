@@ -1,3 +1,9 @@
+<?php  session_start();
+
+require('src/View/AffichageAdmin.php');
+
+?>
+
 <?php session_start();
 
 setcookie('pseudo','',time(), null, null, false, true); 
