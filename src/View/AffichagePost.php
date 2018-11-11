@@ -208,7 +208,7 @@
 <?php
 	  if(isset($message))
 	  {
-		  echo  (htmlspecialcharts($message);
+		  echo  esc_attr($message);
 	  }
 ?>
 	  

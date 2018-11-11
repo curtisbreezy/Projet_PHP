@@ -71,7 +71,7 @@
         </div>
 			<div class="col-lg-8 mx-auto">
 				<p class="text-faded mb-5">Mourad Kheloui- Développeur PHP</p>
-				<a class="btn btn-primary btn-xl js-scroll-trigger" href="CV_2018_PHP.pdf">Plus d'informations</a>
+				<a class="btn btn-primary btn-xl js-scroll-trigger" href="doc/CV_2018_PHP.pdf">Plus d'informations</a>
 		</div>
     </div>
 </header>
@@ -268,7 +268,7 @@
 	<section class="bg-dark text-white">
       <div class="container-fluid text-center">
         <h2 class="mb-4">Mon CV là ! </h2>
-        <a class="btn btn-light btn-xl sr-button" href="CV_2018_PHP.pdf" target="blank">Ne soyez pas timide !</a>
+        <a class="btn btn-light btn-xl sr-button" href="doc/CV_2018_PHP.pdf" target="blank">Ne soyez pas timide !</a>
       </div>
     </section>
     <section id="contact">

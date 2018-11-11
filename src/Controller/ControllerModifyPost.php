@@ -4,7 +4,7 @@ $bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
 
 $articles = $bdd->query('SELECT * FROM articles ORDER BY id_article ASC LIMIT 0, 10');
 
-
+$edit_id = htmlspecialchars($_GET['edit']);
 
 if(isset($_GET['edit']) AND !empty($_GET['edit'])){ 
 	
