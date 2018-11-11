@@ -208,7 +208,7 @@
 <?php
 	  if(isset($message))
 	  {
-		  echo  $message;
+		  echo  (htmlspecialcharts($message);
 	  }
 ?>
 	  
