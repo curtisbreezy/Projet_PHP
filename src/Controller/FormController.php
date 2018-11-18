@@ -16,18 +16,15 @@ class FormController  extends Connect
 
     public function sendMessage()
     {
-        $to = 'lieninformatique9@gmail.com';
+        $to = 'mourad.kheloui@gmail.com';
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
         $message = htmlspecialchars($_POST['message']);
         $sujet = $name.' depuis le site viva Informatique';
-        $headers = 'From : ' . $email . "\r\n";
+        
 
-        if ( preg_match( "/[\r\n]/", $name) || preg_match( "/[\r\n]/", $email ) ) {
-            header("location : http://www.myriamstampers.com/mail-error.php");
-        }
-        else{
-           mail($to, $sujet, $message, $headers); 
+        if ( preg_match( "/[\r\n]/", $name) || preg_match( "/[\r\n]/", $email ) ) { 
+           mail($to, $sujet, $message); 
         }
     }
 }
