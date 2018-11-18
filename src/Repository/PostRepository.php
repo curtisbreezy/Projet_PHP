@@ -14,14 +14,14 @@ use PDO;
 class PostRepository extends Connect
 {
 /**
- * function UPDATE valid post
+ * function UPDATE valid article
  */
     public function updateValidPost()
     {
         $db = $this->getDb();
 
-        if ($_SESSION['postValid']==1) {
-            $reqUpdate = 'UPDATE post';
+        if ($_SESSION['Validate']==1) {
+            $reqUpdate = 'UPDATE articles';
             $reqSet = ' SET valid=0';
             $reqWhere = ' WHERE id=:id';
             $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
@@ -32,12 +32,12 @@ class PostRepository extends Connect
             $_SESSION['reqValid']='NO';
         }
 
-        if ($_SESSION['postValid']==0) {
-            $reqUpdate = 'UPDATE post';
+        if ($_SESSION['Validate']==0) {
+            $reqUpdate = 'UPDATE articles';
             $reqSet = ' SET valid=1';
             $reqWhere = ' WHERE id=:id';
             $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
+            $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
 
             $req->execute();
 
@@ -52,13 +52,12 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
     
-        $reqSelect = 'SELECT p.id AS post_id, 
-        p.title, p.introduction, p.createdAt, p.updateAt, user.pseudo';
-        $reqFrom = ' FROM post AS p INNER JOIN user';
-        $reqOn = ' ON p.userId = user.id';
-        $reqWhere = ' WHERE p.valid = 1';
-        $reqLimit = ' ORDER BY p.createdAt DESC LIMIT 0, 10';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqWhere . $reqLimit);
+        $reqSelect = 'SELECT id_article, 
+        auteurpost,titrepost, datepost, textepost, pseudo';
+        $reqFrom = ' FROM articles AS p INNER JOIN user';
+        $reqOn = ' ON auteurpost = id_utilisateur';
+        $reqLimit = ' ORDER BY commentairedate DESC LIMIT 0, 10';
+        $req = $db->prepare($reqSelect . $reqFrom . $reqOn  . $reqLimit);
         $req->execute();
         $posts=[];
 
@@ -79,10 +78,10 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqSelect = 'SELECT p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.userId, p.id AS postId, u.pseudo  ';
-        $reqFrom = ' FROM post AS p INNER JOIN user AS u';
-        $reqOn = ' ON p.userId = u.id';
-        $reqWhere = ' WHERE p.id = :postId AND p.valid = 1';
+        $reqSelect = 'SELECT auteurpost, titrepost, datepost, textepost, id_article, u.pseudo';
+        $reqFrom = ' FROM articles AS INNER JOIN user AS u';
+        $reqOn = ' ON auteurpost = u.id';
+        $reqWhere = ' WHERE id_article = :postId ';
         $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqWhere);
         $req->bindParam(':postId', $_SESSION['postId'], \PDO::PARAM_INT);
         $req->execute();
@@ -103,10 +102,12 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqSelect = 'SELECT p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.valid AS postValid, p.userId, p.id AS postId, u.pseudo AS pseudo, u.email AS email';
-        $reqFrom = ' FROM post AS p INNER JOIN user AS u';
-        $reqOn = ' ON p.userId = u.id';
-        $reqWhere = ' ORDER BY createdAt DESC';
+        $reqSelect = 'SELECT a.auteurpost, a.titrepost, a.datepost, a.textepost,  
+		a.userId, a.id AS id_article, 
+		u.pseudo AS pseudo, u.email AS email';
+        $reqFrom = ' FROM articles AS a INNER JOIN user AS u';
+        $reqOn = ' ON a.userId = u.id';
+        $reqWhere = ' ORDER BY datepost DESC';
         $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqWhere);
         $req->execute();
         $posts =[];
@@ -120,35 +121,35 @@ class PostRepository extends Connect
     }
 
     /**
-     * Function INSERT TO post
+     * Function INSERT TO articles
      */
     public function addPost()
     {
         $db = $this->getDb();
 
-        $reqInsert = 'INSERT INTO post';
-        $reqCol = '(title, introduction, content, createdAt, userId)';
-        $reqValues = ' VALUES(:title, :introduction, :content, NOW() , :userId)';
+        $reqInsert = 'INSERT INTO articles';
+        $reqCol = '(auteurpost, titrepost, datepost, textepost)';
+        $reqValues = ' VALUES(:auteurpost, :titrepost, NOW(), :textepost)';
         $req = $db->prepare($reqInsert . $reqCol . $reqValues);
-        $req->bindParam(':title', $_SESSION['title'], \PDO::PARAM_STR);
+        $req->bindParam(':titrepost', $_SESSION['titrepost'], \PDO::PARAM_STR);
         $req->bindParam(':introduction', $_SESSION['introduction'], \PDO::PARAM_STR);
-        $req->bindParam(':content', $_SESSION['content'], \PDO::PARAM_STR);
-        $req->bindParam(':userId', $_SESSION['userId'], \PDO::PARAM_INT);
+        $req->bindParam(':textepost', $_SESSION['textepost'], \PDO::PARAM_STR);
+  
 
         $req->execute();
     }
 
     /**
-     * Function DELETE post
+     * Function DELETE artiles
      */
     public function deletePost()
     {
         $db = $this->getDb();
 
-        $reqUpdate = 'DELETE FROM post';
+        $reqUpdate = 'DELETE FROM articles';
         $reqWhere = ' WHERE id=:id';
         $req = $db->prepare($reqUpdate . $reqWhere);
-        $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
+        $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
 
         $req->execute();
     }
@@ -160,15 +161,15 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqUpdate = 'UPDATE post';
-        $reqSet = ' SET title=:title, introduction=:introduction, content=:content, updateAt=now()';
+        $reqUpdate = 'UPDATE article';
+        $reqSet = ' SET titrepost=:title, textepost=:content, datepost=now()';
         $reqWhere = ' WHERE id=:id';
         $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-        $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
-        $req->bindParam(':title', $_SESSION['title'], \PDO::PARAM_STR);
-        $req->bindParam(':introduction', $_SESSION['introduction'], \PDO::PARAM_STR);
-        $req->bindParam(':content', $_SESSION['content'], \PDO::PARAM_STR);
+        $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
+        $req->bindParam(':title', $_SESSION['titrepost'], \PDO::PARAM_STR);
+        $req->bindParam(':content', $_SESSION['textepost'], \PDO::PARAM_STR);
 
         $req->execute();
     }
 }
+

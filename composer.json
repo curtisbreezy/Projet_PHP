@@ -1,12 +1,5 @@
 {
-    "name": "mourad/fofuser",
     "require": {
-        "composer-plugin-api": "2.1.2"
-    },
-    "authors": [
-        {
-            "name": "curtisbreezy",
-            "email": "mourad.kheloui@gmail.com"
-        }
-    ]
+        "friendsofsymfony/user-bundle": "~2.0"
+    }
 }

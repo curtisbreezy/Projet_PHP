@@ -17,15 +17,15 @@ class ConnectRepository extends Connect
         $db = $this->getDb();
 
         $pseudo  =$_SESSION['pseudo'];
-        $pass = $_SESSION['pass'];
+        $mdp = $_SESSION['mdp'];
         $email = $_SESSION['email'];
 
-        $reqInsert = 'INSERT INTO user(pseudo, pass, createdAt, email)' ;
-        $reqValues = 'VALUES(:pseudo, :pass, now(), :email)';
+        $reqInsert = 'INSERT INTO user(email, pseudo,mdp)' ;
+        $reqValues = 'VALUES(:email,:pseudo,:mdp)';
         $req = $db->prepare($reqInsert . $reqValues);
         $req->execute(array(
         'pseudo' => $pseudo,
-        'pass' => $pass,
+        'mdp' => $mdp,
         'email' => $email));
     }
     /**
