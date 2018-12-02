@@ -1,284 +1,39 @@
 <?php
-session_start();
 
-require_once '../vendor/autoload.php';
+use App\Kernel;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpFoundation\Request;
 
-use App\Controller\PostController;
-use App\Controller\FormController;
-use App\Controller\ConnectController;
-use App\Controller\CommentController;
-use App\Controller\AdminController;
-use App\Model\Connect;
+require __DIR__.'/../vendor/autoload.php';
 
-if (!isset($_SESSION['status'])) {
-    $_SESSION['status']=0;
-}
-
-if (!isset($_SESSION['connect'])) {
-    $_SESSION['connect']=0;
-}
-
-if (!isset($_SESSION['pseudo'])) {
-    $_SESSION['pseudo']=0;
-}
-
-if (!isset($_SESSION['userId'])) {
-    $_SESSION['userId']=0;
-}
-
-// Default opening : homeView.php
-if (isset($_GET['page'])) {
-    $p = $_GET['page'];
-} else {
-    $p = 'home';
-}
-
-// Routes
-// Home
-if ($p === 'home') {
-    require '../src/View/homeView.php';
-}
-
-//_______________POSTS__________________
-// List of posts
-if ($p === 'postList') {
-    $postController = new PostController();
-    $postController->listPosts();
-}
-
-// One post
-if ($p === 'article') {
-    $_SESSION['id_article'] = $_GET['id'];
-    $contArticle = new PostController();
-    $contArticle->post();
-}
-
-// Display postAddView
-if ($p === 'postNew') {
-    require '../src/View/postAddView.php';
-}
-
-// Add Post
-if ($p === 'postAdd') {
-	$_SESSION['auteurpost'] = htmlspecialchars($_POST['auteurpost'], ENT_IGNORE);
-    $_SESSION['titrepost'] = htmlspecialchars($_POST['titrepost'], ENT_IGNORE);
-    $_SESSION['datepost'] = htmlspecialchars($_POST['datepost'], ENT_IGNORE);
-    $_SESSION['textepost'] = htmlspecialchars($_POST['textepost'], ENT_IGNORE);
-
-    $newPost = new PostController;
-    $newPost->newPost();
-    $newPost->listPosts();
-}
-// edit post
-if ($p === 'edit_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
-    $postController = new PostController();
-    $postController->postEdit();
-}
-
-//update post
-if ($p === 'postEdit') {
-    $_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
-    $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
-    $postController = new PostController();
-    $postController->postUpdate();
-    $postController->post();
-}
-
-// delete post éliminer les commentaires liés
-if ($p === 'delete_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
-    $postController = new PostController();
-    $postController->postDelete();
-    $postController->listPosts();
-}
-
-//________________CONTACT_________________
-//contact
-if ($p === 'contact') {
-    require '../src/View/contactView.php';
-}
-
-//________________FORMS___________________
-//send message
-if ($p === 'formHome') {
-    $formController = new FormController();
-    $formController->sendMessage();
-    require '../src/View/homeView.php';
-}
-
-// Identification
-if ($p === 'Login') {
-    //Data reception
-    $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
-    $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
-  
-    //Vérifier qu'aucun champs est vide
-    if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonyme")</script>
-    <?php
+// The check is to ensure we don't use .env in production
+if (!isset($_SERVER['APP_ENV']) && !isset($_ENV['APP_ENV'])) {
+    if (!class_exists(Dotenv::class)) {
+        throw new \RuntimeException('APP_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.');
     }
-  
-    if (!$_SESSION['mdp']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-    <?php
-    }
-
-    //vérification du pseudo et du mot de passe et passage en mode connecté
-    $verifPseudo= new ConnectController();
-    $verifPseudo->Login();
-    require '../src/View/homeView.php';
+    (new Dotenv())->load(__DIR__.'/../.env');
 }
 
-//Registration
-if ($p === 'formAddUser') {
-    //Data reception
-    $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
-    $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
-    $_SESSION['email']= htmlspecialchars($_POST['email']);
-    $_SESSION['mdp2'] = htmlspecialchars($_POST['mdp2']);
+$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? 'dev';
+$debug = (bool) ($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? ('prod' !== $env));
 
-    //Vérifier qu'aucun champs est vide
-    if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonyme")</script>
-  <?php
-    }
+if ($debug) {
+    umask(0000);
 
-    if (!$_SESSION['mdp']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-  <?php
-    }
-
-    if (!$_SESSION['email']) {
-        ?> <script> alert("Merci de renseigner votre e-mail")</script>
-  <?php
-    }
-
-    if (!$_SESSION['mdp2']) {
-        ?> <script> alert("Merci de confirmer votre mot de passe")</script>
-  <?php
-    }
-
-    //si les mots de passes sont identiques
-    if ($_SESSION['pass'] === $_SESSION['confPass']) {
-        //data processing
-        $pass_hache= new ConnectController();
-        $_SESSION['pass']=$pass_hache->hach();
-
-        // Verification of the free pseudo. If ok add new user
-        $existPseudo= new ConnectController();
-        $existPseudo->existPseudo();
-
-        require '../src/View/homeView.php';
-    } else {
-        echo 'Les deux mots de passes sont différents';
-    }
+    Debug::enable();
 }
 
-//________________LOG AND STATUS___________________
-// Identification
-if ($p === 'login') {
-    if ($_SESSION['connect'] === 1) {
-        session_destroy();
-        $_SESSION['connect'] = 0;
-        require '../src/View/homeView.php'; ?> <script>alert('Vous êtes déconnecté')</script> <?php
-    } else {
-        require '../src/View/registrationView.php';
-    }
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {
+    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
 }
 
-//_______________ADMIN__________________
-// display admin gestion
-if ($p === 'admin') {
-    $adminController = new AdminController();
-    $adminController->displayUsers();
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false) {
+    Request::setTrustedHosts(explode(',', $trustedHosts));
 }
 
-// valid article
-if ($p === 'valid_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
-    $adminController = new AdminController();
-    $adminController->validPost();
-    $adminController->displayUsers();
-}
-
-// valid comment
-if ($p === 'valid_comment') {
-    $_SESSION['id_commentaire']= intval($_GET['id']);
-    $_SESSION['validate']= intval($_GET['validate']);
-    $adminController = new AdminController();
-    $adminController->validComment();
-    $adminController->displayUsers();
-}
-
-// valid user
-if ($p === 'valid_user') {
-    $_SESSION['id_utilisateur']= intval($_GET['id']);
-    $adminController = new AdminController();
-    $adminController->validUser();
-    $adminController->displayUsers();
-}
-
-
-//________________COMMENTS________________
-// Adding a comment
-if ($p === 'commentAdd') {
-    $_SESSION['contmessage']=$_POST['contmessage'];
-    $commentController = new CommentController();
-    $commentController->commentAdd();
-
-    $contArticle = new PostController();
-    $contArticle->post();
-}
-
-// reply comment
-if ($p === 'reply_comment') {
-    $_SESSION['parentId']= intval($_GET['id']);
-    require '../src/View/replyCommentView.php';
-}
-
-// edit comment
-if ($p === 'edit_comment') {
-    $_SESSION['commentId']= intval($_GET['id']);
-    $_SESSION['contmessage']= ($_POST['contmessage']);
-    $commentController = new CommentController();
-    $commentController->commentEdit();
-
-    //commment écrire directement sur la page ? AJAX
-}
-
-//update comment
-if ($p === 'commentEdit') {
-    $_SESSION['contmessage']= htmlspecialchars($_POST['contmessage'], ENT_IGNORE);
-    $commentController = new CommentController();
-    $commentController->commentUpdate();
-
-    $contArticle = new PostController();
-    $contArticle->post();
-}
-
-// delete comment
-if ($p === 'delete_comment') {
-    $_SESSION['commentId']= intval($_GET['id']);
-    $commentController = new CommentController();
-    $commentController->commentDelete();
-
-    $contArticle = new PostController();
-    $contArticle->post();
-}
-
-//________________Replies________________
-
-//display replies
-//non utilisé pour l'instant essais en cours
-if ($p==='replies') {
-    $replyComment = new CommentRepository();
-    $replies = $replyComment->getReplies();
-    return $replies;
-}
-
-
-// penser un envoyer un message pour vérifier que l'email est valide
-
-//super comment
- 
+$kernel = new Kernel($env, $debug);
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);

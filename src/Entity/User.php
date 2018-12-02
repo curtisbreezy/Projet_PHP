@@ -2,204 +2,149 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
- * Class User
+ * @ORM\Table(name="user")
+ * @UniqueEntity(fields="email")
+ * @ORM\Entity()
  */
-class User
-{
+class User implements UserInterface, \Serializable {
+
     /**
-     * @var int primary key auto incremented
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string userpseudo
-     */
-    private $pseudo;
-
-    /**
-     * @var string user's password
-     */
-    private $pass;
-
-    /**
-     * @var string user's statut
-     */
-    private $statut;
-
-    /**
-     * @var string user's inscription date
-     */
-    private $createdAt;
-
-    /**
-     * @var string user's email
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @var string user's phone
+     * @Assert\NotBlank()
+     * @Assert\Length(max=250)
      */
-    private $phone;
+    private $plainPassword;
 
     /**
-     * @param string $data use function hydrate
+     * The below length depends on the "algorithm" you use for encoding
+     * the password, but this works well with bcrypt.
+     *
+     * @ORM\Column(type="string", length=64)
      */
-    public function __construct($data)
-    {
-        if (isset($data)) {
-            $this->hydrate($data);
-        }
-    }
+    private $password;
 
     /**
-     * @param string $data hydrate attributs with data
+     * @ORM\Column(name="is_active", type="boolean")
      */
-    public function hydrate($data)
-    {
-    
-        /**
-         * if $data is an array. The value of each column is retrieved
-         */
-        if (is_array($data)) {
-            if (isset($data['id'])) {
-                $this->setId($data['id']);
-            }
-             
-            if (isset($data['pseudo'])) {
-                $this->setpseudo($data['pseudo']);
-            }
-            
-            if (isset($data['pass'])) {
-                $this->setPass($data['pass']);
-            }
-
-            if (isset($data['statut'])) {
-                $this->setStatut($data['statut']);
-            }
-
-            if (isset($data['email'])) {
-                $this->setemail($data['email']);
-            }
-
-            if (isset($data['createdAt'])) {
-                $this->setCreatedAt($data['createdAt']);
-            }
-
-            if (isset($data['phone'])) {
-                $this->setPhone(['phone']);
-            }
-        }
-    }
+    private $isActive;
 
     /**
-     * @return int id
+     * @ORM\Column(name="roles", type="array")
      */
-    public function getId()
-    {
-        return $this->id;
+    private $roles = array();
+
+    public function __construct() {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
     }
 
-    /**
-     * @param int $id
-     */
-    private function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-    * @return string pseudo
-    */
-    public function getpseudo()
-    {
-        return $this->pseudo;
-    }
-
-    /**
-     * @param string $pseudo
-     */
-    public function setpseudo($pseudo)
-    {
-        $this->pseudo = htmlspecialchars($pseudo);
-    }
-
-    /**
-    * @return string status
-    */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatut($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return string password
-     */
-    public function getPass()
-    {
-        return $this->pass;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPass($pass)
-    {
-        $this->pass = htmlspecialchars($pass);
-    }
-
-    /**
-     * @return int createAt
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param int $createAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createAt = $createdAt;
-    }
-
-    /**
-    * @return string email
-    */
-    public function getEmail()
-    {
+    public function getUsername() {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = htmlspecialchars($email);
-    }
-    /**
-    * @return string phone
-    */
-    public function getPhone()
-    {
-        return $this->phone;
+    public function getSalt() {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
     }
 
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = htmlspecialchars($phone);
+    public function getPassword() {
+        return $this->password;
     }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
+
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->isActive,
+                // see section on salt below
+                // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized) {
+        list (
+                $this->id,
+                $this->email,
+                $this->password,
+                $this->isActive,
+                // see section on salt below
+                // $this->salt
+                ) = unserialize($serialized);
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getPlainPassword() {
+        return $this->plainPassword;
+    }
+
+    function getIsActive() {
+        return $this->isActive;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setPlainPassword($plainPassword) {
+        $this->plainPassword = $plainPassword;
+    }
+
+    function setIsActive($isActive) {
+        $this->isActive = $isActive;
+    }
+
 }

@@ -2,87 +2,49 @@
 
 namespace App\Repository;
 
-use App\Model\Connect;
 use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * Class UerRepository extend Connect
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends Connect
+class UserRepository extends ServiceEntityRepository
 {
-    /**
-     * @function SELECT all users
-     * @return $users
-     */
-    public function getAllUsers()
+    public function __construct(RegistryInterface $registry)
     {
-        $db = $this->getDb();
-
-        $reqSelect = 'SELECT *';
-        $reqFrom = ' FROM user';
-        $reqWhere = ' ORDER BY createdAt DESC';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqWhere);
-        $req->execute();
-        $users = [];
-        
-        while ($data = $req->fetch()) {
-            $users[] = $data;
-        }
-
-        $req->closeCursor();
-        return $users;
+        parent::__construct($registry, User::class);
     }
 
-    /**
-     * @function SELECT author with userId
-     * @return $author
-     */
-
-    public function getAuthor()
+//    /**
+//     * @return User[] Returns an array of User objects
+//     */
+    /*
+    public function findByExampleField($value)
     {
-        $db = $this->getDb();
-
-        $userId = $_GET['userId'];
-
-        $reqSelect = 'SELECT *';
-        $reqFrom = ' FROM post';
-        $reqWhere = ' WHERE id = :userId';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqWhere);
-        $req->bindParam(':userId', $userId, \PDO::PARAM_INT);
-        $req->execute();
-        
-        $data = $req->fetch();
-        $author = new User($data);
-
-        $req->closeCursor();
-        return $author;
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
     }
+    */
 
-    /**
-     * function UPDATE valid user
-     */
-    public function updateValidUser()
+    /*
+    public function findOneBySomeField($value): ?User
     {
-        $db = $this->getDb();
-
-        if ($_SESSION['status']==1) {
-            $reqUpdate = 'UPDATE user';
-            $reqSet = ' SET status=0';
-            $reqWhere = ' WHERE id=:id';
-            $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['userId'], \PDO::PARAM_INT);
-
-            $req->execute();
-        }
-
-        if ($_SESSION['status']==0) {
-            $reqUpdate = 'UPDATE user';
-            $reqSet = ' SET status=1';
-            $reqWhere = ' WHERE id=:id';
-            $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['userId'], \PDO::PARAM_INT);
-
-            $req->execute();
-        }
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
+    */
 }
