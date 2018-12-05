@@ -1,22 +1,4 @@
-<?php  session_start();
-
-$db = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$article = $db->query('SELECT * FROM articles');
-
-if(isset($_GET['id']) && !empty($_GET['id'])) {
-    
-	$get_id = htmlentities($_GET['id']);
-	if (is_numeric($get_id))
-	{
-	$articles = $db->prepare('SELECT * FROM articles WHERE id_article = :get_id');
-	$articles->execute(array('get_id'=>$get_id));
-	
-	
-}
-}
-
-
-
+<?php db-
 ?>
 
 <!DOCTYPE html>

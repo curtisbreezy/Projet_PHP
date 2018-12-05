@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/src/View/LoginView.php">Connexion</a>
+              <a class="nav-link js-scroll-trigger" href="index.php?page=login">Connexion</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/src/View/RegistrationView.php">Inscription</a>
+              <a class="nav-link js-scroll-trigger" href="index.php?page=formAddUser">Inscription</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/src/View/PostListView.php">Posts</a>
+              <a class="nav-link js-scroll-trigger" href="index.php?page=listPosts">Posts</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">A propos</a>

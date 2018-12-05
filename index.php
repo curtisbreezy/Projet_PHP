@@ -1,8 +1,9 @@
 <?php
 session_start();
 
+require_once 'vendor/autoload.php';
 
-use App\Controller\PostController;
+use App\Controller\PostsController;
 use App\Controller\FormController;
 use App\Controller\ConnectController;
 use App\Controller\CommentController;
@@ -40,9 +41,9 @@ if ($p === 'home') {
 
 //_______________POSTS__________________
 // List of posts
-if ($p === 'postList') {
-    $postController = new PostController();
-    $postController->listPosts();
+if ($p === 'listPosts') {
+    $postsController = new PostsController();
+    $postsController->listPosts();
 }
 
 // One post
@@ -54,7 +55,7 @@ if ($p === 'article') {
 
 // Display postAddView
 if ($p === 'postNew') {
-    require 'View/postAddView.php';
+    require 'src/view/postAddView.php';
 }
 
 // Add Post
@@ -70,26 +71,26 @@ if ($p === 'postAdd') {
 }
 // edit post
 if ($p === 'edit_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
-    $postController = new PostController();
-    $postController->postEdit();
+    $_SESSION['id']= intval($_GET['id']);
+    $postsController = new PostsController();
+    $postsController->postEdit();
 }
 
 //update post
 if ($p === 'postEdit') {
     $_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
-    $postController = new PostController();
-    $postController->postUpdate();
-    $postController->post();
+    $postsController = new PostsController();
+    $postsController->postUpdate();
+    $postsController->post();
 }
 
 // delete post éliminer les commentaires liés
 if ($p === 'delete_post') {
     $_SESSION['id_article']= intval($_GET['id']);
-    $postController = new PostController();
-    $postController->postDelete();
-    $postController->listPosts();
+    $postsController = new PostController();
+    $postsController->postDelete();
+    $postsController->listPosts();
 }
 
 //________________CONTACT_________________
@@ -126,7 +127,7 @@ if ($p === 'Login') {
     //vérification du pseudo et du mot de passe et passage en mode connecté
     $verifPseudo= new ConnectController();
     $verifPseudo->Login();
-    require '../src/View/LoginView.php';
+    require 'src/View/LoginView.php';
 }
 
 //Registration
@@ -168,7 +169,7 @@ if ($p === 'formAddUser') {
         $existPseudo= new ConnectController();
         $existPseudo->existPseudo();
 
-        require '../src/View/LoginView.php';
+        require 'src/View/Registration.php';
     } else {
         echo 'Les deux mots de passes sont différents';
     }
@@ -182,7 +183,7 @@ if ($p === 'login') {
         $_SESSION['connect'] = 0;
         require '../src/View/homeView.php'; ?> <script>alert('Vous êtes déconnecté')</script> <?php
     } else {
-        require '../src/View/registrationView.php';
+        require 'src/View/LoginView.php';
     }
 }
 

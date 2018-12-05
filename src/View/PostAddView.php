@@ -1,6 +1,6 @@
-<?php  session_start();
+<?php  
 
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
+$db = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
 
 if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['textepost'])) 
 	if(!empty($_POST['auteurpost']) AND !empty($_POST['datepost']) AND !empty($_POST['textepost']))
@@ -11,7 +11,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 	$textepost = htmlspecialchars_decode($_POST['textepost']);
 	
 	
-	$ins = $bdd->prepare('INSERT INTO articles(auteurpost, titrepost, datepost, textepost) VALUES(?,?,?,?)'); // insertion dans la base de donnée ,en théorie !
+	$ins = $db->prepare('INSERT INTO articles(auteurpost, titrepost, datepost, textepost) VALUES(?,?,?,?)'); // insertion dans la base de donnée ,en théorie !
 	$ins->execute(array($auteurpost,$titrepost,$datepost,$textepost));
 	var_dump($auteurpost,$titrepost,$datepost,$textepost);			
 	$message = 'Votre article a bien été posté';
@@ -50,7 +50,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 	
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer" id="page-top">
   
       
       <div class="row">

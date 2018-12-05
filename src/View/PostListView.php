@@ -1,9 +1,4 @@
-<?php  session_start();
-
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles');
-$comments = $bdd->query('SELECT * FROM commentaire');
-?>
+<?php  session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
