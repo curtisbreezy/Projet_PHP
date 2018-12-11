@@ -11,7 +11,7 @@ use PDO;
  * Class PostRepository extend Connect
  */
 
-class PostRepository extends Connect
+class PostsRepository extends Connect
 {
 /**
  * function UPDATE valid article
@@ -52,8 +52,7 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
     
-        $reqSelect = 'SELECT id_article, 
-        auteurpost,titrepost, datepost, textepost';
+        $reqSelect = 'SELECT *';
         $reqFrom = ' FROM articles AS p INNER JOIN user';
         $reqOn = ' ON auteurpost = pseudo';
         $reqLimit = ' ORDER BY datepost DESC LIMIT 0, 10';

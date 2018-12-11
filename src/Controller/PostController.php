@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\PostRepository;
+use App\Repository\PostsRepository;
 use App\Repository\Commentrepository;
 use App\Entity\User;
 
 /**
  * Class PostController
  */
-class PostController
+class PostController 
 {
     /**
      * Get the last 10 posts
@@ -17,9 +17,9 @@ class PostController
      */
     public function listPosts()
     {
-        $postRepository = new PostRepository();
-        $posts = $postRepository->getByLimit();
-        require '../src/View/postListView.php';
+        $PostsRepository = new PostsRepository();
+        $posts = $PostsRepository->getByLimit();
+        require 'src/View/postListView.php';
     }
     
     /**

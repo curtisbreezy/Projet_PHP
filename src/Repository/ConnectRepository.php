@@ -34,7 +34,7 @@ class ConnectRepository extends Connect
     public function existPseudo()
  
 
-$bdd = new PDO('mysql:host=localhost;dbname=projet_5', 'root', '');
+$db = new PDO('mysql:host=localhost;dbname=projet_5', 'root', '');
 
 
 if(isset($_POST['connexion'])) 

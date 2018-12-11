@@ -1,8 +1,18 @@
 {
-    "require": {},
+    "name": "blog",
+    
+    "authors": [
+        {
+            "name": "Mourad Kheloui",
+            "email": "mourad.kheloui@gmail.com"
+        }
+    ],
+    "require": {
+	
+	},
     "autoload": {
         "psr-4":{
             "App\\": "src/"
         }
     }
-
+}

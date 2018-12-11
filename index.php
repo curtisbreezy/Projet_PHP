@@ -1,14 +1,15 @@
 <?php
 session_start();
 
-require_once 'vendor/autoload.php';
+require_once '/vendor/autoload.php';
 
-use App\Controller\PostsController;
+use App\Controller\PostController;
 use App\Controller\FormController;
 use App\Controller\ConnectController;
 use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Model\Connect;
+
 
 if (!isset($_SESSION['status'])) {
     $_SESSION['status']=0;
@@ -42,8 +43,8 @@ if ($p === 'home') {
 //_______________POSTS__________________
 // List of posts
 if ($p === 'listPosts') {
-    $postsController = new PostsController();
-    $postsController->listPosts();
+    $PostController = new PostController();
+    $PostController->listPosts();
 }
 
 // One post
@@ -72,25 +73,25 @@ if ($p === 'postAdd') {
 // edit post
 if ($p === 'edit_post') {
     $_SESSION['id']= intval($_GET['id']);
-    $postsController = new PostsController();
-    $postsController->postEdit();
+    $PostController = new PostController();
+    $PostController->postEdit();
 }
 
 //update post
 if ($p === 'postEdit') {
     $_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
-    $postsController = new PostsController();
-    $postsController->postUpdate();
-    $postsController->post();
+    $PostController = new PostController();
+    $PostController->postUpdate();
+    $PostController->post();
 }
 
 // delete post éliminer les commentaires liés
 if ($p === 'delete_post') {
     $_SESSION['id_article']= intval($_GET['id']);
-    $postsController = new PostController();
-    $postsController->postDelete();
-    $postsController->listPosts();
+    $PostController = new PostController();
+    $PostController->postDelete();
+    $PostController->listPosts();
 }
 
 //________________CONTACT_________________

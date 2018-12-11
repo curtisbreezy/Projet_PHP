@@ -1,5 +1,4 @@
-<?php db-
-?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -83,21 +82,23 @@
 			
 <section style="background-image : url('article.jpg'); background-repeat:no-repeat; background-position:center center;">					
 	<div class="container">
-           <?php while($a = $articles->fetch()) {  
-                   $current = intval ($a['id_article']) ?>
+           <?php
+    // Main Content last 10 posts
+    foreach ($posts as $post) {
+        ?>    
 						<div id="currentarticle" class="p-3" style="margin-bottom:50px;">
 								<div class="card mb-3" >
-										<div class="card-header" style="font-weight:bold;"><h3><?=$a['titrepost'] ?></h3></div>
+										<div class="card-header" style="font-weight:bold;"><h3><?= htmlspecialchars($post['titrepost']); ?></h3></div>
 												<div class="card-body">
 														<p class="card-text">
-															<h4 style="font-weight:bold;"><?=$a['titrepost'] ?></h4>
+															<h4 style="font-weight:bold;"><?= htmlspecialchars($post['titrepost']); ?></h4>
 															<hr/>								
-															<p><?=$a['textepost'] ?></p>
+															<p><?= htmlspecialchars($post['textepost']); ?></p>
 															<hr/>
-															<p style="color:lightgray;">Rédigé par <?=$a['auteurpost'] ?>, le <?=$a['datepost'] ?>. </p> 
+															<p style="color:lightgray;">Rédigé par <?= htmlspecialchars($post['auteurpost']); ?>, le <?= htmlspecialchars($post['datepost']); ?> </p> 
 															<br/>
-															<button id="<?php echo $a['id_article']; ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>								
-															<button id="<?php echo $a['id_article']; ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
+															<button id="<?= htmlspecialchars ($post['id_article']); ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>								
+															<button id="<?= htmlspecialchars ($post['id_article']); ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
 															<div>
 															<span> Validation sous 24h maximum </span>
 															</div>
