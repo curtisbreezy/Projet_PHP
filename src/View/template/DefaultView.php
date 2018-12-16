@@ -272,7 +272,7 @@
     </section>	
 <footer class="sticky-footer text-center col-md-12 bg-dark">
     <div class="container">
-		<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="src/View/adminview.php">Espace abonné</a>
+		<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="index.php?page=admin">Espace abonné</a>
 				<div>
 					<small>Copyright © Blog PHP-Mourad Kheloui-2018</small>
 				</div>

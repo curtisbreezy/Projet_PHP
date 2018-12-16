@@ -53,10 +53,9 @@ class PostsRepository extends Connect
         $db = $this->getDb();
     
         $reqSelect = 'SELECT *';
-        $reqFrom = ' FROM articles AS p INNER JOIN user';
-        $reqOn = ' ON auteurpost = pseudo';
+        $reqFrom = ' FROM articles';
         $reqLimit = ' ORDER BY datepost DESC LIMIT 0, 10';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqOn  . $reqLimit);
+        $req = $db->prepare($reqSelect . $reqFrom . $reqLimit);
         $req->execute();
         $posts=[];
 
@@ -70,19 +69,28 @@ class PostsRepository extends Connect
     
     /**
      * @function SELECT a post with id
-     * @param int $postId retreive one post
+     * @param int $postId retreive one post SELECT auteurpost, titrepost, datepost, textepost, id_article FROM articles WHERE id_article = 27  affiché les commentaires :
+	 <?php 
+																	
+																	$comments = $db->prepare('SELECT * FROM commentaire WHERE parent_id = 0 && validate = 1 && id_article = :current ORDER BY commentairedate ASC LIMIT 0, 10');
+																	$comments->execute(array('current'=>$current));	
+																	?>
+																						
+																	<?php while($c = $comments->fetch()) { 
+																						 
+																		$answer = intval($c['id_commentaire']);
+																		
+																	?>
      * @return $post
      */
-    public function getOneById()
+    public function getOneById() 
     {
         $db = $this->getDb();
-
-        $reqSelect = 'SELECT auteurpost, titrepost, datepost, textepost, id_article, u.pseudo';
-        $reqFrom = ' FROM articles AS INNER JOIN user AS u';
-        $reqOn = ' ON auteurpost = u.id';
-        $reqWhere = ' WHERE id_article = :postId ';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqWhere);
-        $req->bindParam(':postId', $_SESSION['postId'], \PDO::PARAM_INT);
+		$reqSelect = 'Select * ';
+        $reqFrom = 'From Articles';
+		$reqWhere = ' Where id_article = :id';
+        $req = $db->prepare($reqSelect . $reqFrom . $reqWhere );
+		$req->bindParam(':id', $_SESSION['id'], \PDO::PARAM_INT);
         $req->execute();
         $post=[];
         
@@ -101,13 +109,10 @@ class PostsRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqSelect = 'SELECT a.auteurpost, a.titrepost, a.datepost, a.textepost,  
-		a.userId, a.id AS id_article, 
-		u.pseudo AS pseudo, u.email AS email';
-        $reqFrom = ' FROM articles AS a INNER JOIN user AS u';
-        $reqOn = ' ON a.userId = u.id';
+        $reqSelect = 'SELECT *';
+        $reqFrom = ' FROM articles';
         $reqWhere = ' ORDER BY datepost DESC';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqWhere);
+        $req = $db->prepare($reqSelect . $reqFrom  . $reqWhere);
         $req->execute();
         $posts =[];
         
@@ -130,11 +135,10 @@ class PostsRepository extends Connect
         $reqCol = '(auteurpost, titrepost, datepost, textepost)';
         $reqValues = ' VALUES(:auteurpost, :titrepost, NOW(), :textepost)';
         $req = $db->prepare($reqInsert . $reqCol . $reqValues);
+        $req->bindParam(':auteurpost', $_SESSION['auteurpost'], \PDO::PARAM_STR);
         $req->bindParam(':titrepost', $_SESSION['titrepost'], \PDO::PARAM_STR);
-        $req->bindParam(':introduction', $_SESSION['introduction'], \PDO::PARAM_STR);
         $req->bindParam(':textepost', $_SESSION['textepost'], \PDO::PARAM_STR);
   
-
         $req->execute();
     }
 

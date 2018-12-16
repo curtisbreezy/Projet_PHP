@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Model\Connect
+use App\Model\Connect;
 use App\Entity\Comment;
 
 class CommentRepository extends Connect
@@ -88,11 +88,10 @@ class CommentRepository extends Connect
     
         // DIsplay all comments
         $reqSelect = 'SELECT id_commentaire, 
-        commentairetexte, commentairedate, c.updateAt, parent_id,validate,pseudo';
+        commentairetexte, commentairedate,pseudo';
         $reqFrom = ' FROM commentaire';
-        $reqOn = ' INNER JOIN user AS u ON c.userId = u.id';
         $reqOrder = ' ORDER BY commentairedate DESC';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqOn . $reqOrder);
+        $req = $db->prepare($reqSelect . $reqFrom . $reqOrder);
         $req->bindparam(':id_article', $_SESSION['id_commentaire'], \PDO::PARAM_INT);
         $req->execute();
         $comments = [];
@@ -169,132 +168,5 @@ class CommentRepository extends Connect
 
             $req->execute();
         }
-    }
-	
-	
-	$sql = "UPDATE commentaire SET validate = 1";
-		 echo "<script> alert('3'); </script>";
-        $statement = $bdd->prepare($sql);     
-        $statement->execute();
-		echo "<script> alert('commentaire validé'); </script>"; 
-		header("location: validatecomment.php");
-}
-
-
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
-   
-   
-   
-   $suppr = $bdd->prepare('DELETE FROM commentaire WHERE id_commentaire = ?');
-   
-   $suppr->execute(array($suppr_id));
- 
-   header("Location: extrait.php");
-}
-?>
-// suppresion de commentaire par l'admin ou la personne seule concernée
-<?php
-$bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
-
-
-
-if(isset($_GET['id']) AND !empty($_GET['id'])) {
-   
-   $suppr_id = htmlspecialchars($_GET['id']);
-   
-   $suppr = $bdd->prepare('DELETE FROM commentaire WHERE id_commentaire = ?');
-   
-   $suppr->execute(array($suppr_id));
- 
-   header("Location: validatecomment.php");
-}
-?>
-// Validation du commentaire
-<?php  session_start();
-
-$bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
-$comments = $bdd->query('SELECT * FROM commentaire ASC LIMIT 0, 10');
-
-
-if(isset($_POST['pseudo'],$_POST['commentairedate'],$_POST['commentairetexte'],$_POST['validate']))
-	echo "<script> alert('1'); </script>";
-	{
-		
-				 
-		echo "<script> alert('2'); </script>";
-        
-        
-		
-                    
-		
-		
-	
-	}
-
-
-?>
-// répondre à un commentaire
-<?php  session_start();
-
-$bdd = new PDO("mysql:host=127.0.0.1;dbname=projet_5;charset=utf8", "root", "");
-$comments = $bdd->query('SELECT * FROM commentaire ASC LIMIT 0, 10');
-
-
-if(isset($_POST['pseudo'],$_POST['commentairedate'],$_POST['commentairetexte'],$_POST['validate']))
-	echo "<script> alert('1'); </script>";
-	{
-		
-				 
-		echo "<script> alert('2'); </script>";
-        
-        $sql = "UPDATE commentaire SET validate = 1";
-		 echo "<script> alert('3'); </script>";
-        $statement = $bdd->prepare($sql);     
-        $statement->execute();
-		echo "<script> alert('commentaire validé'); </script>"; 
-		header("location: validatecomment.php");
-		
-                    
-		
-		
-	
-	}
-
-
-?>
-
-// ou
-
-<?php
-		
-		$servername = "127.0.0.1";
-		$username = "root";
-		$password = "";
-		$db = "projet_5";
-
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $db);
-		
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		} 
-		$conn->set_charset("utf8");
-		
-		//FOR TESTING
-		//echo "Connected successfully";
-		
-		$sql = "INSERT INTO reponse_commentaire (auteurreponse,datereponse,textereponse,id_commentaire)
-		VALUES ('" . $_POST['author'] . "',now(),'" . $_POST['comment'] . "','" . $_POST['id'] . "')";
-
-		if ($conn->query($sql) === TRUE) {
-			
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}
-		
-		
-		mysqli_close($conn);
-
-		
-?>
+	}	
+ }

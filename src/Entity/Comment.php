@@ -5,7 +5,7 @@ namespace App\Entity;
 /**
  * Class Comment
  */
-class Comment
+class Comment extends Connect
 {
     /**
      * @var int primary key auto incremented

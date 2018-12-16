@@ -1,32 +1,3 @@
-<?php  
-
-$db = new PDO("mysql:host=localhost;dbname=projet_5", "root", "");
-
-if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['textepost'])) 
-	if(!empty($_POST['auteurpost']) AND !empty($_POST['datepost']) AND !empty($_POST['textepost']))
-	{
-	$auteurpost = htmlspecialchars($_POST['auteurpost']); // protection des données
-	$titrepost = htmlspecialchars($_POST['titrepost']);
-	$datepost = htmlspecialchars($_POST['datepost']);
-	$textepost = htmlspecialchars_decode($_POST['textepost']);
-	
-	
-	$ins = $db->prepare('INSERT INTO articles(auteurpost, titrepost, datepost, textepost) VALUES(?,?,?,?)'); // insertion dans la base de donnée ,en théorie !
-	$ins->execute(array($auteurpost,$titrepost,$datepost,$textepost));
-	var_dump($auteurpost,$titrepost,$datepost,$textepost);			
-	$message = 'Votre article a bien été posté';
-	
-	header("Location: PostListView.php?id=".$_POST['id_article']);
-	}
-	else
-	{
-		$message = 'Veuillez remplir tous les champs'; // si un des champs n'est pas complété
-	}
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -65,7 +36,7 @@ if(isset($_POST['auteurpost'],$_POST['titrepost'],$_POST['datepost'],$_POST['tex
 	  
 <section class="col-md-12">
 	  
-	  <form method="POST">
+	  <form action="index.php?page=postAdd" method="POST">
 			
 				<div>
 					<label>Auteur :</label>

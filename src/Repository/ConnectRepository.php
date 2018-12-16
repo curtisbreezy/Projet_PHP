@@ -32,12 +32,9 @@ class ConnectRepository extends Connect
      * function SELECT user
      */
     public function existPseudo()
- 
-
-$db = new PDO('mysql:host=localhost;dbname=projet_5', 'root', '');
-
-
-if(isset($_POST['connexion'])) 
+{
+	$db = $this->getDb();
+	if(isset($_POST['connexion'])) 
 {			
 		
 		$pseudo = htmlspecialchars($_POST['pseudo']);
@@ -77,14 +74,9 @@ if(isset($_POST['connexion']))
 			{
 			$erreur = "Merci de tout compléter";
 			}
-		
-		
-		
-		
+	
 }
-		
-
-     
+				   
 
     /**
      * function SELECT user

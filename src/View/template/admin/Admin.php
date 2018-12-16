@@ -19,16 +19,11 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
-  <!-- Navigation-->
-
-  
   <?php 
 
-	require'/template/menu_admin.php'
+	require'src/view/template/menu_admin.php'
 
-?>
-
-	  
+?>  
   <div class="content-wrapper bg-light">
     <div class="container-fluid">
 	<hr/>
@@ -42,7 +37,7 @@
 	</h2>
 	
     
-      <!-- Icon Cards-->
+      
       <div class="row">
         <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
@@ -52,7 +47,7 @@
               </div>
               <div class="mr-5">Créer un post!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="post.php?id=".$_SESSION['pseudo']">
+            <a class="card-footer text-white clearfix small z-1" href="index.php?page=newpost&id="">
               <span class="float-left">C'est parti !</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -76,41 +71,33 @@
               </span>
             </a>
           </div>
-        </div>
-		
-		
-		
-       
-      </div>
-	  
-	
-		
-	  
-	            
+        </div>	 
+      </div>  
+	    
+	          
  <div class="mb-0 mt-4">
     <i class="fa fa-newspaper-o"></i> Le dernier article posté</div>
        <hr class="mt-2">
           <div class="card-columns col-12">
             <div class="card mb-3">
 			  <div class="card-body">
-				<?php while($a = $articles->fetch()){?>
-				
+			    <?php foreach($posts as $a) { ?>
 				<h3 class="text-center"><?=$a['titrepost'] ?></h3> </br>
 				<hr/>
 				<p class="text-justify"><?=$a['textepost'] ?></p> </br/>
 				</br>Rédigé par : <?=$a['auteurpost'] ?> </br>
 				<hr/>
-				<p> Posté le <?=$a['datepost'] ?>
-				<?php }?>	
-			  </div>
+				<p> Posté le <?=$a['datepost'] ?> </p></div>
               
 			  <hr class="my-0">
               
 
             </div>
+			  
 		  </div>
+		  <?php } ?>
 </div>      
-      
+ 
     
     <footer class="sticky-footer">
       <div class="container">

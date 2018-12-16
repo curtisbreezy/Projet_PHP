@@ -49,7 +49,7 @@ if ($p === 'listPosts') {
 
 // One post
 if ($p === 'article') {
-    $_SESSION['id_article'] = $_GET['id'];
+    $_SESSION['id'] = $_GET['id'];
     $contArticle = new PostController();
     $contArticle->post();
 }
@@ -59,16 +59,19 @@ if ($p === 'postNew') {
     require 'src/view/postAddView.php';
 }
 
-// Add Post
-if ($p === 'postAdd') {
-	$_SESSION['auteurpost'] = htmlspecialchars($_POST['auteurpost'], ENT_IGNORE);
-    $_SESSION['titrepost'] = htmlspecialchars($_POST['titrepost'], ENT_IGNORE);
-    $_SESSION['datepost'] = htmlspecialchars($_POST['datepost'], ENT_IGNORE);
-    $_SESSION['textepost'] = htmlspecialchars($_POST['textepost'], ENT_IGNORE);
+// Add Post $_SESSION['auteurpost'] = htmlspecialchars($_POST['auteurpost'], ENT_IGNORE);
+ //   $_SESSION['titrepost'] = htmlspecialchars($_POST['titrepost'], ENT_IGNORE);
+  //  $_SESSION['datepost'] = htmlspecialchars($_POST['datepost'], ENT_IGNORE);
+   // $_SESSION['textepost'] = htmlspecialchars($_POST['textepost'], ENT_IGNORE);
 
+if ($p === 'postAdd') {
+	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
+	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
+    $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
     $newPost = new PostController;
     $newPost->newPost();
-    $newPost->listPosts();
+	$newPost->listPosts();
+	
 }
 // edit post
 if ($p === 'edit_post') {
@@ -78,7 +81,7 @@ if ($p === 'edit_post') {
 }
 
 //update post
-if ($p === 'postEdit') {
+if ($p === 'postUpdate') {
     $_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
     $PostController = new PostController();

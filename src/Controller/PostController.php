@@ -28,17 +28,12 @@ class PostController
      */
     public function post()
     {
-        $postRepository = new PostRepository();
-        $dispComment = new CommentRepository();
-        $replyComment = new CommentRepository();
-
-        if (!empty($_SESSION['postId'])) {
-            $post = $postRepository->getOneById($_SESSION['postId']);
-            $comments = $dispComment->getCommentsPost($_SESSION['postId']);
-            $replies = $replyComment->getReplies($_SESSION['postId']);
+        $postsRepository = new PostsRepository();
+        if (!empty($_SESSION['id'])) {
+        $posts = $postsRepository->getOneById($_SESSION['id']);   
         }
 
-        require '../src/View/postView.php';
+        require 'src/View/postView.php';
     }
 
     /**
@@ -59,9 +54,11 @@ class PostController
      */
     public function newPost()
     {
-        $addPost = new PostRepository();
+        $addPost = new PostsRepository();
         $addPost->addPost();
+	
     }
+	
 
     /**
      * edit post
@@ -70,7 +67,7 @@ class PostController
     {
         $postRepo = new PostRepository();
         $post = $postRepo->getOneById();
-        require '../src/View/editPostView.php';
+        require 'src/View/editPostView.php';
     }
 
     /**

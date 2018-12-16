@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use App\Repository\PostRepository;
+use App\Repository\PostsRepository;
 use App\Repository\CommentRepository;
 use App\Entity\User;
 
@@ -18,10 +18,15 @@ class AdminController
      */
     public function validUser()
     {
-        $userRepo = new userRepository();
+		{
+		$userRepo = new userRepository();
         $valid = $userRepo->updateValidUser();
     }
-
+	{
+	require '../View/AdminView.php';
+	
+	}
+}
     /**
      * function valid comment
      */
@@ -36,7 +41,7 @@ class AdminController
      */
     public function validPost()
     {
-        $postRepo = new postRepository();
+        $postRepo = new PostsRepository();
         $valid = $postRepo->updateValidPost();
         if ($_SESSION['reqValid']='OK') {
             $to = $_SESSION['email'];
@@ -70,19 +75,19 @@ class AdminController
     }
 
     //________________display_____________________
-    /**
+    /** $userRepo= new UserRepository(); $users = $userRepo->getAllUsers();
      * function display all users
      */
     public function displayUsers()
     {
-        $userRepo= new UserRepository();
-        $postRepo=new PostRepository();
+        
+        $postRepo= new PostsRepository();
         $commentRepo= new CommentRepository();
 
-        $users = $userRepo->getAllUsers();
+        
         $posts = $postRepo->getAllPosts();
         $comments = $commentRepo->getAllComments();
-        require '../src/View/administrationView.php';
+        require 'src/View/adminView.php';
     }
 
     /**
