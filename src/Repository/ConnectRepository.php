@@ -84,13 +84,12 @@ class ConnectRepository extends Connect
     public function getUser()
     {
         $db = $this->getDb();
-		$pseudo = $_SESSION['pseudo'];
-        $pass = $_SESSION['mdp'];
-        $email = $_SESSION['email'];
+        $pseudo = $_SESSION['pseudo'];
+        $email = $_SESSION['mdpconnect'];
 
         $req = $db->prepare('SELECT * FROM user WHERE pseudo = :pseudo');
-        $req->execute(array(
-    'pseudo' => $_SESSION['pseudo']));
+		$req->bindParam(':pseudo', $_SESSION['pseudo'], \PDO::PARAM_INT);
+        $req->execute();
         $user = $req->fetch();
 
         return $user;

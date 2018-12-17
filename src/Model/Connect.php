@@ -24,7 +24,7 @@ abstract class Connect
     {
         if ($this->db === null) {
             try {
-                $db = new \PDO('mysql:dbname=projet_5;host=localhost;charset=utf8', 'root', '');
+                $db = new \PDO('mysql:dbname=projet_5;host=localhost;charset=utf8', 'root', 'root');
 
                 $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 

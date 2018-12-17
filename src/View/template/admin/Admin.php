@@ -47,7 +47,7 @@
               </div>
               <div class="mr-5">Créer un post!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="index.php?page=newpost&id="">
+            <a class="card-footer text-white clearfix small z-1" href="index.php?page=postNew"">
               <span class="float-left">C'est parti !</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -76,12 +76,14 @@
 	    
 	          
  <div class="mb-0 mt-4">
-    <i class="fa fa-newspaper-o"></i> Le dernier article posté</div>
+	<i class="fa fa-newspaper-o"></i> Les dernier articles postés</div>
+	 <?php foreach($posts as $a) { ?>
+    
        <hr class="mt-2">
           <div class="card-columns col-12">
             <div class="card mb-3">
 			  <div class="card-body">
-			    <?php foreach($posts as $a) { ?>
+			   
 				<h3 class="text-center"><?=$a['titrepost'] ?></h3> </br>
 				<hr/>
 				<p class="text-justify"><?=$a['textepost'] ?></p> </br/>
@@ -90,14 +92,15 @@
 				<p> Posté le <?=$a['datepost'] ?> </p></div>
               
 			  <hr class="my-0">
-              
+              <a href="index.php?page=delete_post&id=<?= $a['id_article'] ?>"> suppression </a>
+			  <a href="index.php?page=postUpdate&id=<?= $a['id_article'] ?>&<?= $a['textepost'] ?>&<?= $a['titrepost'] ?>"> Maj </a>
 
             </div>
-			  
+
 		  </div>
-		  <?php } ?>
+		 <?php } ?>
 </div>      
- 
+ 			   
     
     <footer class="sticky-footer">
       <div class="container">
@@ -106,11 +109,9 @@
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

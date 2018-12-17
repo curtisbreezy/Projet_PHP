@@ -45,12 +45,11 @@ class ConnectController
      */
     public function Login()
     {
-        // search of the user and his password
+        
         $connectRepository = new ConnectRepository;
         $user = $connectRepository->getUser();
 
-        //check password
-        $isPasswordCorrect = password_verify($_SESSION['pass'], $user['pass']);
+        $isPasswordCorrect = password_verify($_SESSION['mdp']]);
 
         if (!$user) {
             echo 'Mauvais identifiant ou mot de passe !';

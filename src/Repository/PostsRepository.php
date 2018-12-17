@@ -149,11 +149,11 @@ class PostsRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqUpdate = 'DELETE FROM articles';
-        $reqWhere = ' WHERE id=:id';
-        $req = $db->prepare($reqUpdate . $reqWhere);
+        $reqDelete = 'DELETE ';
+		$reqFrom = 'FROM articles';
+        $reqWhere = ' WHERE id_article = :id';
+        $req = $db->prepare($reqDelete . $reqFrom . $reqWhere);
         $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
-
         $req->execute();
     }
 

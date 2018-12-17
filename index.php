@@ -11,9 +11,7 @@ use App\Controller\AdminController;
 use App\Model\Connect;
 
 
-if (!isset($_SESSION['status'])) {
-    $_SESSION['status']=0;
-}
+
 
 if (!isset($_SESSION['connect'])) {
     $_SESSION['connect']=0;
@@ -94,7 +92,8 @@ if ($p === 'delete_post') {
     $_SESSION['id_article']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postDelete();
-    $PostController->listPosts();
+	$adminController = new AdminController();
+    $adminController->displayUsers();
 }
 
 //________________CONTACT_________________
@@ -111,13 +110,13 @@ if ($p === 'formHome') {
     require '../src/View/homeView.php';
 }
 
-// Identification
+// Identification //
 if ($p === 'Login') {
-    //Data reception
+  
     $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
     $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
   
-    //Vérifier qu'aucun champs est vide
+
     if (!$_SESSION['pseudo']) {
         ?> <script> alert("Merci de renseigner votre pseudonyme")</script>
     <?php
@@ -128,11 +127,13 @@ if ($p === 'Login') {
     <?php
     }
 
-    //vérification du pseudo et du mot de passe et passage en mode connecté
+   
     $verifPseudo= new ConnectController();
     $verifPseudo->Login();
     require 'src/View/LoginView.php';
 }
+
+//--------------------------------//
 
 //Registration
 if ($p === 'formAddUser') {
@@ -185,7 +186,7 @@ if ($p === 'login') {
     if ($_SESSION['connect'] === 1) {
         session_destroy();
         $_SESSION['connect'] = 0;
-        require '../src/View/homeView.php'; ?> <script>alert('Vous êtes déconnecté')</script> <?php
+        require 'src/View/homeView.php'; ?> <script>alert('Vous êtes déconnecté')</script> <?php
     } else {
         require 'src/View/LoginView.php';
     }
