@@ -164,15 +164,16 @@ class PostsRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqUpdate = 'UPDATE article';
-        $reqSet = ' SET titrepost=:title, textepost=:content, datepost=now()';
-        $reqWhere = ' WHERE id=:id';
+        $reqUpdate = 'UPDATE articles ';
+        $reqSet = 'SET auteurpost=:auteur, textepost=:content,titrepost=:title,datepost=now()';
+        $reqWhere = ' WHERE id_article = :id';
         $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-        $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
+        $req->bindParam(':id', $_SESSION['id'], \PDO::PARAM_INT);
+		$req->bindParam(':auteur', $_SESSION['auteurpost'], \PDO::PARAM_STR);
         $req->bindParam(':title', $_SESSION['titrepost'], \PDO::PARAM_STR);
         $req->bindParam(':content', $_SESSION['textepost'], \PDO::PARAM_STR);
 
         $req->execute();
-    }
+		}
 }
 

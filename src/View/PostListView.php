@@ -40,17 +40,17 @@
 		<div class="card-header" style="font-weight:bold;"><h3><?=$a['titrepost'] ?></h3>
 		<div class="card-body">
 		<p class="card-text">
-			<?php echo substr($a['textepost'],0,700);?>[..........]</p>
-			<p>Rédigé par <?=$a['auteurpost'] ?>,le <?=$a['datepost'] ?>. </p> <br/>
+			<?php echo substr($a['textepost'],0,700);?>[...]</p>
+			<p>Rédigé par <?=$a['auteurpost'] ?>,le <?=htmlspecialchars_decode($a['datepost']) ?>. </p> <br/>
 		    <button class="btn btn-success mt-3"><a href="index.php?page=article&id=<?=$a['id_article']?>"> En savoir + </a> </button> 
-								  <hr/>
-							  </div>
-						</div>
-					</div>
-			  <?php } ?> 					   		
-            </div>					
-        </div>
+			    <hr/>
+			  </div>
+			</div>
+	   	 </div>
+		<?php } ?> 					   		
+      </div>					
     </div>
+ </div>
 </section>
 
 	

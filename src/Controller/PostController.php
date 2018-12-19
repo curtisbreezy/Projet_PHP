@@ -67,7 +67,7 @@ class PostController
     {
         $postRepo = new PostsRepository();
         $post = $postRepo->getOneById();
-        require 'src/View/editPostView.php';
+        require 'src/View/EditPostView.php';
     }
 
     /**
@@ -77,7 +77,8 @@ class PostController
     {
         $postDelete = new PostsRepository();
         $postDelete->deletePost();
-		require 'src/View/Adminview.php';
+		
+		
     }
 
     /**
@@ -87,6 +88,7 @@ class PostController
     {
         $postUpdate = new PostsRepository();
         $postUpdate->updatePost();
-		require 'src/View/EditPostView.php';
+		
+		
     }
 }

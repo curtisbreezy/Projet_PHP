@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Administration</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="vendor/css/articles.css" rel="stylesheet">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    
+ </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Blog PHP-Admin</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
-</head>
-
-<body class="fixed-nav sticky-footer bg-light" id="page-top">
-  <?php 
-
-	require'src/view/template/menu_admin.php'
-
+ <body>
+<?php
+	require'src/view/template/menu_admin.php';
 ?>  
-  <div class="content-wrapper bg-light">
-    <div class="container-fluid">
-	<hr/>
-	 <h2 class="mt-2"> <?php
+<hr/>
+  <div class="container">
+<div class="jumbotron jumbotron-fluid text-center">
+	<h4><font face="Century Gothic" > <?php
 		if(isset($_SESSION['pseudo'])){
 		echo " Vous êtes connecté ".$_SESSION['pseudo'];
-									}
-	
-?>
-<hr/>
-	</h2>
-	
-    
-      
+									}?> </font></h4>
+</div>	
+
+</div>
       <div class="row">
         <div class="col-xl-6 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
@@ -75,25 +71,25 @@
       </div>  
 	    
 	          
- <div class="mb-0 mt-4">
-	<i class="fa fa-newspaper-o"></i> Les dernier articles postés</div>
+ <div class="jumbotron text-center mt-5">
+		<h1 class="display-4"><font face="Century Gothic" size="20"> Les derniers articles postés </font></h1>
+	</div>
 	 <?php foreach($posts as $a) { ?>
-    
-       <hr class="mt-2">
-          <div class="card-columns col-12">
+       <hr class="m-2 container-fluid">
+          <div class="card-columns">
             <div class="card mb-3">
-			  <div class="card-body">
+			  <div class="card-body text-center">
 			   
 				<h3 class="text-center"><?=$a['titrepost'] ?></h3> </br>
 				<hr/>
-				<p class="text-justify"><?=$a['textepost'] ?></p> </br/>
+				<p class="text-justify" style="color:#000"><?=htmlspecialchars_decode($a['textepost']) ?></p> </br/>
 				</br>Rédigé par : <?=$a['auteurpost'] ?> </br>
 				<hr/>
 				<p> Posté le <?=$a['datepost'] ?> </p></div>
               
 			  <hr class="my-0">
-              <a href="index.php?page=delete_post&id=<?= $a['id_article'] ?>"> suppression </a>
-			  <a href="index.php?page=postUpdate&id=<?= $a['id_article'] ?>&<?= $a['textepost'] ?>&<?= $a['titrepost'] ?>"> Maj </a>
+              <a style="color:#000;"href="index.php?page=delete_post&id=<?=$a['id_article'] ?>"> Suppression </a>
+			  <a style="color:#000;" href="index.php?page=edit_post&id=<?=$a['id_article'] ?>"> Édition </a>
 
             </div>
 
@@ -129,6 +125,7 @@
         </div>
       </div>
     </div>
+</body>	
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -144,6 +141,6 @@
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
   </div>
-</body>
+
 
 </html>

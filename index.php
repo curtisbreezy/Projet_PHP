@@ -57,11 +57,6 @@ if ($p === 'postNew') {
     require 'src/view/postAddView.php';
 }
 
-// Add Post $_SESSION['auteurpost'] = htmlspecialchars($_POST['auteurpost'], ENT_IGNORE);
- //   $_SESSION['titrepost'] = htmlspecialchars($_POST['titrepost'], ENT_IGNORE);
-  //  $_SESSION['datepost'] = htmlspecialchars($_POST['datepost'], ENT_IGNORE);
-   // $_SESSION['textepost'] = htmlspecialchars($_POST['textepost'], ENT_IGNORE);
-
 if ($p === 'postAdd') {
 	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
 	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
@@ -69,6 +64,7 @@ if ($p === 'postAdd') {
     $newPost = new PostController;
     $newPost->newPost();
 	$newPost->listPosts();
+	
 	
 }
 // edit post
@@ -79,12 +75,16 @@ if ($p === 'edit_post') {
 }
 
 //update post
+//$_SESSION['titrepost']= htmlentities($_GET['titrepost'], ENT_SUBSTITUTE);
+ //   $_SESSION['textepost']= htmlentities($_GET['textepost'], ENT_SUBSTITUTE);
 if ($p === 'postUpdate') {
-    $_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
+	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
+	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
     $PostController = new PostController();
     $PostController->postUpdate();
-    $PostController->post();
+    $admincontroller = new AdminController() ;
+    $admincontroller->displayUsers();
 }
 
 // delete post éliminer les commentaires liés
@@ -92,8 +92,8 @@ if ($p === 'delete_post') {
     $_SESSION['id_article']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postDelete();
-	$adminController = new AdminController();
-    $adminController->displayUsers();
+	$admincontroller = new AdminController() ;
+    $admincontroller->displayUsers();
 }
 
 //________________CONTACT_________________
@@ -142,6 +142,7 @@ if ($p === 'formAddUser') {
     $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
     $_SESSION['email']= htmlspecialchars($_POST['email']);
     $_SESSION['mdp2'] = htmlspecialchars($_POST['mdp2']);
+	
 
     //Vérifier qu'aucun champs est vide
     if (!$_SESSION['pseudo']) {
