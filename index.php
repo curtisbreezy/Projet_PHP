@@ -39,24 +39,24 @@ if ($p === 'home') {
 }
 
 //_______________POSTS__________________
-// List of posts
+// Liste de tous les posts
 if ($p === 'listPosts') {
     $PostController = new PostController();
     $PostController->listPosts();
 }
 
-// One post
+// Post unique
 if ($p === 'article') {
     $_SESSION['id'] = $_GET['id'];
     $contArticle = new PostController();
     $contArticle->post();
 }
 
-// Display postAddView
+// Ajout de post
 if ($p === 'postNew') {
     require 'src/view/postAddView.php';
 }
-
+// Ajout en bdd
 if ($p === 'postAdd') {
 	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
 	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
@@ -67,14 +67,14 @@ if ($p === 'postAdd') {
 	
 	
 }
-// edit post
+// Édition du post
 if ($p === 'edit_post') {
     $_SESSION['id']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postEdit();
 }
 
-//update post
+// Mise à jour du post
 //$_SESSION['titrepost']= htmlentities($_GET['titrepost'], ENT_SUBSTITUTE);
  //   $_SESSION['textepost']= htmlentities($_GET['textepost'], ENT_SUBSTITUTE);
 if ($p === 'postUpdate') {
@@ -96,6 +96,12 @@ if ($p === 'delete_post') {
     $admincontroller->displayUsers();
 }
 
+if ($p === 'validate') {
+	$_SESSION['id_article']= intval($_GET['id']);
+	$PostController = new PostController();
+	$PostController->moderate();
+
+}
 //________________CONTACT_________________
 //contact
 if ($p === 'contact') {
@@ -115,19 +121,6 @@ if ($p === 'Login') {
   
     $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
     $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
-  
-
-    if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonyme")</script>
-    <?php
-    }
-  
-    if (!$_SESSION['mdp']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-    <?php
-    }
-
-   
     $verifPseudo= new ConnectController();
     $verifPseudo->Login();
     require 'src/View/LoginView.php';
@@ -142,28 +135,7 @@ if ($p === 'formAddUser') {
     $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
     $_SESSION['email']= htmlspecialchars($_POST['email']);
     $_SESSION['mdp2'] = htmlspecialchars($_POST['mdp2']);
-	
 
-    //Vérifier qu'aucun champs est vide
-    if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonyme")</script>
-  <?php
-    }
-
-    if (!$_SESSION['mdp']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-  <?php
-    }
-
-    if (!$_SESSION['email']) {
-        ?> <script> alert("Merci de renseigner votre e-mail")</script>
-  <?php
-    }
-
-    if (!$_SESSION['mdp2']) {
-        ?> <script> alert("Merci de confirmer votre mot de passe")</script>
-  <?php
-    }
 
     //si les mots de passes sont identiques
     if ($_SESSION['pass'] === $_SESSION['confPass']) {
@@ -186,7 +158,7 @@ if ($p === 'formAddUser') {
 if ($p === 'login') {
     if ($_SESSION['connect'] === 1) {
         session_destroy();
-        $_SESSION['connect'] = 0;
+        $_SESSION['connect'] === 0;
         require 'src/View/homeView.php'; ?> <script>alert('Vous êtes déconnecté')</script> <?php
     } else {
         require 'src/View/LoginView.php';
@@ -202,7 +174,7 @@ if ($p === 'admin') {
 
 // valid article
 if ($p === 'valid_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
+    $_SESSION['id']= intval($_GET['id']);
     $adminController = new AdminController();
     $adminController->validPost();
     $adminController->displayUsers();

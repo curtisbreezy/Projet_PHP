@@ -8,13 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Blog PHP-Créer un post</title>
-  <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
+
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-   <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 	<script>tinymce.init({ selector:'textarea' });</script>
@@ -32,47 +29,32 @@
       </div>
 	  
 	  
-<!---------------------------------------------------------------------------------------------------------------------------------- éditeur de post-------------------------------------------------------------------------------------------------------------------------------- -->
+
 	  
 <section class="col-md-12">
-	  
-	  <form action="index.php?page=postAdd" method="POST">
+	<form action="index.php?page=postAdd" method="POST">
+		<div>
 			
-				<div>
-					<label>Auteur :</label>
-					
-					<input type="text"  name="auteurpost" placeholder="" Value="<?php echo ($_SESSION['pseudo']);?>"> </br>
-				
-
-				
-					<label>Titre :</label>
+			<label>Auteur :</label>
+				<input type="text"  name="auteurpost" placeholder="" Value="<?php echo ($_SESSION['pseudo']);?>"> </br>
+			
+			<label>Titre :</label>
 					 
-					<input type="text"   name="titrepost"  placeholder="Titre du post"> </br>
-				
+				<input type="text"   name="titrepost"  placeholder="Titre du post"> </br>
 		
-					<label>Date :</label>
-					<input type="datetime" name="datepost" value="<?php echo date("Y-m-d-H:i" ); ?>"> 
+			<label>Date :</label>
 					
-				</div>	
+				<input type="datetime" name="datepost" value="<?php echo date("Y-m-d-H:i" ); ?>"> 
+					
+		</div>	
 				<div>
 			
-					<textarea id="textepost" name="textepost" type="text">
-			
-					</textarea>
+					<textarea id="textepost" name="textepost" type="text"> </textarea>
 			
 				</div>
 			
 			
-				
-					
-			
 					<button type="submit" class="btn btn-success mt-3" name="soumettre" id="soumettre" Value="Soumettre le post"> Soumettre </button>
-					
-				
-				
-			
-		
-	 
 	 </form>
 	  <?php
 	  if(isset($message))
@@ -83,14 +65,7 @@
 	  ?>
 	  
 </section>
-   
-<!---------------------------------------------------------------------------------------------------------------------------------- fin du modèle ----------------------------------------------------------------------------------------------------------------------------------------------------->
-	
-	
 </div>
-    
-	<!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -120,13 +95,9 @@
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-   
   </div>
 </body>
-
 </html>

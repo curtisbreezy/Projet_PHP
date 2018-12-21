@@ -19,10 +19,11 @@ class PostsRepository extends Connect
     public function updateValidPost()
     {
         $db = $this->getDb();
+		$_SESSION['id_article']= intval($_GET['id']);
 
-        if ($_SESSION['Validate']==1) {
+        if ($_SESSION['validate']==1) {
             $reqUpdate = 'UPDATE articles';
-            $reqSet = ' SET valid=0';
+            $reqSet = ' SET validate = 0';
             $reqWhere = ' WHERE id=:id';
             $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
             $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
@@ -32,7 +33,7 @@ class PostsRepository extends Connect
             $_SESSION['reqValid']='NO';
         }
 
-        if ($_SESSION['Validate']==0) {
+        if ($_SESSION['validate']==0) {
             $reqUpdate = 'UPDATE articles';
             $reqSet = ' SET valid=1';
             $reqWhere = ' WHERE id=:id';

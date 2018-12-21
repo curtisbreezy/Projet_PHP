@@ -19,17 +19,13 @@
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="js/creative.min.js"></script>
  </head>
- 
  <body id="page-top">
 <?php
-	require'template/Menu.php';
+	require'src/view/template/menu_admin.php';
 ?>
-
-
-    <div class="jumbotron jumbotron-fluid text-center mt-5">
-		<h1 class="display-4"><font face="Century Gothic" size="20"> Extrait </font></h1>
-	</div>			
-
+ <div class="jumbotron jumbotron-fluid text-center mt-5">
+		<h1 class="display-4"><font face="Century Gothic" size="20"> Modération </font></h1>
+	</div>
 
 <section style="background-image : url('extrait.jpg'); background-repeat:no-repeat; background-position:center center;"> 
  <div class="text-center container" >
@@ -40,9 +36,12 @@
 		<div class="card-header" style="font-weight:bold;"><h3><?=$a['titrepost'] ?></h3>
 		<div class="card-body">
 		<p class="card-text" style="text-align:center;">
-			<?php echo substr($a['textepost'],0,700);?>[...]</p>
+			<?php $content = $a['textepost'];
+		   echo htmlspecialchars_decode($content);
+		   ?>
 			<p>Rédigé par <?=$a ['auteurpost']; ?>,le <?=$a ['datepost']; ?>. </p> <br/>
-		    <button class="btn btn-success mt-3"><a href="index.php?page=article&id=<?=$a['id_article']?>"> En savoir + </a> </button> 
+			<p> <?=$a['validate'];?></p>
+		    <button class="btn btn-success mt-3"><a href="index.php?page=validate&id=<?=$a['id_article']?>&validate=<?=$a['validate']?>"> Valider </a> </button> 
 			    <hr/>
 			  </div>
 			</div>
@@ -53,10 +52,6 @@
  </div>
 </section>
 
-	
-	
-</body>
-    
 <footer class="sticky-footer text-center col-md-12 bg-dark">
     <div class="container">
 		<a class="btn btn-dark btn-xl sr-button col-md-6 mb-3 text-center" href="index.php?page=admin">Espace abonné</a>
@@ -65,15 +60,7 @@
 				</div>
 			
 </div>
- </footer>
-  
-  
-  <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/creative.min.js"></script>
+      </footer>
+  </body>
 </html>
-
 

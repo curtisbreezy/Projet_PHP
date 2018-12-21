@@ -25,7 +25,7 @@
 	require'src/view/template/menu_admin.php';
 ?>  
 <hr/>
-  <div class="container">
+  <!--<div class="container">
 <div class="jumbotron jumbotron-fluid text-center">
 	<h4><font face="Century Gothic" > <?php
 		if(isset($_SESSION['pseudo'])){
@@ -33,9 +33,13 @@
 									}?> </font></h4>
 </div>	
 
-</div>
-      <div class="row">
-        <div class="col-xl-6 col-sm-6 mb-3">
+</div>-->
+               
+ <div class="jumbotron text-center mt-5">
+		<h1 class="display-4"><font face="Century Gothic" size="20"> Les derniers articles postés </font></h1>
+	</div>
+	<div class="container">
+        <div class="col-xl-12 col-sm-12 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
@@ -50,36 +54,13 @@
               </span>
             </a>
           </div>
-        </div>
-        
-        <div class="col-xl-6 col-sm-6 mb-3">
-          <div class="card text-white bg-success o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
-              </div>
-              <div class="mr-5">Supprimer ou Mettre à jour un post</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="supprimer-un-post.php">
-              <span class="float-left">Dommage !</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>	 
-      </div>  
-	    
-	          
- <div class="jumbotron text-center mt-5">
-		<h1 class="display-4"><font face="Century Gothic" size="20"> Les derniers articles postés </font></h1>
-	</div>
+        </div> 
+		
 	 <?php foreach($posts as $a) { ?>
-       <hr class="m-2 container-fluid">
-          <div class="card-columns">
+       <div class="container-fluid">
+          
             <div class="card mb-3">
 			  <div class="card-body text-center">
-			   
 				<h3 class="text-center"><?=$a['titrepost'] ?></h3> </br>
 				<hr/>
 				<p class="text-justify" style="color:#000"><?=htmlspecialchars_decode($a['textepost']) ?></p> </br/>
@@ -87,13 +68,17 @@
 				<hr/>
 				<p> Posté le <?=$a['datepost'] ?> </p></div>
               
-			  <hr class="my-0">
-              <a style="color:#000;"href="index.php?page=delete_post&id=<?=$a['id_article'] ?>"> Suppression </a>
-			  <a style="color:#000;" href="index.php?page=edit_post&id=<?=$a['id_article'] ?>"> Édition </a>
-
-            </div>
-
-		  </div>
+			  
+		
+             
+			  <a href="index.php?page=edit_post&id=<?=$a['id_article'] ?> type="submit" class="btn btn-warning" name="modifier" id="modifier" Value="modifier"> Édition </a>
+			  <br/>
+			  <a href="index.php?page=delete_post&id=<?=$a['id_article'] ?> type="submit" class="btn btn-danger" name="modifier" id="modifier" Value="modifier"> Suppression </a>
+			  <br/>
+			  <a href="index.php?page=validate&id=<?=$a['id_article'] ?> type="submit" class="btn btn-danger" name="modifier" id="modifier" Value="modifier"> A valider </a>
+           
+</div>
+		  
 		 <?php } ?>
 </div>      
  			   

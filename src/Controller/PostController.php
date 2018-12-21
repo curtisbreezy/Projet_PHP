@@ -18,7 +18,7 @@ class PostController
     public function listPosts()
     {
         $PostsRepository = new PostsRepository();
-        $posts = $PostsRepository->getByLimit();
+        $posts = $PostsRepository->getAllPosts();
         require 'src/View/postListView.php';
     }
     
@@ -34,6 +34,27 @@ class PostController
         }
 
         require 'src/View/postView.php';
+    }
+	
+	/**
+	 * Modérer les articles
+	 * @var $articles
+	 */
+	public function moderate()
+    {
+        $PostsRepository = new PostsRepository();
+        $posts = $PostsRepository->getByLimit() ;  
+        
+        require 'src/View/ModerationView.php';
+    }
+	
+	public function validate()
+    {	
+		
+        $PostsRepository = new PostsRepository();
+        $posts = $PostsRepository->updateValidPost() ;  
+        
+        require 'src/View/ModerationView.php';
     }
 
     /**

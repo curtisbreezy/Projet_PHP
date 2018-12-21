@@ -54,13 +54,13 @@ class AdminController
 
             // En-têtes additionnels
             $headers .= 'To:' . $_SESSION['pseudo'] . $_SESSION['email'];
-            $headers .= 'From: VivaInformatique <lieninformatique9@gmail.com>';
+            $headers .= 'From: Mourad <mourad.kheloui@gmail.com>';
             //   mail($to, $subject, $message, $headers);
         }
 
         if ($_SESSION['reqValid']='NO') {
             $to = $_SESSION['email'];
-            $subject = 'Votre article sur VivaInformatique';
+            $subject = 'Votre article sur mon blog';
             $message = $_SESSION['pseudo'] . ' , votre article a été refusé.' . "\r\n" . 'pour plus de détail n\'hésitez pas à nous contacter';
            
             // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
@@ -69,7 +69,7 @@ class AdminController
 
             // En-têtes additionnels
             $headers .= 'To:' . $_SESSION['pseudo'] . $_SESSION['email'];
-            $headers .= 'From: VivaInformatique <lieninformatique9@gmail.com>';
+            $headers .= 'From: Mourad <mourad.kheloui@gmail.com>';
             //   mail($to, $subject, $message, $headers);
         }
     }
