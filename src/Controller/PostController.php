@@ -43,19 +43,24 @@ class PostController
 	public function moderate()
     {
         $PostsRepository = new PostsRepository();
-        $posts = $PostsRepository->getByLimit() ;  
+        $posts = $PostsRepository->updateValidPost() ;  
         
-        require 'src/View/ModerationView.php';
     }
 	
-	public function validate()
+	public function validation()
     {	
 		
         $PostsRepository = new PostsRepository();
-        $posts = $PostsRepository->updateValidPost() ;  
-        
-        require 'src/View/ModerationView.php';
+        $PostsRepository->updateValidPost();  
     }
+	
+	public function signaler ()
+	{
+		
+		$PostsRepository = new PostsRepository();
+        $PostsRepository->updateunValidPost();
+	
+	}
 
     /**
      * Get author of a post

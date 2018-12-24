@@ -102,11 +102,12 @@
 							<br/>
 							<button id="<?= htmlspecialchars ($a['id_article']); ?>" class="commentbutton btn btn-primary" >Voir les commentaires</button>								
 							<button id="<?= htmlspecialchars ($a['id_article']); ?>" class="seecommentbutton btn btn-success"  data-toggle="modal" data-target="#myModalNorm">Poster un commentaire</button>
+							
 							<div>
 						<span> Validation sous 24h maximum </span>
 					</div>
 				</div>
-            					  
+            	<a href="index.php?page=validate&id=<?= htmlspecialchars ($a['id_article']); ?>" class="seecommentbutton btn btn-danger"  data-toggle="modal" data-target="#myModalNorm">Signaler</a>				  
 		</div>											 
 	</div> 
  <?php } ?>		

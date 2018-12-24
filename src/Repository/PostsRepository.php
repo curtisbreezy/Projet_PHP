@@ -18,33 +18,29 @@ class PostsRepository extends Connect
  */
     public function updateValidPost()
     {
-        $db = $this->getDb();
-		$_SESSION['id_article']= intval($_GET['id']);
-
-        if ($_SESSION['validate']==1) {
-            $reqUpdate = 'UPDATE articles';
-            $reqSet = ' SET validate = 0';
-            $reqWhere = ' WHERE id=:id';
-            $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
-
+			$db = $this->getDb();
+			
+            $reqUpdate = 'UPDATE articles ';
+            $reqSet = 'SET validate = 1 ';
+            
+            $req = $db->prepare($reqUpdate . $reqSet );
+			
             $req->execute();
 
-            $_SESSION['reqValid']='NO';
-        }
 
-        if ($_SESSION['validate']==0) {
-            $reqUpdate = 'UPDATE articles';
-            $reqSet = ' SET valid=1';
-            $reqWhere = ' WHERE id=:id';
-            $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['id_article'], \PDO::PARAM_INT);
-
+    }			
+       
+	public function updateunValidPost()
+      { 
+			$db = $this->getDb();
+            $reqUpdate = 'UPDATE articles ';
+            $reqSet = 'SET validate = 0 where id_article=:id ';
+            $req = $db->prepare($reqUpdate . $reqSet );
+            $req->bindParam(':id', $_SESSION['id'], \PDO::PARAM_INT);
             $req->execute();
 
-            $_SESSION['reqValid']='OK';
         }
-    }
+    
     /**
      * @function SELECT the last 10 articles
      * @return $Posts array
@@ -55,8 +51,8 @@ class PostsRepository extends Connect
     
         $reqSelect = 'SELECT *';
         $reqFrom = ' FROM articles';
-        $reqLimit = ' ORDER BY datepost DESC LIMIT 0, 10';
-        $req = $db->prepare($reqSelect . $reqFrom . $reqLimit);
+        $reqWhere = ' Where validate = 0';
+        $req = $db->prepare($reqSelect . $reqFrom . $reqWhere);
         $req->execute();
         $posts=[];
 
@@ -112,7 +108,7 @@ class PostsRepository extends Connect
 
         $reqSelect = 'SELECT *';
         $reqFrom = ' FROM articles';
-        $reqWhere = ' ORDER BY datepost DESC';
+		$reqWhere = ' Where validate = 1';
         $req = $db->prepare($reqSelect . $reqFrom  . $reqWhere);
         $req->execute();
         $posts =[];

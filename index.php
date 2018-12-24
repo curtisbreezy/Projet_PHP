@@ -89,7 +89,7 @@ if ($p === 'postUpdate') {
 
 // delete post éliminer les commentaires liés
 if ($p === 'delete_post') {
-    $_SESSION['id_article']= intval($_GET['id']);
+    $_SESSION['id']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postDelete();
 	$admincontroller = new AdminController() ;
@@ -97,9 +97,20 @@ if ($p === 'delete_post') {
 }
 
 if ($p === 'validate') {
-	$_SESSION['id_article']= intval($_GET['id']);
+	$_SESSION['id']= intval($_GET['id']);
 	$PostController = new PostController();
-	$PostController->moderate();
+	$PostController->validation();
+	$admincontroller = new AdminController() ;
+	$admincontroller->displayUsers ();
+
+}
+
+
+if ($p === 'signaler') {
+	$_SESSION['id']= intval($_GET['id']);
+	$PostController = new PostController();
+	$PostController->signaler();
+
 
 }
 //________________CONTACT_________________

@@ -85,7 +85,7 @@ class AdminController
         $commentRepo= new CommentRepository();
 
         
-        $posts = $postRepo->getAllPosts();
+        $posts = $postRepo->getByLimit();
         $comments = $commentRepo->getAllComments();
         require 'src/View/adminView.php';
     }

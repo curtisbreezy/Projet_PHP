@@ -75,7 +75,7 @@
 			  <br/>
 			  <a href="index.php?page=delete_post&id=<?=$a['id_article'] ?> type="submit" class="btn btn-danger" name="modifier" id="modifier" Value="modifier"> Suppression </a>
 			  <br/>
-			  <a href="index.php?page=validate&id=<?=$a['id_article'] ?> type="submit" class="btn btn-danger" name="modifier" id="modifier" Value="modifier"> A valider </a>
+			  <a href="index.php?page=validate&id=<?=$a['id_article']?>&validate=<?=$a['validate']?> type="submit" class="btn btn-danger"> A valider </a>
            
 </div>
 		  

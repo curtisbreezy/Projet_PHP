@@ -41,7 +41,7 @@
 		   ?>
 			<p>Rédigé par <?=$a ['auteurpost']; ?>,le <?=$a ['datepost']; ?>. </p> <br/>
 			<p> <?=$a['validate'];?></p>
-		    <button class="btn btn-success mt-3"><a href="index.php?page=validate&id=<?=$a['id_article']?>&validate=<?=$a['validate']?>"> Valider </a> </button> 
+		    <button class="btn btn-success mt-3"><a href="index.php?page=validate&id=<?=$a['id_article'];?>"> Valider </a> </button> 
 			    <hr/>
 			  </div>
 			</div>
