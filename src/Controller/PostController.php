@@ -54,7 +54,7 @@ class PostController
         $PostsRepository->updateValidPost();  
     }
 	
-	public function signaler ()
+	public function signaler()
 	{
 		
 		$PostsRepository = new PostsRepository();

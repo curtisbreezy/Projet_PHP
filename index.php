@@ -110,7 +110,8 @@ if ($p === 'signaler') {
 	$_SESSION['id']= intval($_GET['id']);
 	$PostController = new PostController();
 	$PostController->signaler();
-
+	$admincontroller = new AdminController() ;
+	$admincontroller->displayUsers ();
 
 }
 //________________CONTACT_________________
