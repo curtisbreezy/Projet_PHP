@@ -11,9 +11,9 @@
 												    <textarea class="col-lg-10" type="text" name="commentairetexte">  </textarea>
 												
 												<br/>	
-													<input type="hidden"  name="id_article" value="<?php echo $_GET["id_article"];?>"> </input>
+													<input type="hidden"  name="id_article" value="<?php echo $_GET htmlspecialchars["id_article"];?>"> </input>
 												
-													<input type="hidden"  name="id_commentaire" class="col-md-8" value="<?php echo $_GET["id_commentaire"];?>"> </> 
+													<input type="hidden"  name="id_commentaire" class="col-md-8" value="<?php echo $_GET htmlspecialchars["id_commentaire"];?>"> </> 
 												
 													<input type="hidden"  name="validate" class="col-md-8" value="0">
 												<hr/>

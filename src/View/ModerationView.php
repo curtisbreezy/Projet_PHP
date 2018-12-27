@@ -39,9 +39,8 @@
 			<?php $content = $a['textepost'];
 		   echo htmlspecialchars_decode($content);
 		   ?>
-			<p>Rédigé par <?=$a ['auteurpost']; ?>,le <?=$a ['datepost']; ?>. </p> <br/>
-			<p> <?=$a['validate'];?></p>
-		    <button class="btn btn-success mt-3"><a href="index.php?page=validate&id=<?=$a['id_article'];?>"> Valider </a> </button> 
+			<p>Rédigé par <?= htmlspecialchars($a ['auteurpost']); ?>,le <?=htmlspecialchars($a ['datepost']); ?>. </p> <br/>
+		    <button class="btn btn-success mt-3"><a href="index.php?page=validate&id=<?=htmlspecialchars($a['id_article']);?>"> Valider </a> </button> 
 			    <hr/>
 			  </div>
 			</div>

@@ -37,11 +37,11 @@
 					
 				<label>Auteur</label>
 					<br/>
-					<input type="text"  name="auteurpost" Value="<?= $post[0]['auteurpost']; ?>"> </br>
+					<input type="text"  name="auteurpost" Value="<?=htmlspecialchars($post[0]['auteurpost']; ?>"> </br>
 				
 				<label>Titre</label>
 					 <br/>
-					<input type="text" name="titrepost" value="<?=$post[0]['titrepost'] ?>"> </br>
+					<input type="text" name="titrepost" value="<?=htmlspecialchars($post[0]['titrepost'] ?>"> </br>
 				
 		
 				<label>Date</label>

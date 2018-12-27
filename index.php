@@ -78,8 +78,7 @@ if ($p === 'edit_post') {
 }
 }
 // Mise à jour du post
-//$_SESSION['titrepost']= htmlentities($_GET['titrepost'], ENT_SUBSTITUTE);
- //   $_SESSION['textepost']= htmlentities($_GET['textepost'], ENT_SUBSTITUTE);
+
 if ($p === 'postUpdate') {
 	if(isset($_SESSION['auteurpost']) && isset($_SESSION['titrepost']) && isset($_SESSION['textepost'])) {
 	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);

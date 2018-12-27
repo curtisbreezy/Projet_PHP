@@ -36,7 +36,7 @@
 		<div>
 			
 			<label>Auteur :</label>
-				<input type="text"  name="auteurpost" placeholder="" Value="<?php echo ($_SESSION['pseudo']);?>"> </br>
+				<input type="text"  name="auteurpost" placeholder="" Value="<?php echo htmlspecialchars ($_SESSION['pseudo']);?>"> </br>
 			
 			<label>Titre :</label>
 					 
@@ -56,14 +56,8 @@
 			
 					<button type="submit" class="btn btn-success mt-3" name="soumettre" id="soumettre" Value="Soumettre le post"> Soumettre </button>
 	 </form>
-	  <?php
-	  if(isset($message))
-	  {
-		  echo $message;
-	  }
-	  
-	  ?>
-	  
+	 
+	 
 </section>
 </div>
     <footer class="sticky-footer">

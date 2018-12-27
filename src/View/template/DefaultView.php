@@ -30,7 +30,7 @@
         <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
               <strong>
-				<?php if(isset($_SESSION['pseudo'])){ echo " Bienvenue ".$_SESSION['pseudo']; } ?>  
+				<?php if(isset htmlspecialchars ($_SESSION['pseudo'])){ echo " Bienvenue ".$_SESSION['pseudo']; } ?>  
 				Ensemble,allons plus loin.
 			  </strong>
             </h1>
@@ -249,7 +249,7 @@
         </div>
         
       </div>
-	  <?php if(isset($erreur)){ echo"$erreur"; } ?>	  
+	 	  
 	 
 		
 <div class="col-lg-8 col-md-8 col-xs-10 mx-auto text-center">

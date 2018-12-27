@@ -32,15 +32,7 @@
         </form>
 		
 	
-		
-		<?php
-		
-		if(isset($erreur))
-		{
-			echo $erreur;
-		}
-		
-		?>
+	
 		
 
 

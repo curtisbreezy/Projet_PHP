@@ -37,11 +37,11 @@
 		 <div class="mb-3">
 				<div id="currentarticle" name="currentarticle" class="p-3 mt-3" style="margin-bottom:50px;">		
 						    <?php
-    // Main Content last 10 posts
+   
     foreach ($posts as $a) {
         ?>   
 							<div class="card mb-3" >
-							<div class="card-header" style="font-weight:bold;"><h3><?=$a['titrepost'] ?></h3>
+							<div class="card-header" style="font-weight:bold;"><h3><?=htmlspecialchars($a['titrepost']) ?></h3>
 							<div class="card-body">
 							<p class="card-text">
 										
@@ -50,11 +50,11 @@
 						<!--<?php echo substr($a['textepost'],0,700);?>[..........]</p>-->
 										
 				
-							<!--<p style="color:white;">Rédigé par <?=$a['auteurpost'] ?>,le <?=$a['datepost'] ?>. </p> 
+							<!--<p style="color:white;">Rédigé par <?=$a['auteurpost'] ?>,le <?= htmlspecialchars($a['datepost']) ?>. </p> 
 
 							<br/>
 									
-						    <button class="btn btn-success mt-3"><a href="article.php?id=<?= $a['id_article'] ?>"> En savoir + </a> </button> -->
+						    <button class="btn btn-success mt-3"><a href="article.php?id=<?= htmlspecialchars($a['id_article']) ?>"> En savoir + </a> </button> -->
 								
 								  <hr/>
 							  </div>
