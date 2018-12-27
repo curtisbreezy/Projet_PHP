@@ -40,9 +40,9 @@
 		<div class="card-header" style="font-weight:bold;"><h3><?=$a['titrepost'] ?></h3>
 		<div class="card-body">
 		<p class="card-text" style="text-align:center;">
-			<?php echo substr($a['textepost'],0,700);?>[...]</p>
+			<?php html_entity_decode ($a['textepost']);?>Cliquez sur en savoir + pour découvrir l'intégralité de l'article</p>
 			<p>Rédigé par <?=$a ['auteurpost']; ?>,le <?=$a ['datepost']; ?>. </p> <br/>
-		    <button class="btn btn-success mt-3"><a href="index.php?page=article&id=<?=$a['id_article']?>"> En savoir + </a> </button> 
+		    <button class="btn btn-success"><a href="index.php?page=article&id=<?=$a['id_article']?>"> En savoir + </a> </button> 
 			<button class="btn btn-danger"> <a href="index.php?page=signaler&id=<?= htmlspecialchars ($a['id_article']); ?>&validate=<?=($a['validate']);?>">Signaler</a> </button>
 			    <hr/>
 			  </div>

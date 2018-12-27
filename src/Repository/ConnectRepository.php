@@ -34,11 +34,11 @@ class ConnectRepository extends Connect
     public function existPseudo()
 {
 	$db = $this->getDb();
-	if(isset($_POST['connexion'])) 
-{			
+	
+			
 		
 		$pseudo = htmlspecialchars($_POST['pseudo']);
-		$mdpconnect = sha1($_POST['mdpconnect']);
+		$mdp = sha1($_POST['mdp']);
 		
 		
 		
@@ -59,21 +59,6 @@ class ConnectRepository extends Connect
 			
 			}
 			
-			else  
-			
-		
-			{
-			$erreur = "Mauvais mot de passe ou email";
-			}
-		
-		
-		}	
-		else 
-			
-		
-			{
-			$erreur = "Merci de tout compléter";
-			}
 	
 }
 				   
@@ -85,10 +70,11 @@ class ConnectRepository extends Connect
     {
         $db = $this->getDb();
         $pseudo = $_SESSION['pseudo'];
-        $email = $_SESSION['mdpconnect'];
+        $email = $_SESSION['mdp'];
 
-        $req = $db->prepare('SELECT * FROM user WHERE pseudo = :pseudo');
+        $req = $db->prepare('SELECT * FROM user WHERE pseudo = :pseudo AND mdp = :mdp');
 		$req->bindParam(':pseudo', $_SESSION['pseudo'], \PDO::PARAM_INT);
+		$req->bindParam(':mdp', $_SESSION['mdp'], \PDO::PARAM_INT);
         $req->execute();
         $user = $req->fetch();
 

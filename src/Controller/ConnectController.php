@@ -16,7 +16,7 @@ class ConnectController
      */
     public function hach()
     {
-        $pass_hache = password_hash($_SESSION['pass'], PASSWORD_DEFAULT);
+        $pass_hache = password_hash($_SESSION['mdp'], PASSWORD_DEFAULT);
         return $pass_hache;
     }
 
@@ -49,15 +49,14 @@ class ConnectController
         $connectRepository = new ConnectRepository;
         $user = $connectRepository->getUser();
 
-        $isPasswordCorrect = password_verify($_SESSION['mdp']]);
+        $isPasswordCorrect = password_verify($_SESSION['mdp']);
 
         if (!$user) {
             echo 'Mauvais identifiant ou mot de passe !';
         } else {
             if ($isPasswordCorrect) {
-                $_SESSION['userId'] = $user['id'];
                 $_SESSION['pseudo'] = $user['pseudo'];
-                $_SESSION['status'] = $user['status'];
+                $_SESSION['mdp'] = $user['mdp'];
                 $_SESSION['connect'] = 1;
             } else {
                 echo 'Mauvais identifiant ou mot de passe !';

@@ -21,10 +21,9 @@ class PostsRepository extends Connect
 			$db = $this->getDb();
 			
             $reqUpdate = 'UPDATE articles ';
-            $reqSet = 'SET validate = 1 ';
-            
+            $reqSet = 'SET validate = 1 where id_article=:id ';
             $req = $db->prepare($reqUpdate . $reqSet );
-			
+            $req->bindParam(':id', $_SESSION['id'], \PDO::PARAM_INT);
             $req->execute();
 
 
