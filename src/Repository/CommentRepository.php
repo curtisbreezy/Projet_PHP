@@ -13,8 +13,10 @@ class CommentRepository extends Connect
 	*/
 	public function deleteComment()
 	{
-		$db = $this->getDb();
 		
+		$db = $this->getDb();
+		if(isset($_GET['id'])
+			&& wp_verify_nonce( sanitize_key( $_GET['id']))) 
 		$suppr_id = htmlspecialchars($_GET['id']);
 	
 		$suppr = $db->prepare('DELETE FROM commentaire WHERE id_commentaire = ?');

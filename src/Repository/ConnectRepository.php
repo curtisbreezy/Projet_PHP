@@ -35,7 +35,8 @@ class ConnectRepository extends Connect
 {
 	$db = $this->getDb();
 	
-			
+		if(isset($_POST['pseudo']) && (isset($_POST['mdp'])
+			&& wp_verify_nonce( sanitize_key( $_POST['pseudo'])))	
 		
 		$pseudo = htmlspecialchars($_POST['pseudo']);
 		$mdp = sha1($_POST['mdp']);

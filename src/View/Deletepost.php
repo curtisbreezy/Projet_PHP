@@ -1,29 +1,3 @@
-<?php  session_start();
-
-$bdd = new PDO("mysql:host=localhost;dbname=projet_5;charset=utf8", "root", "");
-$articles = $bdd->query('SELECT * FROM articles');
-
-if(isset($_get['id']) AND !empty($_GET['id'])) {
-	$get_id = htmlspecialchars($_GET['id']);
-	$articles = $bdd->prepare('SELECT * FROM articles WHERE id_article = ?');
-	$articles->execute(array($get_id));
-	
-	if($articles->rowCount() ==1) {
-		$titre = $articles['titrepost'];
-		$contenu = $articles['textepost'];
-		$auteur = $articles['auteurpost'];
-	
-} else{
-	die('Cet article n existe pas !');
-	
-} 
-
-
-}
-
-?>
-
-
 
 <?php 
 
@@ -35,7 +9,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
   <div class="content-wrapper">
     <div class="container-fluid">
 
-      <!-- Breadcrumbs-->
+     
       
      
 	 <div class="row">
@@ -48,7 +22,7 @@ if(isset($_get['id']) AND !empty($_GET['id'])) {
 		
 		</div>
 	
-	<!---------------- code à modifier ----------------------->
+
 	
 <div class="col-md-12">
 	<div class="card mb-3">
