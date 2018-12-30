@@ -26,7 +26,8 @@ if (!empty($_SESSION['userId'])) {
 }
 
 // Default opening : homeView.php
-if (!empty($_GET['page'])) {
+if (!empty($_GET['page'])
+ && wp_verify_nonce ( sanitize_key( $_GET['page'])))	{
     $p = $_GET['page'];
 } else {
     $p = 'home';
