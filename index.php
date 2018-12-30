@@ -13,20 +13,20 @@ use App\Model\Connect;
 
 
 
-if (!isset($_SESSION['connect'])) {
+if (!empty($_SESSION['connect'])) {
     $_SESSION['connect']=0;
 }
 
-if (!isset($_SESSION['pseudo'])) {
+if (!empty($_SESSION['pseudo'])) {
     $_SESSION['pseudo']=Invité;
 }
 
-if (!isset($_SESSION['userId'])) {
+if (!empty($_SESSION['userId'])) {
     $_SESSION['userId']=0;
 }
 
 // Default opening : homeView.php
-if (isset($_GET['page'])) {
+if (!empty($_GET['page'])) {
     $p = $_GET['page'];
 } else {
     $p = 'home';
@@ -47,7 +47,7 @@ if ($p === 'listPosts') {
 
 // Post unique
 if ($p === 'article') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
     $_SESSION['id'] = $_GET['id'];
     $contArticle = new PostController();
     $contArticle->post();
@@ -59,7 +59,7 @@ if ($p === 'postNew') {
 }
 // Ajout en bdd
 if ($p === 'postAdd') {
-	if(isset($_SESSION['auteurpost']) && isset($_SESSION['titrepost']) && isset($_SESSION['textepost'])) {
+	if(!empty($_SESSION['auteurpost']) && !empty($_SESSION['titrepost']) && empty($_SESSION['textepost'])) {
 	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
 	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
@@ -71,7 +71,7 @@ if ($p === 'postAdd') {
 }
 // Édition du post
 if ($p === 'edit_post') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
     $_SESSION['id']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postEdit();
@@ -80,7 +80,7 @@ if ($p === 'edit_post') {
 // Mise à jour du post
 
 if ($p === 'postUpdate') {
-	if(isset($_SESSION['auteurpost']) && isset($_SESSION['titrepost']) && isset($_SESSION['textepost'])) {
+	if(!empty($_SESSION['auteurpost']) && !empty($_SESSION['titrepost']) && !empty($_SESSION['textepost'])) {
 	$_SESSION['auteurpost']= htmlentities($_POST['auteurpost'], ENT_SUBSTITUTE);
 	$_SESSION['titrepost']= htmlentities($_POST['titrepost'], ENT_SUBSTITUTE);
     $_SESSION['textepost']= htmlentities($_POST['textepost'], ENT_SUBSTITUTE);
@@ -93,7 +93,7 @@ if ($p === 'postUpdate') {
 
 // delete post éliminer les commentaires liés
 if ($p === 'delete_post') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
     $_SESSION['id']= intval($_GET['id']);
     $PostController = new PostController();
     $PostController->postDelete();
@@ -103,7 +103,7 @@ if ($p === 'delete_post') {
 }
 
 if ($p === 'validate') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
 	$_SESSION['id']= intval($_GET['id']);
 	$PostController = new PostController();
 	$PostController->validation();
@@ -114,7 +114,7 @@ if ($p === 'validate') {
 }
 
 if ($p === 'signaler') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
 		
 	$_SESSION['id']= intval($_GET['id']);
 	$PostController = new PostController();
@@ -129,7 +129,7 @@ if ($p === 'signaler') {
 
 // Identification //
 if ($p === 'Login') {
-  
+    if(!empty($_SESSION['pseudo']) && !empty($_SESSION['mdp']))
     $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
     $_SESSION['mdp'] = htmlspecialchars($_POST['mdp']);
     $verifPseudo= new ConnectController();
@@ -185,7 +185,7 @@ if ($p === 'admin') {
 
 // valid article
 if ($p === 'valid_post') {
-	if(isset($_SESSION['id'])) {
+	if(!empty($_SESSION['id'])) {
     $_SESSION['id']= intval($_GET['id']);
     $adminController = new AdminController();
     $adminController->validPost();
@@ -194,7 +194,7 @@ if ($p === 'valid_post') {
 }
 // valid comment
 if ($p === 'valid_comment') {
-	if(isset($_SESSION['id']) && isset($_SESSION['validate'])) {
+	if(!empty($_SESSION['id']) && empty($_SESSION['validate'])) {
     $_SESSION['id_commentaire']= intval($_GET['id']);
     $_SESSION['validate']= intval($_GET['validate']);
     $adminController = new AdminController();
@@ -205,7 +205,7 @@ if ($p === 'valid_comment') {
 
 // valid user
 if ($p === 'valid_user') {
-	if(isset($_SESSION['id']) && isset($_SESSION['validate'])) {
+	if(!empty($_SESSION['id']) && isset($_SESSION['validate'])) {
     $_SESSION['id_utilisateur']= intval($_GET['id']);
     $adminController = new AdminController();
     $adminController->validUser();
