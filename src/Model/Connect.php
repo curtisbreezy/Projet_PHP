@@ -14,7 +14,7 @@ abstract class Connect
      * @var int
      * data to connect with database
      */
-    private $db;
+    private $bdd;
 
     /**
      * Function to connect
@@ -22,27 +22,27 @@ abstract class Connect
      */
     protected function getDb()
     {
-        if ($this->db === null) {
+        if ($this->bdd === null) {
             try {
-                $db = new \PDO('mysql:dbname=projet_5;host=localhost;charset=utf8', 'root', '');
+                $bdd = new \PDO('mysql:dbname=projet_5;host=localhost;charset=utf8', 'root', '');
 
-                $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                $bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-                $this->db = $db;
+                $this->bdd = $bdd;
 
-                return $this->db;
+                return $this->bdd;
             } catch (PDOException $e) {
                 die('Echec lors de la connexion : '.$e->getMessage());
             }
         }
 
-        return $this->db;
+        return $this->bdd;
     }
 
     /**
      * Function to secure data 
      */
-    protected function secure_db($data)
+    protected function secure_bdd($data)
     {
         // check if data is an integer
         if (ctype_digit($data)) {
