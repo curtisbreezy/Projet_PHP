@@ -1,3 +1,7 @@
+<?php
+if (isset($_GET['id_article']))
+?>
+
 <div class="jumbotron text-center">	
 		
 											<form method="post">
@@ -11,7 +15,11 @@
 												    <textarea class="col-lg-10" type="text" name="commentairetexte">  </textarea>
 												
 												<br/>	
-													<input type="hidden"  name="id_article" value="<?php echo $_GET htmlspecialchars["id_article"];?>"> </input>
+													<input type="hidden"  name="id_article" value="<?php 
+													
+													if(isset($_GET['id_article']) && !empty($_GET['id_article']))
+													
+													echo $_GET htmlspecialchars["id_article"];?>"> </input>
 												
 													<input type="hidden"  name="id_commentaire" class="col-md-8" value="<?php echo $_GET htmlspecialchars["id_commentaire"];?>"> </> 
 												
